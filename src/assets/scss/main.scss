@@ -1,0 +1,244 @@
+@import 'tailwind';
+@import 'vue_datepicker';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap');
+
+html {
+  overflow: hidden;
+}
+
+.lock-scroll-body {
+  overflow: hidden;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.card {
+  @apply bg-white rounded-lg overflow-hidden shadow-md relative;
+}
+
+.badge {
+  @apply bg-gray-100 text-gray-500 text-xs uppercase font-bold rounded-full p-2 absolute top-0 right-0 mr-2 mt-2;
+}
+
+
+.custom-table-row {
+  &:nth-child(even) {
+    @apply bg-gray-100;
+  }
+  td {
+    @apply px-4 py-2 whitespace-nowrap text-sm text-gray-500;
+  }
+}
+
+.custom-table-row,
+.custom-table-account {
+  .action {
+    @apply text-center
+  }
+
+  a {
+    @apply inline-flex items-center text-sky-700 hover:text-sky-900 cursor-pointer;
+  }
+
+  a.edit {
+    @apply text-amber-700;
+  }
+
+  a.remove {
+    @apply text-rose-700;
+  }
+}
+
+.pagination-item {
+  @apply border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium;
+
+  &__active {
+    @apply border-orange-500 text-orange-600 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium;
+  }
+}
+
+.default-field {
+  @apply flex items-center mb-2;
+
+  .default-label {
+    @apply flex items-center w-[180px];
+  }
+  .default-input {
+    @apply flex-1;
+  }
+}
+
+.default-input {
+  @apply h-8 block w-full shadow-sm text-sm border-gray-300;
+
+  &[disabled] {
+    @apply bg-gray-300 disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none;
+  }
+}
+
+.default-input-info {
+  @apply absolute mt-1 inset-y-0 bg-soft-gray px-2 border flex items-center pointer-events-none whitespace-nowrap;
+
+  &-left {
+    @extend .default-input-info;
+    @apply left-0 rounded-tl-md rounded-bl-md px-2;
+  }
+
+  &-right {
+    @extend .default-input-info;
+    @apply right-0 rounded-br-md rounded-tr-md px-2;
+  }
+
+  &.is-button {
+    @apply pointer-events-auto focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+}
+
+.default-input-message {
+  @apply text-xs;
+}
+
+.default-label {
+  @apply block text-sm font-medium text-gray-900;
+}
+
+.default-tag {
+  @apply inline-flex items-center justify-center py-1 px-2 border shadow-sm text-xs font-medium rounded-xl;
+
+  &.hoverable {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+}
+
+.success-tag {
+  @extend .default-tag;
+  @apply text-white bg-primary-green;
+
+  &.hoverable {
+    @apply hover:bg-green-600 focus:ring-green-500;
+  }  
+}
+
+.info-tag {
+  @extend .default-tag;
+  @apply text-white bg-primary-blue;
+
+  &.hoverable {
+    @apply hover:bg-sky-600 focus:ring-sky-500;
+  }
+}
+
+.warning-tag {
+  @extend .default-tag;
+  @apply text-white bg-amber-700;
+
+  &.hoverable {
+    @apply hover:bg-amber-600 focus:ring-amber-500;
+  }
+}
+
+.danger-tag {
+  @extend .default-tag;
+  @apply text-white bg-primary-red;
+
+  &.hoverable {
+    @apply hover:bg-rose-600 focus:ring-rose-500;
+  }
+}
+
+.default-button {
+  @apply inline-flex items-center justify-center py-1 px-3 shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 border border-gray-300 hover:bg-gray-300 focus:ring-gray-300;
+}
+
+.success-button {
+  @extend .default-button;
+  @apply text-white bg-primary-green hover:bg-green-600 focus:ring-green-500;
+}
+
+.info-button {
+  @extend .default-button;
+  @apply text-white bg-primary-blue hover:bg-secondary-blue focus:ring-sky-500;
+}
+
+.warning-button {
+  @extend .default-button;
+  @apply text-white bg-amber-700 hover:bg-amber-600 focus:ring-amber-500;
+}
+
+.danger-button {
+  @extend .default-button;
+  @apply text-white bg-primary-red hover:bg-rose-600 focus:ring-rose-500;
+}
+
+.control-button {
+  @apply w-8 h-8 p-1 text-gray-800 border shadow-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2;
+
+  svg {
+    fill: currentColor;
+  }
+
+  &.is-active,
+  &:hover {
+    @apply text-white bg-gray-800;
+  }
+}
+
+.divider {
+  @apply w-px h-8 bg-gray-600 mr-2;
+}
+
+.default-detail {
+  @apply pl-4 py-2 border border-dashed border-green-500 rounded-md;
+}
+
+.default-checkbox {
+  @apply appearance-none checked:bg-primary-blue border-gray-300 rounded-sm h-5 w-5 mr-4 shadow-sm;
+}
+
+.create-edit-submit-container {
+  @apply w-full absolute bottom-0 left-0 px-4 py-3 bg-gray-50 text-right sm:px-6;
+}
+
+.custom-multiselect {
+  @apply mt-1;
+  .multiselect__tags {
+    @apply focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md;
+
+    .multiselect__tag {
+      @apply bg-primary-blue;
+    }
+  }
+
+  .multiselect__content-wrapper {
+    .multiselect__content {
+      .multiselect__element {
+        .multiselect__option {
+          &--highlight {
+            @apply bg-primary-blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+input.search-datepicker {
+  @apply pl-12 text-left w-full py-2 sm:text-sm border-transparent rounded-tr-md rounded-br-md bg-gray-100 block
+}
+
+.workspace {
+  @apply divide-y divide-gray-200 lg:col-span-9 pr-4 pb-4;
+  height: calc(100vh - 5rem);
+  overflow: hidden;
+}

@@ -1,0 +1,78 @@
+{
+  "title": "Franc Indonesia",
+  "app": {
+    "components": {
+      "customTable": {
+        "showingData": "Menampilkan {count} data",
+        "itemPerPageLabel": "Item per page",
+        "emptyState": {
+          "title": "{name} not found",
+          "description": "Double check the search keywords you entered,\nor try another keyword."
+        },
+        "loading": {
+          "title": "Loading"
+        },
+        "view": "View",
+        "edit": "Edit",
+        "remove": "Remove"
+      },
+      "customSearch": {
+        "searchTypeLabel": "Search type",
+        "confirm": "⌘Enter",
+        "create": "Create"
+      },
+      "forbidden": {
+        "headline": "401 not auhtorized",
+        "title": "Uh oh! No access.",
+        "description": "Do not worry though, there is always a way to go back home.",
+        "goBack": "Go back home"
+      },
+      "notFound": {
+        "headline": "404 error",
+        "title": "Uh oh! I think you’re lost.",
+        "description": "It looks like the page you’re looking for doesn't exist.",
+        "goBack": "Go back home"
+      },
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "defaultModal": {
+        "title": "Confirmation",
+        "description": "Are you sure? This action may cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      },
+      "notification": {
+        "success": {
+          "defaultTitle": "Success",
+          "defaultMessage": "{name} have been successfully {action}"
+        },
+        "danger": {
+          "defaultTitle": "Error",
+          "defaultMessage": "{name} have failed to be {action}"
+        },
+        "warning": {
+          "defaultTitle": "Warning",
+          "defaultMessage": "{name} have failed to be {action}"
+        }
+      }
+    },
+    "createEdit": {
+      "save": "Save"
+    },
+    "fields": {
+      "id": "ID",
+      "code": "Kode",
+      "sku": "SKU",
+      "price": "Harga",
+      "name": "Nama",
+      "description": "Deskripsi",
+      "image": "Gambar",
+      "address": "Alamat",
+      "brandId": "Brand ID",
+      "typeId": "Type ID",
+      "coordinate": "Koordinat"
+    }
+  }
+}

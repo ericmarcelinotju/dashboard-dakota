@@ -1,0 +1,227 @@
+{
+  "title": "Central Recording System",
+  "global": {
+    "ok": "OK",
+    "done": "Done",
+    "pending": "Pending",
+    "paid": "Paid",
+    "yes": "Yes",
+    "no": "No",
+    "pay": "Pay",
+    "send": "Send",
+    "resend": "Resend",
+    "download": "Download",
+    "logout": "Logout",
+    "pdf": "PDF",
+    "iUnderstand": "I Understand",
+    "scheduler": "Scheduler",
+    "queue": "Queue"
+  },
+  "error": {
+    "required": "This field is required",
+    "email": "Invalid email format",
+    "phone": "Invalid phone number format"
+  },
+  "billing": {
+    "billings": "Billings",
+    "pendingBillings": "Pending Billings",
+    "paidBilling": "Paid Billings",
+    "billingStatus": "Billing Status",
+    "confirmedBy": "Confirmed By",
+    "confirmedDate": "Confirmed Date",
+    "paymentStatus": "Payment Status",
+    "emailStatus": "Email Status",
+    "emailed": "Emailed",
+    "notEmailed": "Not Emailed",
+    "payBilling": "Pay this Billing",
+    "payBillingConfirm": "Are you sure to mark this billing as paid?",
+    "payBillings": "Pay Selected Billings",
+    "payBillingsConfirm": "Are you sure to mark these selected billings as paid?",
+    "emailBilling": "Email this Billing",
+    "emailBillingConfirm": "Are you sure to send this billing to unit's occupant?",
+    "allBillingPaid": "No Pending Billings",
+    "allBillingPaidDescription": "All billings have been marked as paid."
+  },
+  "meter": {
+    "createMeter": "Attention!",
+    "createMeterConfirm": "Creating meter record is a sensitive operation! Please be sure before doing this!"
+  },
+  "tips": {
+    "include_recording": "If enabled, only CDR records with recording files will be displayed (if a CDR's recording file was deleted or lost due to storage issue, the CDR record will also be displayed but you will not be able to operate on the Recording Options).<br>If disabled, all CDR records will be displayed. This option is disabled by default.",
+    "number_fuzzy_search": "Search for the fuzzy equivalent for the phone number. For example, enter <b>501</b> in <b>Call From</b> and do not enable fuzzy search, you will only get CDR exactly related to Number 501. If fuzzy search is enabled, CDR related to any number including 501, like 5501 will display."
+  },
+  "app": {
+    "set_default": "Set Default",
+    "online": "Online",
+    "offline": "Offline",
+    "components": {
+      "customTable": {
+        "showingData": "Showing {count} data",
+        "selectedData": "Selected {count} data",
+        "itemPerPageLabel": "Item per page",
+        "emptyState": {
+          "title": "{name} not found",
+          "description": "Double check the search keywords you entered,\nor try another keyword."
+        },
+        "loading": {
+          "title": "Loading"
+        }
+      },
+      "customSearch": {
+        "searchTypeLabel": "Search type",
+        "confirm": "⌘Enter",
+        "create": "Create",
+        "import": "Import",
+        "export": "Export",
+        "download": "Download",
+        "submit": "Submit"
+      },
+      "customMultitext": {
+        "duplicateErr": "Duplicate item is not allowed"
+      },
+      "forbidden": {
+        "headline": "403 Forbidden Access",
+        "title": "Warning! User have no access.",
+        "description": "Please leave this page as you have no permission to access this page.",
+        "goBack": "Go back home"
+      },
+      "notFound": {
+        "headline": "404 error",
+        "title": "Page not found.",
+        "description": "It looks like the page you’re looking for doesn't exist.",
+        "goBack": "Go back home"
+      },
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "defaultModal": {
+        "title": "Confirmation",
+        "description": "Are you sure? This action may cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      },
+      "notification": {
+        "success": {
+          "defaultTitle": "Success",
+          "defaultMessage": "{name} have been successfully {action}"
+        },
+        "danger": {
+          "defaultTitle": "Error",
+          "defaultMessage": "{name} have failed to be {action}"
+        },
+        "warning": {
+          "defaultTitle": "Warning",
+          "defaultMessage": "{name} have failed to be {action}"
+        },
+        "empty": "There are no notification."
+      },
+      "back": "Back",
+      "loading": "Loading..."
+    },
+    "createEdit": {
+      "save": "Save",
+      "select": "Select",
+      "sumbit": "Submit",
+      "search": "Search",
+      "cancel": "Cancel"
+    },
+    "fields": {
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "sync": "Sync",
+      "web": "Go to Site",
+      "log": "Log",
+      "status": "Status",
+      "start_time": "Time Start",
+      "end_time": "Time End",
+      "call_id": "Call ID",
+      "call_from": "Call From",
+      "call_from_number": "Call From",
+      "call_to": "Call To",
+      "call_to_number": "Call To",
+      "call_duration": "Call Duration (s)",
+      "talk_duration": "Talk Duration (s)",
+      "options": "Options",
+      "branch": "Branch",
+      "branches": "Branches",
+      "extension": "Extension",
+      "extensions": "Extensions",
+      "recording": "Recording",
+      "last_backup": "Last Backup",
+      "time": "Time",
+      "number_fuzzy_search": "Number Fuzzy Search",
+      "include_recording": "Include Recording Files",
+      "id": "ID",
+      "title": "Title",
+      "folder": "Folder",
+      "subject": "Subject",
+      "content": "Content",
+      "level": "Level",
+      "recipient": "Recipient",
+      "code": "Code",
+      "module": "Module",
+      "method": "Method",
+      "description": "Description",
+      "name": "Name",
+      "version": "Version",
+      "pic_name": "PIC Name",
+      "user": "User",
+      "username": "Username",
+      "personInCharge": "PIC Contact",
+      "number": "Number",
+      "email": "Email",
+      "emailForBillingMsg": "This email will be used for billing purpose.",
+      "pic_email": "PIC Email",
+      "phone": "Phone Number",
+      "pic_phone": "PIC Phone",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "role": "Role",
+      "permission": "Permission",
+      "last_login": "Last Login",
+      "type": "Type",
+      "date": "Date",
+      "value": "Value",
+      "start_date": "Start Date",
+      "end_date": "End Date",
+      "date_range": "Date Range",
+      "emailedTo": "Emailed to",
+      "isEmailed": "Emailed ?",
+      "isPaid": "Paid ?",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "rangeDate": "Range Date",
+      "serial_number": "Serial Number",
+      "is_auto_email": "Auto Email",
+      "cutOffDate": "Cut-off Date",
+      "scheduled_email": "Scheduled Email",
+      "is_online": "Online ?",
+      "logo": "Logo",
+      "document": "Document",
+      "select": "Select",
+      "autoEmailDesc": "Automatically email billing to unit's occupant",
+      "autoBillingDesc": "Automatically generate billing for this unit at set date",
+      "noreply": "No Reply",
+      "smtp": "SMTP",
+      "sftp": "SFTP",
+      "host": "Host",
+      "port": "Port",
+      "communication_type": "Communication Type",
+      "trunk": "Trunk",
+      "pin_code": "PIN Code",
+      "src_trunk_name": "Source Trunk",
+      "dst_trunk_name": "Destination Trunk",
+      "did_number": "DID Number",
+      "created_by": "Created By",
+      "error": "Error",
+      "is_legacy": "Legacy ?",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "department": "Department",
+      "backup": "Backup",
+      "setting": "Setting"
+    }
+  }
+}

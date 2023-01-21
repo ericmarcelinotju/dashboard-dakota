@@ -1,0 +1,2 @@
+<a href="https://www.flaticon.com/free-icons/lock" title="lock icons">Lock icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/digital-marketing" title="digital marketing icons">Digital marketing icons created by Mehwish - Flaticon</a>
