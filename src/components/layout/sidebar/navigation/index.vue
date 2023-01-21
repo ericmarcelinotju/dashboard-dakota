@@ -4,117 +4,98 @@
       <router-link
         v-if="!item.children"
         :key="item.name"
-        active-class="bg-gray-200/50"
-        class="menu-container"
+        active-class="border-r-8 border-primary-red"
+        class="
+          group
+          flex
+          items-center
+          px-6
+          py-3
+          leading-6
+          font-medium
+          text-base
+          group
+          hover:text-white hover:bg-primary-red
+        "
         :class="{ hidden: item.module && !hasPermission(item.module) }"
         :to="item.href || ''"
       >
-        <div class="menu-box">
-          <img
-            :alt="item.icon"
-            :src="item.icon"
-          >
-          <div class="menu-detail">
-            {{ item.name }}
-          </div>
-        </div>
+        <component
+          :is="item.icon"
+          active-class="text-white"
+          aria-hidden="true"
+          class="mr-4 h-6 w-6 text-base group hover:bg-red-600"
+        />
+        {{ item.name }}
       </router-link>
-      <Popover
+      <Disclosure
         v-else
         :key="`parent-${item.name}`"
+        v-slot="{ open }"
         as="div"
-        class="text-sm relative"
+        class="space-y-1"
         :class="{ hidden: !hasAnyPermission(item.children) }"
         :default-open="hasActiveChild(item.children)"
       >
-        <PopoverButton
-          active-class="bg-gray-200/50"
-          class="menu-container"
+        <DisclosureButton
+          active-class="bg-primary-red text-white"
+          :class="[
+            'hover:text-white hover:bg-red-600',
+            'group w-full flex items-center px-6 py-3 text-left text-base font-medium',
+          ]"
         >
-          <div class="menu-box">
-            <img
-              :alt="item.icon"
-              :src="item.icon"
-            >
-            <div class="menu-detail">
-              {{ item.name }}
-            </div>
-          </div>
-        </PopoverButton>
-        <PopoverPanel
-          v-slot="{ close }"
-          class="
-            absolute
-            -top-2
-            left-32
-            flex
-            gap-4
-            border border-gray-300
-            bg-white
-            rounded-md
-            shadow-lg
-            p-4
-          "
-        >
+          <component
+            :is="item.icon"
+            aria-hidden="true"
+            class="mr-4 flex-shrink-0 h-6 w-6"
+          />
+          <span class="flex-1">
+            {{ item.name }}
+          </span>
+          <svg
+            aria-hidden="true"
+            :class="[
+              open ? 'rotate-90' : '',
+              'ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-white transition-colors ease-in-out duration-150',
+            ]"
+            viewBox="0 0 20 20"
+          >
+            <path d="M6 6L14 10L6 14V6Z" fill="currentColor" />
+          </svg>
+        </DisclosureButton>
+        <DisclosurePanel class="space-y-1">
           <router-link
             v-for="subItem in item.children"
             :key="subItem.name"
-            class="menu-container is-child"
+            active-class="bg-primary-red text-white"
+            class="
+              group
+              w-full
+              flex
+              items-center
+              pl-10
+              pr-2
+              py-2
+              text-base
+              font-medium
+              hover:text-white hover:bg-red-600
+            "
             :class="{
               hidden: subItem.module && !hasPermission(subItem.module),
             }"
             :to="subItem.href"
-            @click="close"
           >
-            <div class="menu-box">
-              <div
-                class="
-                  h-16
-                  w-16
-                  mb-1
-                  flex
-                  justify-center
-                  items-center
-                  rounded-md
-                  bg-gray-200/50
-                "
-              >
-                <img
-                  :alt="subItem.name"
-                  :src="subItem.icon"
-                >
-              </div>
-              <div class="menu-detail">
-                {{ subItem.name }}
-              </div>
-            </div>
+            <component
+              :is="subItem.icon"
+              aria-hidden="true"
+              class="mr-4 flex-shrink-0 h-6 w-6"
+            />
+            {{ subItem.name }}
           </router-link>
-        </PopoverPanel>
-      </Popover>
+        </DisclosurePanel>
+      </Disclosure>
     </template>
   </div>
 </template>
 
 <script src="./script.js"></script>
-
-<style lang="scss">
-.menu-container {
-  @apply w-full block items-center mt-1 px-3 py-2 leading-6 rounded-md outline-none text-sm hover:bg-gray-200/50;
-
-  &.is-child {
-    @apply text-black border border-transparent hover:bg-inherit hover:border-gray-300;
-  }
-
-  .menu-box {
-    @apply flex flex-col justify-center items-center;
-
-    img {
-      @apply w-4/5;
-    }
-
-    .menu-detail {
-      @apply text-center whitespace-nowrap;
-    }
-  }
-}
-</style>

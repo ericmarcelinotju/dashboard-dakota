@@ -33,30 +33,21 @@ html {
 
 
 .custom-table-row {
-  &:nth-child(even) {
-    @apply bg-gray-100;
-  }
   td {
-    @apply px-4 py-2 whitespace-nowrap text-sm text-gray-500;
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b-2;
   }
 }
 
 .custom-table-row,
 .custom-table-account {
   .action {
-    @apply text-center
+    a {
+      @apply underline text-rose-700;
+    }
   }
 
   a {
     @apply inline-flex items-center text-sky-700 hover:text-sky-900 cursor-pointer;
-  }
-
-  a.edit {
-    @apply text-amber-700;
-  }
-
-  a.remove {
-    @apply text-rose-700;
   }
 }
 
@@ -158,7 +149,7 @@ html {
 }
 
 .default-button {
-  @apply inline-flex items-center justify-center py-1 px-3 shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 border border-gray-300 hover:bg-gray-300 focus:ring-gray-300;
+  @apply inline-flex items-center justify-center py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 border border-gray-300 hover:bg-gray-300 focus:ring-gray-300;
 }
 
 .success-button {
@@ -238,7 +229,7 @@ input.search-datepicker {
 }
 
 .workspace {
-  @apply divide-y divide-gray-200 lg:col-span-9 pr-4 pb-4;
+  @apply divide-y divide-gray-200 lg:col-span-9;
   height: calc(100vh - 5rem);
   overflow: hidden;
 }

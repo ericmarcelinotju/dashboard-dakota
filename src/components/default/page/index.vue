@@ -1,26 +1,19 @@
 <template>
   <div class="workspace">
-    <div class="h-full overflow-hidden flex flex-col p-6 bg-white shadow relative">
+    <div
+      class="h-full overflow-hidden flex flex-col p-6 bg-white shadow relative"
+    >
       <template v-if="title">
-        <div class="-mt-4 mb-2 text-primary-blue font-bold">
+        <div class="-mt-6 mb-2 font-bold">
           {{ title }}
         </div>
-        <hr class="-mx-6 mb-2">
       </template>
-      <div
-        v-if="$slots.search"
-        class="mt-2"
-      >
+      <slot />
+      <div v-if="$slots.search" class="mt-2">
         <slot name="search" />
       </div>
-      <div
-        v-if="$slots.search && $slots.action"
-        class="mt-4"
-      />
-      <div
-        v-if="$slots.action"
-        class="flex justify-between"
-      >
+      <div v-if="$slots.search && $slots.action" class="mt-4" />
+      <div v-if="$slots.action" class="flex justify-between">
         <div class="flex justify-center">
           <slot name="action" />
         </div>

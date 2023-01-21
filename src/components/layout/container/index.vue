@@ -1,34 +1,26 @@
 <template>
-  <div
-    id="app-body"
-    class="min-h-full"
-  >
-    <img
-      alt="default background"
-      class="-z-50 absolute h-full w-full"
-      src="@/assets/img/default-background.jpg"
-    >
-    <div class="fixed z-10 w-full">
+  <div id="app-body" class="min-h-full">
+    <div class="fixed border-b z-10 w-full bg-primary-red">
       <DefaultHeader
         id="header"
-        @about="handleAbout"
         @logout="handleLogout"
         @notification="handleNotification"
+        @about="handleAbout"
+        @open-sidebar="handleOpenSidebar"
       />
     </div>
-    <DefaultSidebar />
-    <div class="pl-28 min-h-screen flex flex-col flex-1 pt-20">
+    <DefaultSidebar :sidebar-open="sidebarOpen" @close="handleCloseSidebar" />
+    <div class="lg:pl-72 min-h-screen flex flex-col flex-1 pt-20">
       <main class="flex-1 pb-8">
-        <router-view v-slot="{ Component }">
-          <transition
-            mode="out-in"
-            name="fade"
-          >
-            <component :is="Component" />
-          </transition>
-        </router-view>
+        <div class="mt-8">
+          <router-view v-slot="{ Component }">
+            <transition mode="out-in" name="fade">
+              <component :is="Component" />
+            </transition>
+          </router-view>
+        </div>
       </main>
-      <!-- <DefaultFooter id="footer" /> -->
+      <DefaultFooter id="footer" />
     </div>
     <DefaultModal
       v-model="visibleNotificationModal"

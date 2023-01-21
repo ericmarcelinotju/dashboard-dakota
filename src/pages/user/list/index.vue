@@ -1,29 +1,40 @@
 <template>
-  <DefaultPage :title="$t('app.fields.user')">
+  <DefaultPage title="Ringkasan Pengguna">
     <template #action>
       <button
         v-if="hasPermission('POST')"
-        class="info-button mr-4"
+        class="danger-button mr-4"
         type="button"
         @click="handleCreate"
       >
         <PlusIcon class="w-4 h-4 mr-1" />
         {{ $t("app.components.customSearch.create") }}
       </button>
-      <button>
-        <CogIcon
-          class="w-5 h-5 text-gray-500"
-          @click="() => (visibleFieldConfigModal = true)"
-        />
-      </button>
     </template>
-    <!-- <template #search>
-      <DefaultSearch
-        :fields="fields"
-        :loading="loading"
-        @search="handleSearch"
-      />
-    </template> -->
+    <template #search>
+      <div class="flex">
+        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-amber-500">
+          <p class="text-2xl">5678</p>
+          <p class="text-sm">Total Pengguna</p>
+        </div>
+        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-indigo-600">
+          <p class="text-2xl">3026</p>
+          <p class="text-sm">Pengguna Premium</p>
+        </div>
+        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-blue-700">
+          <p class="text-2xl">2652</p>
+          <p class="text-sm">Pengguna Basic</p>
+        </div>
+        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-sky-400">
+          <p class="text-2xl">123</p>
+          <p class="text-sm">Pengguna Baru</p>
+        </div>
+        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-green-600">
+          <p class="text-2xl">2345</p>
+          <p class="text-sm">Pengguna Melakukan Transaksi</p>
+        </div>
+      </div>
+    </template>
     <template #table>
       <DefaultTable
         :fields="fields"
@@ -64,46 +75,6 @@
         @confirm="confirmDelete"
       />
     </template>
-    <DefaultModal
-      v-model="visibleFieldConfigModal"
-      description="Please choose the item shown in the list:"
-      :has-cancel="false"
-      :has-icon="false"
-      title="Edit List Options"
-      type="info"
-      @confirm="onConfirmFieldConfig"
-    >
-      <div class="mt-6 grid grid-cols-3 gap-4">
-        <div
-          v-for="field in fields.filter((field) => field.editable !== false)"
-          :key="field"
-          class="flex field"
-        >
-          <input
-            :id="field.value"
-            ref="visibleCheckboxRefs"
-            :checked="!field.hidden"
-            class="default-checkbox"
-            type="checkbox"
-          >
-          <label
-            class="default-label"
-            :for="field.value"
-          >
-            {{ field.name }}
-          </label>
-        </div>
-      </div>
-      <template #action>
-        <button
-          class="default-button mr-6"
-          type="button"
-          @click="setDefaultFields"
-        >
-          {{ $t("app.set_default") }}
-        </button>
-      </template>
-    </DefaultModal>
   </DefaultPage>
 </template>
 

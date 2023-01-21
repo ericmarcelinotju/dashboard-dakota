@@ -89,7 +89,7 @@ export default defineComponent({
           showSuccessNotification('synchronized')
         })
         .catch(err => {
-          if (err.response.status === 404) {
+          if (err.response.code === 404) {
             showWarningNotification('synchronized', 'No new recording found')
             return
           }

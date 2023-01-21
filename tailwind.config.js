@@ -14,7 +14,8 @@ module.exports = {
         'primary-green': '#65CC46',
         'primary-blue': '#3788d7',
         'secondary-blue': '#2f74b8',
-        'primary-red': '#CD4766'
+        'primary-red': '#CA2929',
+        'secondary-red': '#FFE3E3'
       }
     }
   },

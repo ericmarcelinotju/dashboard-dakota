@@ -28,20 +28,11 @@ export default defineComponent({
 
     const handleLogin = () => {
       store.dispatch('auth/login', { ...params })
-        .then(res => {
-          const hasDashboardPermission = store.getters['auth/hasPermission']('DASHBOARD', 'GET')
-          if (hasDashboardPermission) {
-            router.push({ path: pages.dashboard.url })
-          } else {
-            router.push({ path: pages.recording.url })
-          }
+        .then(() => {
+          router.push({ path: pages.dashboard.url })
         })
         .catch(err => {
-          if (err.response.data.includes('NotAuthorized')) {
-            error.value = 'Invalid Username or Password'
-          } else {
-            error.value = 'Unexpected Error'
-          }
+          error.value = err.response && err.response.data
         })
     }
 
@@ -84,7 +75,7 @@ export default defineComponent({
           }, 5000)
         })
         .catch(err => {
-          if (err.response.status === 404) {
+          if (err.response.code === 404) {
             forgotPasswordMessage.value = 'Incorrect username or email. Contact your administrator.'
           } else {
             forgotPasswordMessage.value = 'Unexpected error, please contact your administrator.'

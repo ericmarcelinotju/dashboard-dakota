@@ -2,25 +2,16 @@
   <div class="flex-auto min-h-0 flex flex-col">
     <div class="mb-3 flex justify-between items-end">
       <div class="inset-y-0 left-0 flex items-center" />
-      <div
-        v-if="hasSelection"
-        class="right-0 flex items-center"
-      >
+      <div v-if="hasSelection" class="right-0 flex items-center">
         <slot name="selection-action" />
       </div>
     </div>
     <div
-      class="align-middle min-w-full overflow-x-auto"
+      class="align-middle min-w-full overflow-x-auto -mx-6"
       :class="{ shadow: !isBorderless }"
     >
-      <table
-        class="min-w-full divide-y divide-gray-200"
-        :class="{ 'border border-collapse': !isBorderless }"
-        :style="tableStyle"
-      >
-        <thead
-          class="bg-gray-100 outline outline-1 outline-gray-300 sticky top-0"
-        >
+      <table class="min-w-full divide-y divide-gray-200" :style="tableStyle">
+        <thead class="bg-gray-200 sticky top-0">
           <tr>
             <th v-if="hasSelection">
               <div>
@@ -29,7 +20,7 @@
                   style="margin-right: 0"
                   type="checkbox"
                   @input="onSelectionInput"
-                >
+                />
               </div>
             </th>
             <th v-if="hasDetail">
@@ -49,7 +40,7 @@
                 <span class="mr-1">
                   {{
                     field.name &&
-                      $t(`app.fields.${toSimplifiedObjectName(field.value)}`)
+                    $t(`app.fields.${toSimplifiedObjectName(field.value)}`)
                   }}
                 </span>
                 <Component
@@ -59,26 +50,12 @@
                 />
               </div>
             </th>
-            <th
-              v-if="hasEdit"
-              class="head action"
-            >
-              edit
-            </th>
-            <th
-              v-if="hasDelete"
-              class="head action"
-            >
-              delete
-            </th>
+            <th v-if="hasEdit || hasDelete" class="head action">Aksi</th>
           </tr>
         </thead>
         <tbody>
           <template v-if="hasItems">
-            <template
-              v-for="(item, index) in items"
-              :key="item.id"
-            >
+            <template v-for="(item, index) in items" :key="item.id">
               <tr
                 class="custom-table-row"
                 :class="{ 'cursor-pointer': isClickable }"
@@ -93,10 +70,7 @@
                       v-if="!item.isDetailOpen"
                       class="h-6 w-6"
                     />
-                    <ChevronUpIcon
-                      v-else
-                      class="h-6 w-6"
-                    />
+                    <ChevronUpIcon v-else class="h-6 w-6" />
                   </a>
                 </td>
                 <td
@@ -105,44 +79,21 @@
                   :class="field.class"
                 >
                   <template v-if="$slots[field.value]">
-                    <slot
-                      :item="item"
-                      :name="field.value"
-                    />
+                    <slot :item="item" :name="field.value" />
                   </template>
                   <span v-else>
                     {{ item[field.value] }}
                   </span>
                 </td>
-                <td
-                  v-if="hasEdit"
-                  class="action"
-                >
-                  <a
-                    class="edit"
-                    @click="onEdit(item)"
-                  >
-                    <PencilIcon class="h-6 w-6 mr-1" />
-                  </a>
-                </td>
-                <td
-                  v-if="hasDelete"
-                  class="action"
-                >
-                  <a
-                    class="delete"
-                    @click="onDelete(item)"
-                  >
-                    <TrashIcon class="h-6 w-6 mr-1" />
-                  </a>
+                <td v-if="hasEdit || hasDelete" class="action">
+                  <a @click="onEdit(item)"> Lihat </a>
+                  <br />
+                  <a @click="onDelete(item)"> Hapus </a>
                 </td>
               </tr>
               <tr v-if="hasDetail && item.isDetailOpen">
                 <td colspan="100%">
-                  <slot
-                    :item="item"
-                    name="detail"
-                  />
+                  <slot :item="item" name="detail" />
                 </td>
               </tr>
             </template>
@@ -156,7 +107,7 @@
                       alt="loading..."
                       class="mx-auto h-24 w-24"
                       src="@/assets/img/animated/loading.svg"
-                    >
+                    />
                     <h3 class="mb-3 mt-1 text-sm font-semibold text-gray-500">
                       {{ $t("app.components.customTable.loading.title") }}
                     </h3>
@@ -183,10 +134,7 @@
         </tbody>
       </table>
     </div>
-    <div
-      v-if="hasPagination"
-      class="flex justify-between items-center mt-4"
-    >
+    <div v-if="hasPagination" class="flex justify-between items-center mt-4">
       <Pagination
         v-if="total"
         :current="pagination.page"
@@ -195,10 +143,7 @@
         :total="total"
         @page-changed="(page) => (pagination.page = page)"
       />
-      <label
-        class="sr-only"
-        for="item-per-page"
-      >
+      <label class="sr-only" for="item-per-page">
         {{ $t("app.components.customTable.itemPerPageLabel") }}
       </label>
       <select

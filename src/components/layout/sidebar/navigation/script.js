@@ -1,24 +1,13 @@
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverPanel
-} from '@headlessui/vue'
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 
 export default defineComponent({
-  name: 'NavigationLayout',
   components: {
     Disclosure,
     DisclosureButton,
-    DisclosurePanel,
-    Popover,
-    PopoverButton,
-    PopoverPanel
+    DisclosurePanel
   },
   props: {
     navigation: {
@@ -26,7 +15,7 @@ export default defineComponent({
       default: () => ([])
     }
   },
-  setup () {
+  setup() {
     const route = useRoute()
     const store = useStore()
 

@@ -2,6 +2,7 @@ import { defineComponent, reactive, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { pages } from '@/config'
+import { fields } from '../config'
 import components from '@/components'
 import { useDefaultForm } from '@/composables/default-form'
 import { CogIcon, PlusIcon } from '@heroicons/vue/solid'
@@ -19,7 +20,7 @@ export default defineComponent({
     DefaultModal: components.DefaultModal,
     DefaultPage: components.DefaultPage
   },
-  setup () {
+  setup() {
     const router = useRouter()
     const store = useStore()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
@@ -34,7 +35,8 @@ export default defineComponent({
       loading.value = true
       getUsers(params)
         .then(res => {
-          items.value = res.data.users.filter(user => user.role_name !== 'Super Admin')
+          console.log(res)
+          items.value = res.data.data
           itemsTotal.value = res.data.total
         })
         .finally(() => {
@@ -79,23 +81,6 @@ export default defineComponent({
         })
     }
 
-    // Table fields setting
-    const copyFields = JSON.parse(JSON.stringify(store.getters['fields/user']))
-    const fields = reactive(copyFields)
-    const visibleCheckboxRefs = ref([])
-    const visibleFieldConfigModal = ref(false)
-    const onConfirmFieldConfig = () => {
-      for (const checkbox of visibleCheckboxRefs.value) {
-        const field = fields.find((field) => field.value === checkbox.id)
-        field.hidden = !checkbox.checked
-      }
-      store.commit('fields/setUser', fields)
-    }
-    const setDefaultFields = () => {
-      store.commit('fields/setDefaultUser')
-      Object.assign(fields, JSON.parse(JSON.stringify(store.getters['fields/user'])))
-    }
-
     const hasPermission = (method, module = 'USER') => {
       return store.getters['auth/hasPermission'](module, method)
     }
@@ -107,10 +92,6 @@ export default defineComponent({
       handleSearch,
 
       fields,
-      visibleFieldConfigModal,
-      visibleCheckboxRefs,
-      onConfirmFieldConfig,
-      setDefaultFields,
 
       handleCreate,
       handleEdit,

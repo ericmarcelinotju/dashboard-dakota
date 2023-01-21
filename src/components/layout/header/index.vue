@@ -1,7 +1,36 @@
 <template>
-  <div class="relative z-10 flex-shrink-0 flex h-20">
-    <div class="flex-1 px-4 flex justify-end px-6 mx-auto">
-      <div class="ml-4 flex items-center">
+  <div
+    class="
+      relative
+      z-10
+      flex-shrink-0 flex
+      h-20
+      border-b border-gray-200
+      lg:border-none
+    "
+  >
+    <button
+      class="
+        px-4
+        border-r border-gray-200
+        text-soft-gray
+        focus:outline-none focus:ring-2 focus:ring-inset focus:ring-soft-gray
+        lg:hidden
+      "
+      type="button"
+      @click="handleOpenSidebar"
+    >
+      <span class="sr-only">Open sidebar</span>
+      <MenuAlt1Icon aria-hidden="true" class="h-6 w-6" />
+    </button>
+    <!-- Search bar -->
+    <div class="flex-1 px-4 flex justify-between sm:px-6 lg:mx-auto lg:px-6">
+      <div class="flex-1 flex items-center">
+        <h1 class="text-xl font-bold text-soft-gray">
+          Halo, {{ user.username }} !
+        </h1>
+      </div>
+      <div class="ml-4 flex items-center md:ml-6">
         <!-- About button -->
         <!-- <Menu as="div" class="ml-3 relative">
           <div>
@@ -36,26 +65,21 @@
             </MenuButton>
           </div>
         </Menu> -->
-        <!-- Log dropdown -->
-        <Popover
-          v-if="hasPermission('GET')"
-          v-slot="{ open }"
-          as="div"
-          class="ml-3 relative"
-        >
+        <!-- Notification dropdown -->
+        <!-- <Menu as="div" class="ml-3 relative">
           <div>
-            <PopoverButton
+            <MenuButton
               class="
                 relative
                 p-1
                 rounded-full
                 text-bg-primary text-soft-gray
                 hover:text-soft-gray
-                outline-none
+                focus:outline-none
+                focus:ring-1
+                focus:ring-offset-2
+                focus:ring-soft-gray
               "
-              :class="{
-                'ring-1 ring-offset-2 ring-soft-gray': open,
-              }"
             >
               <BellIcon aria-hidden="true" class="text-white h-6 w-6" />
               <div
@@ -70,78 +94,75 @@
                   bg-primary-red
                 "
               />
-            </PopoverButton>
-            <PopoverPanel>
-              <div
-                class="
-                  fixed
-                  top-0
-                  right-0
-                  w-72
-                  bg-white
-                  mt-16
-                  mr-6
-                  p-2
-                  text-center
-                  shadow-lg
-                "
-              >
-                <div class="text-lg font-bold mb-2">Notification</div>
-
-                <div
-                  class="max-h-96 -mr-2 overflow-x-hidden overflow-y-auto"
-                  v-if="notifications.length > 0"
+            </MenuButton>
+          </div>
+          <transition
+            enter-active-class="transition ease-out duration-100"
+            enter-from-class="transform opacity-0 scale-95"
+            enter-to-class="transform opacity-100 scale-100"
+            leave-active-class="transition ease-in duration-75"
+            leave-from-class="transform opacity-100 scale-100"
+            leave-to-class="transform opacity-0 scale-95"
+          >
+            <MenuItems
+              class="
+                origin-top-right
+                absolute
+                right-0
+                mt-4
+                w-52
+                rounded-md
+                shadow-lg
+                py-1
+                z-10
+                bg-soft-gray
+                ring-1 ring-soft-gray
+                focus:outline-none
+              "
+            >
+              <MenuItem v-if="notifications.length <= 0">
+                <span
+                  class="
+                    block
+                    px-4
+                    py-2
+                    text-sm text-primary-gray
+                    cursor-pointer
+                  "
+                  >{{ $t("app.components.notification.empty") }}</span
                 >
+              </MenuItem>
+              <MenuItem
+                v-for="notification in notifications"
+                v-else
+                :key="notification.id"
+                v-slot="{ active }"
+              >
+                <a
+                  :class="[
+                    active ? 'bg-white' : '',
+                    'block px-4 py-2 text-primary-gray cursor-pointer',
+                  ]"
+                  @click="handleNotification(notification)"
+                >
+                  <div class="font-bold">
+                    {{ notification.title }}
+                  </div>
                   <div
-                    v-for="noti in notifications"
-                    :key="noti.id"
                     class="
-                      relative
-                      p-2
-                      mb-2
-                      text-sm text-left
-                      cursor-pointer
-                      hover:bg-gray-100
-                    "
-                    @click="
-                      () =>
-                        noti.type === 'event'
-                          ? handleEventLog()
-                          : handleSystemLog()
+                      text-sm
+                      whitespace-nowrap
+                      text-ellipsis
+                      overflow-hidden
                     "
                   >
-                    <div class="absolute top-0 flex items-center w-full">
-                      <span class="whitespace-nowrap mr-2 text-xs">
-                        {{ noti.created_at }}
-                      </span>
-                      <hr class="border-gray-600 w-full" />
-                    </div>
-                    <div class="mt-4 ml-2">
-                      <div class="text-amber-600 mt-2">
-                        {{ noti.title }}
-                      </div>
-                      <div>
-                        {{ noti.subject }}
-                      </div>
-                      <div class="truncate" v-html="noti.content" />
-                    </div>
+                    {{ notification.subject }}
                   </div>
-                </div>
-                <div v-else class="text-sm text-primary-blue h-48">
-                  There are no notifications
-                </div>
-                <div class="flex gap-x-2 w-full mt-4">
-                  <button class="info-button text-sm" @click="handleEventLog">
-                    Event Log
-                  </button>
-                  <button class="info-button text-sm" @click="handleSystemLog">
-                    System Log
-                  </button>
-                </div>
-              </div>
-            </PopoverPanel>
-          </div>
-        </Popover>
+                </a>
+              </MenuItem>
+            </MenuItems>
+          </transition>
+        </Menu> -->
 
         <!-- Profile dropdown -->
         <Menu as="div" class="ml-3 relative">
@@ -157,7 +178,7 @@
                 focus:ring-1
                 focus:ring-offset-2
                 focus:ring-soft-gray
-                lg:p-2 lg:rounded-md lg:hover:bg-primary-blue
+                lg:p-2 lg:rounded-md lg:hover:bg-red-500
               "
             >
               <UserCircleIcon class="text-white h-8 w-8 rounded-full" />
@@ -190,10 +211,11 @@
                 right-0
                 mt-4
                 w-48
+                rounded-md
                 shadow-lg
                 py-1
                 z-10
-                bg-white
+                bg-soft-gray
                 ring-1 ring-soft-gray
                 focus:outline-none
               "

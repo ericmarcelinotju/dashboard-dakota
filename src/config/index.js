@@ -21,7 +21,7 @@ const constant = {
 }
 
 const pages = {
-  getAppTitle: (pageName) => `${pageName.toUpperCase()} | Central Recording Management`,
+  getAppTitle: (pageName) => `${pageName.toUpperCase()} | Dakota - CMS`,
   constant: {
     INDEX: {
       path: ''

@@ -33,7 +33,7 @@ export default defineComponent({
     LogoutIcon,
     UserCircleIcon
   },
-  emits: ['logout', 'notification', 'about'],
+  emits: ['logout', 'notification', 'about', 'openSidebar'],
   setup(_, context) {
     const route = useRoute()
     const router = useRouter()
@@ -51,27 +51,31 @@ export default defineComponent({
       context.emit('about')
     }
 
-    const notifications = ref([])
-    const getNotifications = () => {
-      if (hasPermission('GET')) {
-        getLogs({
-          level: 'danger'
-        })
-          .then(res => {
-            notifications.value = res.data.logs
-          })
-      }
+    const handleOpenSidebar = () => {
+      context.emit('openSidebar')
     }
-    onMounted(() => {
-      getNotifications()
-    })
 
-    const handleEventLog = () => {
-      router.push({ name: pages.log.event.name })
-    }
-    const handleSystemLog = () => {
-      router.push({ name: pages.log.system.name })
-    }
+    // const notifications = ref([])
+    // const getNotifications = () => {
+    //   if (hasPermission('GET')) {
+    //     getLogs({
+    //       level: 'danger'
+    //     })
+    //       .then(res => {
+    //         notifications.value = res.data.logs
+    //       })
+    //   }
+    // }
+    // onMounted(() => {
+    //   getNotifications()
+    // })
+
+    // const handleEventLog = () => {
+    //   router.push({ name: pages.log.event.name })
+    // }
+    // const handleSystemLog = () => {
+    //   router.push({ name: pages.log.system.name })
+    // }
 
     const hasPermission = (method, module = 'LOG') => {
       return store.getters['auth/hasPermission'](module, method)
@@ -81,11 +85,12 @@ export default defineComponent({
       routeName,
       handleLogout,
       handleAbout,
+      handleOpenSidebar,
       user,
-      notifications,
-      getNotifications,
-      handleEventLog,
-      handleSystemLog,
+      // notifications,
+      // getNotifications,
+      // handleEventLog,
+      // handleSystemLog,
       hasPermission
     }
   }
