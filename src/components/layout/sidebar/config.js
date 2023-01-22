@@ -3,7 +3,8 @@ import {
   UserGroupIcon,
   ChartBarIcon,
   TicketIcon,
-  ChartPieIcon
+  ChartPieIcon,
+  CurrencyDollarIcon
 } from '@heroicons/vue/solid'
 
 export const navigations = [
@@ -32,6 +33,18 @@ export const navigations = [
     icon: DesktopComputerIcon
   },
   {
+    name: 'Pricing',
+    module: 'PRICING',
+    href: '/pricing',
+    icon: CurrencyDollarIcon
+  },
+  {
+    name: 'Studio',
+    module: 'STUDIO',
+    href: '/studio',
+    icon: DesktopComputerIcon
+  },
+  {
     name: 'Kafetaria',
     module: 'PRODUCT',
     href: '/product',
@@ -40,7 +53,7 @@ export const navigations = [
   {
     name: 'Film',
     module: 'MOVIE',
-    href: '/film',
+    href: '/movie',
     icon: DesktopComputerIcon
   },
   {

@@ -1,19 +1,18 @@
 <template>
   <TabGroup>
-    <TabList class="flex">
-      <Tab
-        v-for="option in options"
-        :key="option.value"
-        v-slot="{ selected }"
-        class="outline-0"
-      >
+    <TabList class="flex border-l-2">
+      <Tab v-for="option in options" :key="option.value" v-slot="{ selected }">
         <button
-          class="relative top-[1px] w-full py-2 px-4 text-gray-500"
-          :class="
-            selected
-              ? 'bg-white text-primary-blue border-t border-x border-gray-300'
-              : 'hover:text-gray-700'
+          class="
+            relative
+            top-[1px]
+            w-full
+            py-2
+            px-4
+            hover:bg-gray-100
+            border-t-2 border-r-2 border-b-4
           "
+          :class="selected ? 'border-b-primary-red' : 'border-b-transparent'"
         >
           {{ option.label }}
         </button>

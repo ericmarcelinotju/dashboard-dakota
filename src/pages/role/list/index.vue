@@ -1,23 +1,16 @@
 <template>
-  <DefaultPage :title="$t('app.fields.role')">
+  <DefaultPage>
     <template #action>
       <button
         v-if="hasPermission('POST')"
-        class="info-button mr-4"
+        class="danger-button mr-4"
         type="button"
         @click="handleCreate"
       >
         <PlusIcon class="w-4 h-4 mr-1" />
-        {{ $t("app.components.customSearch.create") }}
+        TAMBAH BARU
       </button>
     </template>
-    <!-- <template #search>
-      <DefaultSearch
-        :fields="fields"
-        :loading="loading"
-        @search="handleSearch"
-      />
-    </template> -->
     <template #table>
       <DefaultTable
         :fields="fields"

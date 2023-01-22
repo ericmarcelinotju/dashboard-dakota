@@ -5,7 +5,7 @@ export const fields = [
     hidden: true
   },
   {
-    name: 'Name',
+    name: 'Nama Peran',
     value: 'name',
     sortable: true,
     searchable: true

@@ -19,7 +19,7 @@ export default defineComponent({
     DefaultModal: components.DefaultModal,
     DefaultPage: components.DefaultPage
   },
-  setup () {
+  setup() {
     const router = useRouter()
     const store = useStore()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('role')
@@ -33,7 +33,7 @@ export default defineComponent({
       loading.value = true
       getRoles(params)
         .then(res => {
-          items.value = res.data.roles
+          items.value = res.data.data
           itemsTotal.value = res.data.total
         })
         .finally(() => {

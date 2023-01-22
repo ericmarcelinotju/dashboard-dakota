@@ -8,7 +8,7 @@
         @click="handleCreate"
       >
         <PlusIcon class="w-4 h-4 mr-1" />
-        {{ $t("app.components.customSearch.create") }}
+        TAMBAH BARU
       </button>
     </template>
     <template #search>
@@ -47,18 +47,6 @@
         @edit="handleEdit"
         @search="handleSearch"
       >
-        <template #branches="{ item }">
-          <span
-            v-for="branch in item.branches"
-            :key="branch.id"
-            class="default-tag mr-1"
-          >
-            {{ branch.name }}
-          </span>
-        </template>
-        <template #extensions="{ item }">
-          <span>{{ item.extensions?.length }}</span>
-        </template>
         <template #role="{ item }">
           <span>{{ item.role.name }}</span>
         </template>

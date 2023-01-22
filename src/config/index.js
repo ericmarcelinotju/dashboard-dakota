@@ -78,16 +78,6 @@ const pages = {
     name: 'forbidden',
     url: '/forbidden'
   },
-  permission: {
-    name: 'permission',
-    url: '/permission',
-    create: {
-      name: 'permission' + constant.CREATE.name
-    },
-    edit: {
-      name: 'permission' + constant.EDIT.name
-    }
-  },
   role: {
     name: 'role',
     url: '/role',
@@ -128,36 +118,94 @@ const pages = {
     name: 'statistic',
     url: '/statistic'
   },
-  branch: {
-    name: 'branch',
-    url: '/branch',
+  movie: {
+    name: 'movie',
+    url: '/movie',
     create: {
-      name: 'branch' + constant.CREATE.name
+      name: 'movie' + constant.CREATE.name
     },
     edit: {
-      name: 'branch' + constant.EDIT.name
+      name: 'movie' + constant.EDIT.name
     }
   },
-  extension: {
-    name: 'extension',
-    url: '/extension',
+  product: {
+    name: 'product',
+    url: '/product',
     create: {
-      name: 'extension' + constant.CREATE.name
+      name: 'product' + constant.CREATE.name
     },
     edit: {
-      name: 'extension' + constant.EDIT.name
+      name: 'product' + constant.EDIT.name
     }
   },
-  recording: {
-    name: 'recording',
-    url: '/recording',
+  theater: {
+    name: 'theater',
+    url: '/theater',
     create: {
-      name: 'recording' + constant.CREATE.name
+      name: 'theater' + constant.CREATE.name
     },
     edit: {
-      name: 'recording' + constant.EDIT.name
+      name: 'theater' + constant.EDIT.name
     }
-  }
+  },
+  tax: {
+    name: 'tax',
+    url: '/tax',
+    create: {
+      name: 'tax' + constant.CREATE.name
+    },
+    edit: {
+      name: 'tax' + constant.EDIT.name
+    }
+  },
+  paymentType: {
+    name: 'payment-type',
+    url: '/payment-type',
+    create: {
+      name: 'payment-type' + constant.CREATE.name
+    },
+    edit: {
+      name: 'payment-type' + constant.EDIT.name
+    }
+  },
+
+  studio: {
+    name: 'studio',
+    url: '/studio',
+    create: {
+      name: 'studio' + constant.CREATE.name
+    },
+    edit: {
+      name: 'studio' + constant.EDIT.name
+    }
+  },
+  screening: {
+    name: 'screening',
+    url: '/screening',
+    create: {
+      name: 'screening' + constant.CREATE.name
+    },
+    edit: {
+      name: 'screening' + constant.EDIT.name
+    }
+  },
+  order: {
+    name: 'order',
+    url: '/order',
+    detail: {
+      name: 'order' + constant.DETAIL.name
+    }
+  },
+  pricing: {
+    name: 'pricing',
+    url: '/pricing',
+    create: {
+      name: 'pricing' + constant.CREATE.name
+    },
+    edit: {
+      name: 'pricing' + constant.EDIT.name
+    }
+  },
 }
 
 const app = {

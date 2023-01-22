@@ -5,7 +5,7 @@ import { pages } from '@/config'
 import { fields } from '../config'
 import components from '@/components'
 import { useDefaultForm } from '@/composables/default-form'
-import { CogIcon, PlusIcon } from '@heroicons/vue/solid'
+import { PlusIcon } from '@heroicons/vue/solid'
 import {
   get as getUsers,
   del as deleteUser
@@ -13,7 +13,6 @@ import {
 
 export default defineComponent({
   components: {
-    CogIcon,
     PlusIcon,
     DefaultTable: components.DefaultTable,
     DefaultSearch: components.DefaultSearch,
@@ -35,7 +34,6 @@ export default defineComponent({
       loading.value = true
       getUsers(params)
         .then(res => {
-          console.log(res)
           items.value = res.data.data
           itemsTotal.value = res.data.total
         })

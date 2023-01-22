@@ -4,11 +4,10 @@
       class="h-full overflow-hidden flex flex-col p-6 bg-white shadow relative"
     >
       <template v-if="title">
-        <div class="-mt-6 mb-2 font-bold">
+        <div class="mb-4 font-bold">
           {{ title }}
         </div>
       </template>
-      <slot />
       <div v-if="$slots.search" class="mt-2">
         <slot name="search" />
       </div>

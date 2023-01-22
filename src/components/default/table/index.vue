@@ -38,10 +38,7 @@
             >
               <div>
                 <span class="mr-1">
-                  {{
-                    field.name &&
-                    $t(`app.fields.${toSimplifiedObjectName(field.value)}`)
-                  }}
+                  {{ field.name }}
                 </span>
                 <Component
                   :is="getSortingComponent(field)"

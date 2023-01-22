@@ -12,7 +12,7 @@
     <DefaultSidebar :sidebar-open="sidebarOpen" @close="handleCloseSidebar" />
     <div class="lg:pl-72 min-h-screen flex flex-col flex-1 pt-20">
       <main class="flex-1 pb-8">
-        <div class="mt-8">
+        <div>
           <router-view v-slot="{ Component }">
             <transition mode="out-in" name="fade">
               <component :is="Component" />

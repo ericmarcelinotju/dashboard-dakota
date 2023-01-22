@@ -17,6 +17,10 @@ const getters = {
   token(state) {
     return state.token
   },
+  theater(state) {
+    // TODO :: Theater selection feature
+    return state.user.workIn ? state.user.workIn.theater : {}
+  },
   isLoggedIn(state) {
     return state.token !== null
   },

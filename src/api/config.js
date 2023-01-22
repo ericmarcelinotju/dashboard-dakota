@@ -12,9 +12,16 @@ export default {
   role: '/api/role',
   permission: '/api/permission',
 
-  branch: '/api/branch',
-  extension: '/api/extension',
-  recording: '/api/recording',
+  movie: '/api/movie',
+  product: '/api/product',
+  theater: '/api/theater',
+  tax: '/api/tax',
+  paymentType: '/api/payment/type',
+
+  studio: '/api/studio',
+  screening: '/api/screening',
+  order: '/api/order',
+  pricing: '/api/pricing',
 
   log: 'api/log',
   setting: '/api/setting',

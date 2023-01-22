@@ -23,10 +23,6 @@ export const fields = [
     optionKey: 'role/roles'
   },
   {
-    name: 'Branch',
-    value: 'branch'
-  },
-  {
     name: 'Last Login',
     value: 'last_login',
     sortable: true

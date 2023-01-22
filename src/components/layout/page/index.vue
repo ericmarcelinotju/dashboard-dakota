@@ -10,7 +10,7 @@
             @click="submitAction('create')"
           >
             <PlusIcon class="w-5 h-5 mr-1" />
-            {{ $t("app.components.customSearch.create") }}
+            TAMBAH BARU
           </button>
           <button
             v-if="hasImport"

@@ -4,14 +4,11 @@ import { useStore } from 'vuex'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
-import InputDualList from '@/components/form/dualList/index.vue'
 import {
   detail as getUser,
   insert as insertUser,
   update as updateUser
 } from '@/api/user'
-import { get as getBranches } from '@/api/branch'
-import { get as getExtensions } from '@/api/extension'
 import { get as getRoles } from '@/api/role'
 
 export default defineComponent({
@@ -20,7 +17,6 @@ export default defineComponent({
     DefaultTabs: components.DefaultTabs,
     Loading: components.Loading,
     InputDropdown: components.InputDropdown,
-    InputDualList
   },
   setup() {
     const route = useRoute()
@@ -30,16 +26,12 @@ export default defineComponent({
 
     const initialParams = {
       username: null,
-      first_name: null,
-      last_name: null,
-      department: null,
-      title: null,
+      firstName: null,
+      lastName: null,
       email: null,
       password: null,
-      confirm_password: null,
-      role_id: null,
-      branches: [],
-      extensions: []
+      confirmPassword: null,
+      roleId: null,
     }
     const params = reactive({ ...initialParams })
     const formLoading = ref(false)
@@ -49,29 +41,18 @@ export default defineComponent({
     const hasId = computed(() => !!routeParams.value.id)
 
     const roles = ref([])
-    const branches = ref([])
-    const extensions = ref([])
-
-    const initialFilter = {
-      branch_id: ''
-    }
-    const filter = reactive({ ...initialFilter })
-
-    const extensionOptions = computed(() =>
-      extensions.value
-        .filter(ext =>
-          params.branches.findIndex(branch => branch.id === ext.branch_id) !== -1
-        )
-        .filter(ext => filter.branch_id ? filter.branch_id === ext.branch_id : true)
-    )
 
     const initPage = () => {
       if (!hasId.value) return
       formLoading.value = true
       getUser(routeParams.value.id)
         .then(res => {
-          Object.assign(initialParams, res.data)
-          Object.assign(params, res.data)
+          const data = {
+            ...res.data,
+            roleId: res.data.role.id
+          }
+          Object.assign(initialParams, data)
+          Object.assign(params, data)
         })
         .catch(() => {
           showDangerNotification('loaded')
@@ -83,7 +64,6 @@ export default defineComponent({
 
     const reset = () => {
       Object.assign(params, initialParams)
-      Object.assign(filter, initialFilter)
     }
 
     const submit = () => {
@@ -123,22 +103,10 @@ export default defineComponent({
 
     onMounted(() => {
       initPage()
-      if (hasPermission('GET', 'BRANCH')) {
-        getBranches()
-          .then(res => {
-            branches.value = res.data.branches
-          })
-      }
-      if (hasPermission('GET', 'EXTENSION')) {
-        getExtensions()
-          .then(res => {
-            extensions.value = res.data.extensions
-          })
-      }
       if (hasPermission('GET', 'ROLE')) {
         getRoles()
           .then(res => {
-            roles.value = res.data.roles.filter(role => role.name !== 'Super Admin')
+            roles.value = res.data.data
           })
       }
     })
@@ -147,14 +115,11 @@ export default defineComponent({
       routeParams,
       hasId,
       params,
-      filter,
       formLoading,
       saveLoading,
       submit,
       reset,
       roles,
-      branches,
-      extensionOptions,
       hasPermission
     }
   }

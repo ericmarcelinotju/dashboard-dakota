@@ -6,13 +6,19 @@ import DefaultContainer from '@/components/layout/container/index.vue'
 
 import userRoute from '@/pages/user/route.js'
 import roleRoute from '@/pages/role/route.js'
-import permissionRoute from '@/pages/permission/route.js'
 
 import logRoute from '@/pages/log/route.js'
 
-import branchRoute from '@/pages/branch/route.js'
-import extensionRoute from '@/pages/extension/route.js'
-import recordingRoute from '@/pages/recording/route.js'
+import movieRoute from '@/pages/movie/route.js'
+import productRoute from '@/pages/product/route.js'
+import theaterRoute from '@/pages/theater/route.js'
+import taxRoute from '@/pages/tax/route.js'
+import paymentTypeRoute from '@/pages/paymentType/route.js'
+
+import studioRoute from '@/pages/studio/route.js'
+import screeningRoute from '@/pages/screening/route.js'
+import orderRoute from '@/pages/order/route.js'
+import pricingRoute from '@/pages/pricing/route.js'
 
 /** dynamic & async import **/
 const Login = () => import(/* webpackChunkName: 'p-auth-login' */ '@/pages/auth/Login/index.vue')
@@ -49,12 +55,6 @@ const roleRoutes = {
   children: roleRoute
 }
 
-const permissionRoutes = {
-  path: pages.permission.url,
-  component: RouterView,
-  children: permissionRoute
-}
-
 const logRoutes = {
   path: pages.log.url,
   component: RouterView,
@@ -81,22 +81,58 @@ const statisticRoutes = {
   }
 }
 
-const branchRoutes = {
-  path: pages.branch.url,
+const movieRoutes = {
+  path: pages.movie.url,
   component: RouterView,
-  children: branchRoute
+  children: movieRoute
 }
 
-const extensionRoutes = {
-  path: pages.extension.url,
+const productRoutes = {
+  path: pages.product.url,
   component: RouterView,
-  children: extensionRoute
+  children: productRoute
 }
 
-const recordingRoutes = {
-  path: pages.recording.url,
+const theaterRoutes = {
+  path: pages.theater.url,
   component: RouterView,
-  children: recordingRoute
+  children: theaterRoute
+}
+
+const taxRoutes = {
+  path: pages.tax.url,
+  component: RouterView,
+  children: taxRoute
+}
+
+const paymentTypeRoutes = {
+  path: pages.paymentType.url,
+  component: RouterView,
+  children: paymentTypeRoute
+}
+
+const studioRoutes = {
+  path: pages.studio.url,
+  component: RouterView,
+  children: studioRoute
+}
+
+const screeningRoutes = {
+  path: pages.screening.url,
+  component: RouterView,
+  children: screeningRoute
+}
+
+const orderRoutes = {
+  path: pages.order.url,
+  component: RouterView,
+  children: orderRoute
+}
+
+const pricingRoutes = {
+  path: pages.pricing.url,
+  component: RouterView,
+  children: pricingRoute
 }
 
 /** @type {import('vue-router').RouterOptions['routes']} */
@@ -112,15 +148,21 @@ export const routes = [
 
       userRoutes,
       roleRoutes,
-      permissionRoutes,
 
       logRoutes,
       settingRoutes,
       statisticRoutes,
 
-      branchRoutes,
-      extensionRoutes,
-      recordingRoutes
+      movieRoutes,
+      productRoutes,
+      theaterRoutes,
+      taxRoutes,
+      paymentTypeRoutes,
+
+      studioRoutes,
+      screeningRoutes,
+      orderRoutes,
+      pricingRoutes
     ],
     beforeEnter: guardAuth
   },
