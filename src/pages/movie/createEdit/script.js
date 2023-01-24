@@ -2,7 +2,6 @@ import { computed, defineComponent, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
-import { typeOptions, versionOptions } from '../config'
 import components from '@/components'
 import {
   detail as getBranch,
@@ -16,7 +15,7 @@ export default defineComponent({
     Loading: components.Loading,
     InputDropdown: components.InputDropdown
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('branch')
@@ -99,9 +98,7 @@ export default defineComponent({
       formLoading,
       saveLoading,
       submit,
-      reset,
-      versionOptions,
-      typeOptions
+      reset
     }
   }
 })

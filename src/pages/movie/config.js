@@ -17,16 +17,16 @@ export const fields = [
   {
     name: 'Genre',
     value: 'genre',
-    searchable: true,
+    searchable: true
   },
   {
     name: 'Durasi',
     value: 'runTime',
-    sortable: true,
+    sortable: true
   },
   {
     name: 'Usia',
     value: 'rating',
-    sortable: true,
+    sortable: true
   }
 ]

@@ -8,7 +8,7 @@ import { useDefaultForm } from '@/composables/default-form'
 import { PlusIcon } from '@heroicons/vue/solid'
 import {
   get as getMovies,
-  del as deleteMovie,
+  del as deleteMovie
 } from '@/api/movie'
 
 export default defineComponent({
@@ -21,7 +21,7 @@ export default defineComponent({
     DefaultPage: components.DefaultPage,
     DefaultTabs: components.DefaultTabs
   },
-  setup() {
+  setup () {
     const router = useRouter()
     const store = useStore()
     const {

@@ -6,7 +6,10 @@
         @submit.prevent="submit"
       >
         <div class="default-field mt-4">
-          <label class="default-label" for="number">
+          <label
+            class="default-label"
+            for="number"
+          >
             {{ $t("app.fields.number") }}<sup>*</sup>
           </label>
           <input
@@ -15,11 +18,14 @@
             class="default-input"
             required
             type="text"
-          />
+          >
         </div>
 
         <div class="default-field mt-6">
-          <label class="default-label" for="name">
+          <label
+            class="default-label"
+            for="name"
+          >
             {{ $t("app.fields.name") }}<sup>*</sup>
           </label>
           <input
@@ -28,27 +34,15 @@
             class="default-input"
             required
             type="text"
-          />
-        </div>
-
-        <div class="default-field mt-6">
-          <label class="default-label" for="type">
-            {{ $t("app.fields.type") }}<sup>*</sup>
-          </label>
-          <InputDropdown
-            id="type"
-            v-model="params.type"
-            class="default-input"
-            label-key="label"
-            name="type"
-            :options="typeOptions"
-            value-key="value"
-          />
+          >
         </div>
 
         <template v-if="params.type === 'yeastar'">
           <div class="default-field mt-6">
-            <label class="default-label" for="host">
+            <label
+              class="default-label"
+              for="host"
+            >
               {{ $t("app.fields.host") }}<sup>*</sup>
             </label>
             <input
@@ -57,12 +51,15 @@
               class="default-input"
               required
               type="text"
-            />
+            >
           </div>
 
           <div class="grid grid-cols-12 gap-x-24 mt-6">
             <div class="default-field col-span-6">
-              <label class="default-label" for="port">
+              <label
+                class="default-label"
+                for="port"
+              >
                 {{ $t("app.fields.port") }}<sup>*</sup>
               </label>
               <input
@@ -71,26 +68,15 @@
                 class="default-input"
                 required
                 type="text"
-              />
-            </div>
-            <div class="default-field col-span-6">
-              <label class="default-label" for="version">
-                {{ $t("app.fields.version") }}<sup>*</sup>
-              </label>
-              <InputDropdown
-                id="version"
-                v-model="params.api_version"
-                class="default-input"
-                label-key="label"
-                name="version"
-                :options="versionOptions"
-                value-key="value"
-              />
+              >
             </div>
           </div>
           <div class="grid grid-cols-12 gap-x-24 mt-6">
             <div class="default-field col-span-6">
-              <label class="default-label" for="username">
+              <label
+                class="default-label"
+                for="username"
+              >
                 {{ $t("app.fields.username") }}<sup>*</sup>
               </label>
               <input
@@ -99,10 +85,13 @@
                 class="default-input"
                 required
                 type="text"
-              />
+              >
             </div>
             <div class="default-field col-span-6">
-              <label class="default-label" for="password">
+              <label
+                class="default-label"
+                for="password"
+              >
                 {{ $t("app.fields.password") }}<sup>*</sup>
               </label>
               <input
@@ -111,13 +100,16 @@
                 class="default-input"
                 :required="isUpdate"
                 type="password"
-              />
+              >
             </div>
           </div>
         </template>
         <template v-else>
           <div class="default-field mt-6">
-            <label class="default-label" for="folder">
+            <label
+              class="default-label"
+              for="folder"
+            >
               {{ $t("app.fields.folder") }}<sup>*</sup>
             </label>
             <input
@@ -126,7 +118,7 @@
               class="default-input"
               required
               type="text"
-            />
+            >
           </div>
         </template>
 
@@ -138,7 +130,11 @@
           >
             {{ $t("app.createEdit.cancel") }}
           </button>
-          <button class="info-button" :disabled="saveLoading" type="submit">
+          <button
+            class="info-button"
+            :disabled="saveLoading"
+            type="submit"
+          >
             <Loading v-if="saveLoading" />
             {{ $t("app.createEdit.save") }}
           </button>
