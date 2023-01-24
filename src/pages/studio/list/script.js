@@ -57,6 +57,10 @@ export default defineComponent({
       router.push({ name: pages.studio.edit.name, params: { id } })
     }
 
+    const handleEditSeat = ({ id }) => {
+      router.push({ name: pages.studio.edit.name + 'seat', params: { id } })
+    }
+
     // Delete studio
     const loadingDelete = ref(false)
     const visibleDeleteConfirmationModal = ref(false)
@@ -97,6 +101,7 @@ export default defineComponent({
 
       handleCreate,
       handleEdit,
+      handleEditSeat,
 
       loadingDelete,
       visibleDeleteConfirmationModal,

@@ -2,6 +2,7 @@ import { pages } from '@/config'
 
 const StudioList = () => import(/* webpackChunkName: 'p-studio' */ './list/index.vue')
 const StudioCreateEdit = () => import(/* webpackChunkName: 'p-studio-create-edit' */ './createEdit/index.vue')
+const StudioEditSeat = () => import(/* webpackChunkName: 'p-studio-seat' */ './editSeat/index.vue')
 
 export default [
   {
@@ -34,5 +35,14 @@ export default [
         pages.studio.name + pages.constant.EDIT.appendName
       )
     }
-  }
+  },
+  {
+    path: 'seat/' + pages.constant.EDIT.path,
+    name: pages.studio.name + pages.constant.EDIT.appendName + 'seat',
+    component: StudioEditSeat,
+    meta: {
+      auth: true,
+      title: pages.getAppTitle(pages.studio.name)
+    }
+  },
 ]

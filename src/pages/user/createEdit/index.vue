@@ -2,12 +2,7 @@
   <DefaultCreateEdit>
     <template #form>
       <div class="overflow-y-auto pb-6">
-        <DefaultTabs
-          :options="[
-            { label: 'Profil Pengguna', value: 'profile' },
-            { label: 'Theater Kerja', value: 'workin' },
-          ]"
-        >
+        <DefaultTabs :options="tabOptions">
           <template #profile>
             <div class="px-6">
               <div class="default-field mt-6">

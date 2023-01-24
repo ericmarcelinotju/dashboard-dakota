@@ -15,6 +15,7 @@ import {
 export default defineComponent({
   components: {
     DefaultCreateEdit: components.DefaultCreateEdit,
+    DefaultTabs: components.DefaultTabs,
     Loading: components.Loading
   },
   setup() {
@@ -36,16 +37,19 @@ export default defineComponent({
     const permissions = ref([])
 
     const mappedPermissions = computed(() => {
+      if (!permissions.value) {
+        return []
+      }
       const mappedPermissions = {}
       permissions.value.forEach(permission => {
-        if (!mappedPermissions[permission.module]) mappedPermissions[permission.module] = {}
-        mappedPermissions[permission.module][permission.method] = permission
+        if (!mappedPermissions[permission.feature]) mappedPermissions[permission.feature] = {}
+        mappedPermissions[permission.feature][permission.action] = permission
       })
       const arrayPermissions = []
-      Object.keys(mappedPermissions).forEach(module => {
+      Object.keys(mappedPermissions).forEach(feature => {
         arrayPermissions.push({
-          name: module,
-          permissions: mappedPermissions[module]
+          name: feature,
+          permissions: mappedPermissions[feature]
         })
       })
       return arrayPermissions
@@ -111,7 +115,7 @@ export default defineComponent({
       initPage()
       getPermissions()
         .then(res => {
-          permissions.value = res.data.permissions
+          permissions.value = res.data.data
         })
     })
 

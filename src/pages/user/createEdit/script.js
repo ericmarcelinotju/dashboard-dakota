@@ -101,6 +101,13 @@ export default defineComponent({
       return store.getters['auth/hasPermission'](module, method)
     }
 
+    const tabOptions = computed(() => {
+      return [
+        { label: 'Profil Pengguna', value: 'profile' },
+        { label: 'Theater Kerja', value: 'workin' },
+      ]
+    })
+
     onMounted(() => {
       initPage()
       if (hasPermission('GET', 'ROLE')) {
@@ -120,7 +127,8 @@ export default defineComponent({
       submit,
       reset,
       roles,
-      hasPermission
+      hasPermission,
+      tabOptions
     }
   }
 })

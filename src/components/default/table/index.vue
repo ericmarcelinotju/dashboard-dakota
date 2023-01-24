@@ -86,6 +86,8 @@
                   <a @click="onEdit(item)"> Lihat </a>
                   <br />
                   <a @click="onDelete(item)"> Hapus </a>
+                  <br />
+                  <slot :item="item" name="action" />
                 </td>
               </tr>
               <tr v-if="hasDetail && item.isDetailOpen">

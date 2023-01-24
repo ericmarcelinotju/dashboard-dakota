@@ -20,7 +20,7 @@
           </router-view>
         </div>
       </main>
-      <DefaultFooter id="footer" />
+      <!-- <DefaultFooter id="footer" /> -->
     </div>
     <DefaultModal
       v-model="visibleNotificationModal"
