@@ -18,7 +18,7 @@
         </button>
       </Tab>
     </TabList>
-    <TabPanels class="border-t border-gray-300">
+    <TabPanels class="border-t border-gray-300 overflow-y-auto">
       <TabPanel
         v-for="option in options"
         :key="option.value"

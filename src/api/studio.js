@@ -22,10 +22,15 @@ const del = (id) => {
   return axios.delete(api.studio + '/' + id)
 }
 
+const updateSeat = (id, data) => {
+  return axios.put(api.studio + '/' + id + '/seat', data)
+}
+
 export {
   get,
   detail,
   insert,
   update,
   del,
+  updateSeat
 }

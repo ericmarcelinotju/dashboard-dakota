@@ -6,8 +6,7 @@ import { pages } from '@/config'
 import components from '@/components'
 import {
   detail as getStudio,
-  insert as insertStudio,
-  update as updateStudio
+  updateSeat as updateStudioSeat
 } from '@/api/studio'
 import { get as getPricings } from '@/api/pricing'
 
@@ -24,10 +23,7 @@ export default defineComponent({
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('studio')
 
     const initialParams = {
-      code: null,
-      name: null,
-      maxSeats: null,
-      pricingId: null
+      seatChart: null,
     }
     const params = reactive({ ...initialParams })
     const formLoading = ref(false)
@@ -36,19 +32,13 @@ export default defineComponent({
     const routeParams = computed(() => route.params || {})
     const hasId = computed(() => !!routeParams.value.id)
 
-    const pricings = ref([])
-
     const initPage = () => {
       if (!hasId.value) return
       formLoading.value = true
       getStudio(routeParams.value.id)
         .then(res => {
-          const data = {
-            ...res.data,
-            pricingId: res.data.pricing.id
-          }
-          Object.assign(initialParams, data)
-          Object.assign(params, data)
+          Object.assign(initialParams, res.data)
+          Object.assign(params, res.data)
         })
         .catch(() => {
           showDangerNotification('loaded')
@@ -64,33 +54,18 @@ export default defineComponent({
 
     const submit = () => {
       saveLoading.value = true
-      if (hasId.value) {
-        updateStudio(routeParams.value.id, params)
-          .then(() => {
-            reset()
-            router.push({ path: `${pages.studio.url}` })
-            showSuccessNotification('updated')
-          })
-          .catch(() => {
-            showDangerNotification('saved')
-          })
-          .finally(() => {
-            saveLoading.value = false
-          })
-      } else {
-        insertStudio(params)
-          .then(() => {
-            reset()
-            router.push({ path: `${pages.studio.url}` })
-            showSuccessNotification('inserted')
-          })
-          .catch(() => {
-            showDangerNotification('saved')
-          })
-          .finally(() => {
-            saveLoading.value = false
-          })
-      }
+      updateStudioSeat(routeParams.value.id, params)
+        .then(() => {
+          reset()
+          router.push({ path: `${pages.studio.url}` })
+          showSuccessNotification('updated')
+        })
+        .catch(() => {
+          showDangerNotification('saved')
+        })
+        .finally(() => {
+          saveLoading.value = false
+        })
     }
 
     const hasPermission = (method, module = 'STUDIO') => {
@@ -99,12 +74,6 @@ export default defineComponent({
 
     onMounted(() => {
       initPage()
-      if (hasPermission('GET', 'PRICING')) {
-        getPricings()
-          .then(res => {
-            pricings.value = res.data.data
-          })
-      }
     })
 
     return {
@@ -115,7 +84,6 @@ export default defineComponent({
       saveLoading,
       submit,
       reset,
-      pricings,
       hasPermission
     }
   }

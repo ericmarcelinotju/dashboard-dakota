@@ -24,7 +24,10 @@
         @search="handleSearch"
       >
         <template #pricing="{ item }">
-          <span>{{ item.pricing.name }}</span>
+          <span>{{ item.pricing ? item.pricing.name : "" }}</span>
+        </template>
+        <template #action="{ item }">
+          <a @click="handleEditSeat(item)">Ubah Ketersediaan Kursi</a>
         </template>
       </DefaultTable>
     </template>

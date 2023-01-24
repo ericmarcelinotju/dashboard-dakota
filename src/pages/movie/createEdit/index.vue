@@ -31,21 +31,6 @@
           />
         </div>
 
-        <div class="default-field mt-6">
-          <label class="default-label" for="type">
-            {{ $t("app.fields.type") }}<sup>*</sup>
-          </label>
-          <InputDropdown
-            id="type"
-            v-model="params.type"
-            class="default-input"
-            label-key="label"
-            name="type"
-            :options="typeOptions"
-            value-key="value"
-          />
-        </div>
-
         <template v-if="params.type === 'yeastar'">
           <div class="default-field mt-6">
             <label class="default-label" for="host">
@@ -71,20 +56,6 @@
                 class="default-input"
                 required
                 type="text"
-              />
-            </div>
-            <div class="default-field col-span-6">
-              <label class="default-label" for="version">
-                {{ $t("app.fields.version") }}<sup>*</sup>
-              </label>
-              <InputDropdown
-                id="version"
-                v-model="params.api_version"
-                class="default-input"
-                label-key="label"
-                name="version"
-                :options="versionOptions"
-                value-key="value"
               />
             </div>
           </div>
