@@ -162,13 +162,13 @@
                 >
                   Tanggal Lahir
                 </label>
-                <input
+                <Datepicker
                   id="dob"
                   v-model="params.dob"
+                  auto-apply
                   class="default-input"
-                  required
-                  type="text"
-                >
+                  vertical
+                />
               </div>
 
               <div class="default-field mt-4">
@@ -199,6 +199,23 @@
                   placeholder="Konfirmasi Kata Sandi"
                   type="password"
                 >
+              </div>
+
+              <div
+                v-if="hasPermission('GET', 'ROLE')"
+                class="default-field mt-4"
+              >
+                <label
+                  class="default-label"
+                  for="role_id"
+                >
+                  {{ $t("app.fields.role") }}
+                </label>
+                <InputDropdown
+                  v-model="params.roleId"
+                  class="default-input"
+                  :options="roles"
+                />
               </div>
 
               <button

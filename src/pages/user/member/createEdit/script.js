@@ -1,6 +1,7 @@
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
@@ -18,7 +19,8 @@ export default defineComponent({
     DefaultTabs: components.DefaultTabs,
     Loading: components.Loading,
     InputDropdown: components.InputDropdown,
-    InputAvatar: components.InputAvatar
+    InputAvatar: components.InputAvatar,
+    Datepicker
   },
   setup () {
     const route = useRoute()
@@ -119,7 +121,9 @@ export default defineComponent({
     onMounted(() => {
       initPage()
       if (hasPermission('GET', 'ROLE')) {
-        getRoles()
+        getRoles({
+          filter: 'isCustomer:true'
+        })
           .then(res => {
             roles.value = res.data.data
           })

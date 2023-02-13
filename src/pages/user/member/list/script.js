@@ -32,7 +32,7 @@ export default defineComponent({
     const handleSearch = (params) => {
       stateParams = {
         ...params,
-        isMember: true
+        isCustomer: true
       }
       loading.value = true
       getUsers(stateParams)

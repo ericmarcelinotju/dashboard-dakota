@@ -11,20 +11,20 @@ const state = () => ({
 })
 
 const getters = {
-  user(state) {
+  user (state) {
     return state.user || {}
   },
-  token(state) {
+  token (state) {
     return state.token
   },
-  theater(state) {
+  theater (state) {
     // TODO :: Theater selection feature
     return state.user.workIn ? state.user.workIn.theater : {}
   },
-  isLoggedIn(state) {
+  isLoggedIn (state) {
     return state.token !== null
   },
-  hasPermission(state) {
+  hasPermission (state) {
     return (module, method) => {
       // if (!state.user || !state.user.role) {
       //   return false
@@ -42,11 +42,11 @@ const getters = {
 }
 
 const mutations = {
-  setLogin(state, value) {
+  setLogin (state, value) {
     state.user = value.user
     state.token = value.accessToken
   },
-  setLogout(state) {
+  setLogout (state) {
     state.user = {}
     state.token = null
     router.replace({ path: pages.auth.login.url })
@@ -54,14 +54,14 @@ const mutations = {
 }
 
 const actions = {
-  login({ commit }, data) {
+  login ({ commit }, data) {
     return login(data)
       .then((res) => {
         commit('setLogin', res.data)
         return res
       })
   },
-  logout({ commit }) {
+  logout ({ commit }) {
     return logout()
       .finally(() => {
         commit('setLogout')
