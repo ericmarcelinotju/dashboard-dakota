@@ -4,7 +4,8 @@ import {
   ChartBarIcon,
   TicketIcon,
   ChartPieIcon,
-  CurrencyDollarIcon
+  CurrencyDollarIcon,
+  ShieldExclamationIcon
 } from '@heroicons/vue/solid'
 
 export const navigations = [
@@ -17,7 +18,7 @@ export const navigations = [
   {
     name: 'Pengguna',
     module: 'USER',
-    href: '/user',
+    href: '/member',
     icon: UserGroupIcon
   },
   {
@@ -68,16 +69,27 @@ export const navigations = [
     href: '/promo',
     icon: DesktopComputerIcon
   },
+
   {
-    name: 'Atur Peran',
-    module: 'ROLE',
-    href: '/role',
-    icon: UserGroupIcon
+    name: 'Pengaturan Akses',
+    icon: ShieldExclamationIcon,
+    children: [
+      {
+        name: 'Atur Pengurus',
+        module: 'USER',
+        href: '/staff'
+      },
+      {
+        name: 'Atur Peran',
+        module: 'ROLE',
+        href: '/role'
+      }
+    ]
   },
   {
     name: 'Laporan',
     module: 'ORDER',
     href: '/report',
     icon: ChartPieIcon
-  },
+  }
 ]

@@ -237,3 +237,7 @@ input.search-datepicker {
   height: calc(100vh - 5rem);
   overflow: hidden;
 }
+
+.link {
+  @apply text-primary-red underline cursor-pointer hover:text-red-500;
+}

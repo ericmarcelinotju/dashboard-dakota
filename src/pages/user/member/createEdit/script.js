@@ -5,29 +5,35 @@ import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
 import {
-  detail as getStudio,
-  insert as insertStudio,
-  update as updateStudio
-} from '@/api/studio'
-import { get as getPricings } from '@/api/pricing'
+  detail as getUser,
+  insert as insertUser,
+  update as updateUser
+} from '@/api/user'
+import { get as getRoles } from '@/api/role'
+import { convertJsonToFormData } from '@/utils/body'
 
 export default defineComponent({
   components: {
     DefaultCreateEdit: components.DefaultCreateEdit,
+    DefaultTabs: components.DefaultTabs,
     Loading: components.Loading,
     InputDropdown: components.InputDropdown,
+    InputAvatar: components.InputAvatar
   },
   setup () {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('studio')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
 
     const initialParams = {
-      code: null,
-      name: null,
-      maxSeats: null,
-      pricingId: null
+      username: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+      password: null,
+      confirmPassword: null,
+      roleId: null
     }
     const params = reactive({ ...initialParams })
     const formLoading = ref(false)
@@ -36,16 +42,16 @@ export default defineComponent({
     const routeParams = computed(() => route.params || {})
     const hasId = computed(() => !!routeParams.value.id)
 
-    const pricings = ref([])
+    const roles = ref([])
 
     const initPage = () => {
       if (!hasId.value) return
       formLoading.value = true
-      getStudio(routeParams.value.id)
+      getUser(routeParams.value.id)
         .then(res => {
           const data = {
             ...res.data,
-            pricingId: res.data.pricing.id
+            roleId: res.data.role.id
           }
           Object.assign(initialParams, data)
           Object.assign(params, data)
@@ -65,10 +71,13 @@ export default defineComponent({
     const submit = () => {
       saveLoading.value = true
       if (hasId.value) {
-        updateStudio(routeParams.value.id, params)
+        updateUser(
+          routeParams.value.id,
+          convertJsonToFormData(params)
+        )
           .then(() => {
             reset()
-            router.push({ path: `${pages.studio.url}` })
+            router.push({ path: `${pages.member.url}` })
             showSuccessNotification('updated')
           })
           .catch(() => {
@@ -78,10 +87,10 @@ export default defineComponent({
             saveLoading.value = false
           })
       } else {
-        insertStudio(params)
+        insertUser(convertJsonToFormData(params))
           .then(() => {
             reset()
-            router.push({ path: `${pages.studio.url}` })
+            router.push({ path: `${pages.member.url}` })
             showSuccessNotification('inserted')
           })
           .catch(() => {
@@ -93,16 +102,26 @@ export default defineComponent({
       }
     }
 
-    const hasPermission = (method, module = 'STUDIO') => {
+    const hasPermission = (method, module = 'USER') => {
       return store.getters['auth/hasPermission'](module, method)
     }
 
+    const tabOptions = computed(() => {
+      return [
+        { label: 'Profil Pengguna', value: 'profile' },
+        { label: 'Transaksi Aktif', value: 'active_transaction' },
+        { label: 'Riwayat Transaksi', value: 'history_transaction' },
+        { label: 'DC Point', value: 'point' },
+        { label: 'Sisa Deposit', value: 'deposit' }
+      ]
+    })
+
     onMounted(() => {
       initPage()
-      if (hasPermission('GET', 'PRICING')) {
-        getPricings()
+      if (hasPermission('GET', 'ROLE')) {
+        getRoles()
           .then(res => {
-            pricings.value = res.data.data
+            roles.value = res.data.data
           })
       }
     })
@@ -115,8 +134,9 @@ export default defineComponent({
       saveLoading,
       submit,
       reset,
-      pricings,
-      hasPermission
+      roles,
+      hasPermission,
+      tabOptions
     }
   }
 })

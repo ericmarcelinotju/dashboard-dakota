@@ -15,7 +15,7 @@ export default defineComponent({
       default: () => ([])
     }
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const store = useStore()
 

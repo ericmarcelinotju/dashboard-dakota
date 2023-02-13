@@ -8,11 +8,20 @@
           {{ title }}
         </div>
       </template>
-      <div v-if="$slots.search" class="mt-2">
+      <div
+        v-if="$slots.search"
+        class="mt-2"
+      >
         <slot name="search" />
       </div>
-      <div v-if="$slots.search && $slots.action" class="mt-4" />
-      <div v-if="$slots.action" class="flex justify-between">
+      <div
+        v-if="$slots.search && $slots.action"
+        class="mt-4"
+      />
+      <div
+        v-if="$slots.action"
+        class="flex justify-between mb-4"
+      >
         <div class="flex justify-center">
           <slot name="action" />
         </div>

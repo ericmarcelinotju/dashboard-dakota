@@ -24,7 +24,7 @@ export default defineComponent({
     InputDropdown: components.InputDropdown,
     Loading: components.Loading
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
@@ -55,10 +55,10 @@ export default defineComponent({
     const hasId = computed(() => !!routeParams.value.id)
 
     const startTime = computed({
-      get() {
+      get () {
         return params.start_time
       },
-      set(value) {
+      set (value) {
         if (isValid(value)) {
           params.start_time = format(value)
         } else {

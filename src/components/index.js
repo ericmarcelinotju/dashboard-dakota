@@ -27,6 +27,8 @@ export default {
     /* webpackChunkName: "c-input-switch" */ '@/components/form/Switch.vue')),
   InputAudio: defineAsyncComponent(() => import(
     /* webpackChunkName: "c-input-audio" */ '@/components/form/Audio.vue')),
+  InputAvatar: defineAsyncComponent(() => import(
+    /* webpackChunkName: "c-input-avatar" */ '@/components/form/Avatar.vue')),
   // InputDualList: defineAsyncComponent(() => import(
   //   /* webpackChunkName: "c-input-dualList" */ '@/components/form/dualList/index.vue')),
 

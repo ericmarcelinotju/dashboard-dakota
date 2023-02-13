@@ -4,7 +4,10 @@ import { guardAuth, guardGuest } from '@/utils/auth'
 /** default import **/
 import DefaultContainer from '@/components/layout/container/index.vue'
 
-import userRoute from '@/pages/user/route.js'
+// Users routes
+import memberRoute from '@/pages/user/member/route.js'
+import staffRoute from '@/pages/user/staff/route.js'
+
 import roleRoute from '@/pages/role/route.js'
 
 import logRoute from '@/pages/log/route.js'
@@ -43,10 +46,16 @@ const dashboardRoutes = {
   }
 }
 
-const userRoutes = {
-  path: pages.user.url,
+const memberRoutes = {
+  path: pages.member.url,
   component: RouterView,
-  children: userRoute
+  children: memberRoute
+}
+
+const staffRoutes = {
+  path: pages.staff.url,
+  component: RouterView,
+  children: staffRoute
 }
 
 const roleRoutes = {
@@ -146,7 +155,8 @@ export const routes = [
     children: [
       dashboardRoutes,
 
-      userRoutes,
+      memberRoutes,
+      staffRoutes,
       roleRoutes,
 
       logRoutes,

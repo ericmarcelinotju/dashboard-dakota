@@ -16,7 +16,7 @@ export default defineComponent({
     Loading: components.Loading,
     VueDatepicker
   },
-  setup() {
+  setup () {
     const store = useStore()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm(objectName)
 

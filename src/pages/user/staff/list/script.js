@@ -19,7 +19,7 @@ export default defineComponent({
     DefaultModal: components.DefaultModal,
     DefaultPage: components.DefaultPage
   },
-  setup() {
+  setup () {
     const router = useRouter()
     const store = useStore()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
@@ -30,9 +30,12 @@ export default defineComponent({
     const items = ref([])
     const itemsTotal = ref(0)
     const handleSearch = (params) => {
-      stateParams = { ...params }
+      stateParams = {
+        ...params,
+        isMember: false
+      }
       loading.value = true
-      getUsers(params)
+      getUsers(stateParams)
         .then(res => {
           items.value = res.data.data
           itemsTotal.value = res.data.total
@@ -47,11 +50,11 @@ export default defineComponent({
     })
 
     const handleCreate = () => {
-      router.push({ name: pages.user.create.name })
+      router.push({ name: pages.staff.create.name })
     }
 
     const handleEdit = ({ id }) => {
-      router.push({ name: pages.user.edit.name, params: { id } })
+      router.push({ name: pages.staff.edit.name, params: { id } })
     }
 
     // Delete user

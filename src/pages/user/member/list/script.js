@@ -1,19 +1,18 @@
-import { defineComponent, computed, reactive, ref, onMounted } from 'vue'
+import { defineComponent, reactive, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { pages } from '@/config'
 import { fields } from '../config'
 import components from '@/components'
 import { useDefaultForm } from '@/composables/default-form'
-import { CogIcon, PlusIcon } from '@heroicons/vue/solid'
+import { PlusIcon } from '@heroicons/vue/solid'
 import {
-  get as getStudios,
-  del as deleteStudio
-} from '@/api/studio'
+  get as getUsers,
+  del as deleteUser
+} from '@/api/user'
 
 export default defineComponent({
   components: {
-    CogIcon,
     PlusIcon,
     DefaultTable: components.DefaultTable,
     DefaultSearch: components.DefaultSearch,
@@ -23,9 +22,7 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     const store = useStore()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('studio')
-
-    const theater = computed(() => store.getters['auth/theater'])
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
 
     const loading = ref(false)
     let stateParams = reactive({})
@@ -33,9 +30,12 @@ export default defineComponent({
     const items = ref([])
     const itemsTotal = ref(0)
     const handleSearch = (params) => {
-      stateParams = { ...params }
+      stateParams = {
+        ...params,
+        isMember: true
+      }
       loading.value = true
-      getStudios(params)
+      getUsers(stateParams)
         .then(res => {
           items.value = res.data.data
           itemsTotal.value = res.data.total
@@ -50,18 +50,14 @@ export default defineComponent({
     })
 
     const handleCreate = () => {
-      router.push({ name: pages.studio.create.name })
+      router.push({ name: pages.member.create.name })
     }
 
     const handleEdit = ({ id }) => {
-      router.push({ name: pages.studio.edit.name, params: { id } })
+      router.push({ name: pages.member.edit.name, params: { id } })
     }
 
-    const handleEditSeat = ({ id }) => {
-      router.push({ name: pages.studio.edit.name + 'seat', params: { id } })
-    }
-
-    // Delete studio
+    // Delete user
     const loadingDelete = ref(false)
     const visibleDeleteConfirmationModal = ref(false)
     const deleteItem = ref({})
@@ -72,7 +68,7 @@ export default defineComponent({
     const confirmDelete = () => {
       const { id } = deleteItem.value
       loadingDelete.value = true
-      deleteStudio(id)
+      deleteUser(id)
         .then(() => {
           handleSearch(stateParams)
           showSuccessNotification('deleted')
@@ -91,17 +87,15 @@ export default defineComponent({
     }
 
     return {
-      theater,
-
-      fields,
       items,
       itemsTotal,
       loading,
       handleSearch,
 
+      fields,
+
       handleCreate,
       handleEdit,
-      handleEditSeat,
 
       loadingDelete,
       visibleDeleteConfirmationModal,

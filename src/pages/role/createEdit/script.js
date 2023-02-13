@@ -18,7 +18,7 @@ export default defineComponent({
     DefaultTabs: components.DefaultTabs,
     Loading: components.Loading
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('role')

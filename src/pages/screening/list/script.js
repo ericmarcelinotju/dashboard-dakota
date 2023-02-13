@@ -22,7 +22,7 @@ export default defineComponent({
     DefaultTable: components.DefaultTable,
     PopoverInfo: components.PopoverInfo
   },
-  setup() {
+  setup () {
     const router = useRouter()
     const store = useStore()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('recording')

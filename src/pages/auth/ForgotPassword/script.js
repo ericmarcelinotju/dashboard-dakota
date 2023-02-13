@@ -11,7 +11,7 @@ export default defineComponent({
     LockClosedIcon,
     DefaultModal: components.DefaultModal
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
 

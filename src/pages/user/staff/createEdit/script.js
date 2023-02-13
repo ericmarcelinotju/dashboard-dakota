@@ -16,9 +16,9 @@ export default defineComponent({
     DefaultCreateEdit: components.DefaultCreateEdit,
     DefaultTabs: components.DefaultTabs,
     Loading: components.Loading,
-    InputDropdown: components.InputDropdown,
+    InputDropdown: components.InputDropdown
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
@@ -31,7 +31,7 @@ export default defineComponent({
       email: null,
       password: null,
       confirmPassword: null,
-      roleId: null,
+      roleId: null
     }
     const params = reactive({ ...initialParams })
     const formLoading = ref(false)
@@ -72,7 +72,7 @@ export default defineComponent({
         updateUser(routeParams.value.id, { ...params, ...{ user_id: routeParams.value.id }, ...{ role_id: params.role_id } })
           .then(() => {
             reset()
-            router.push({ path: `${pages.user.url}` })
+            router.push({ path: `${pages.staff.url}` })
             showSuccessNotification('updated')
           })
           .catch(() => {
@@ -85,7 +85,7 @@ export default defineComponent({
         insertUser({ ...params })
           .then(() => {
             reset()
-            router.push({ path: `${pages.user.url}` })
+            router.push({ path: `${pages.staff.url}` })
             showSuccessNotification('inserted')
           })
           .catch(() => {
@@ -104,7 +104,7 @@ export default defineComponent({
     const tabOptions = computed(() => {
       return [
         { label: 'Profil Pengguna', value: 'profile' },
-        { label: 'Theater Kerja', value: 'workin' },
+        { label: 'Theater Kerja', value: 'workin' }
       ]
     })
 

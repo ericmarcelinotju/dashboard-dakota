@@ -15,7 +15,7 @@
       "
       type="file"
       @input="onAudioChange"
-    />
+    >
     <audio
       v-if="audioFile"
       id="uploaded_audio"
@@ -24,7 +24,11 @@
       :src="audioSource"
       @durationchange="onDurationChange"
     />
-    <div v-else id="upload_audio_info" class="mt-1 text-xs">
+    <div
+      v-else
+      id="upload_audio_info"
+      class="mt-1 text-xs"
+    >
       MP3, WAV, or OGG (MAX. 80Mb)
     </div>
   </div>
@@ -41,32 +45,32 @@ export default {
     }
   },
   emits: ['update:modelValue', 'input'],
-  data() {
+  data () {
     return {
       audioFile: null
     }
   },
   computed: {
-    audioSource() {
+    audioSource () {
       return URL.createObjectURL(this.audioFile)
     }
   },
   watch: {
     modelValue: {
-      handler(val) {
+      handler (val) {
         this.audioFile = val
       },
       immediate: true
     }
   },
   methods: {
-    onAudioChange(e) {
+    onAudioChange (e) {
       const files = e.target.files || e.dataTransfer.files
       if (!files.length) return
 
       this.audioFile = files[0]
     },
-    onDurationChange(e) {
+    onDurationChange (e) {
       this.audioFile.duration = e.target.duration
       this.$emit('update:modelValue', this.audioFile)
       this.$emit('input', this.audioFile)

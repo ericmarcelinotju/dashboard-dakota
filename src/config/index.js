@@ -88,14 +88,24 @@ const pages = {
       name: 'role' + constant.EDIT.name
     }
   },
-  user: {
-    name: 'user',
-    url: '/user',
+  member: {
+    name: 'member',
+    url: '/member',
     create: {
-      name: 'user' + constant.CREATE.name
+      name: 'member' + constant.CREATE.name
     },
     edit: {
-      name: 'user' + constant.EDIT.name
+      name: 'member' + constant.EDIT.name
+    }
+  },
+  staff: {
+    name: 'staff',
+    url: '/staff',
+    create: {
+      name: 'staff' + constant.CREATE.name
+    },
+    edit: {
+      name: 'staff' + constant.EDIT.name
     }
   },
   log: {
@@ -205,7 +215,7 @@ const pages = {
     edit: {
       name: 'pricing' + constant.EDIT.name
     }
-  },
+  }
 }
 
 const app = {

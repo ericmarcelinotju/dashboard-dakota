@@ -16,7 +16,7 @@ export default defineComponent({
     Loading: components.Loading,
     InputDropdown: components.InputDropdown,
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()

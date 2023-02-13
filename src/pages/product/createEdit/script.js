@@ -22,7 +22,7 @@ export default defineComponent({
     InputDropdown: components.InputDropdown,
     InputDualList
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()

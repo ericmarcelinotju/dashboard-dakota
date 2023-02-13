@@ -5,7 +5,7 @@
         <div class="my-2 ml-6 text-primary-blue font-bold">
           {{ title }}
         </div>
-        <hr class="mb-2" />
+        <hr class="mb-2">
       </template>
       <slot name="form" />
     </div>

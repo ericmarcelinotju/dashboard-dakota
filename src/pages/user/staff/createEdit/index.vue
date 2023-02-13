@@ -6,7 +6,10 @@
           <template #profile>
             <div class="px-6">
               <div class="default-field mt-6">
-                <label class="default-label" for="username">
+                <label
+                  class="default-label"
+                  for="username"
+                >
                   {{ $t("app.fields.username") }}<sup>*</sup>
                 </label>
                 <input
@@ -16,38 +19,47 @@
                   class="default-input"
                   required
                   type="text"
-                />
+                >
               </div>
 
               <div class="grid grid-cols-12 gap-x-12 gap-y-4 mt-6">
                 <div class="default-field col-span-6">
-                  <label class="default-label" for="first_name">
+                  <label
+                    class="default-label"
+                    for="first_name"
+                  >
                     Nama Depan
                   </label>
                   <input
                     id="first_name"
                     v-model="params.firstName"
                     class="default-input"
-                    type="text"
                     placeholder="Nama Depan"
-                  />
+                    type="text"
+                  >
                 </div>
                 <div class="default-field col-span-6">
-                  <label class="default-label" for="last_name">
+                  <label
+                    class="default-label"
+                    for="last_name"
+                  >
                     Nama Belakang
                   </label>
                   <input
                     id="last_name"
                     v-model="params.lastName"
                     class="default-input"
-                    type="text"
                     placeholder="Nama Belakang"
-                  />
+                    type="text"
+                  >
                 </div>
               </div>
 
               <div class="default-field mt-6">
-                <label class="default-label" for="email">
+                <label
+                  class="default-label"
+                  for="email"
+                >
                   {{ $t("app.fields.email") }}<sup>*</sup>
                 </label>
                 <input
@@ -57,38 +69,47 @@
                   class="default-input"
                   required
                   type="email"
-                />
+                >
               </div>
 
               <div class="default-field mt-6">
-                <label class="default-label" for="password"> Kata Sandi </label>
+                <label
+                  class="default-label"
+                  for="password"
+                > Kata Sandi </label>
                 <input
                   id="password"
                   v-model="params.password"
                   class="default-input"
-                  type="password"
                   placeholder="Kata Sandi"
-                />
+                  type="password"
+                >
               </div>
 
               <div class="default-field mt-6">
-                <label class="default-label" for="confirm-password">
+                <label
+                  class="default-label"
+                  for="confirm-password"
+                >
                   Konfirmasi Kata Sandi
                 </label>
                 <input
                   id="confirm-password"
                   v-model="params.confirmPassword"
                   class="default-input"
-                  type="password"
                   placeholder="Konfirmasi Kata Sandi"
-                />
+                  type="password"
+                >
               </div>
 
               <div
                 v-if="hasPermission('GET', 'ROLE')"
                 class="default-field mt-6"
               >
-                <label class="default-label" for="role_id">
+                <label
+                  class="default-label"
+                  for="role_id"
+                >
                   {{ $t("app.fields.role") }}
                 </label>
                 <InputDropdown
@@ -109,7 +130,7 @@
             </div>
           </template>
           <template #workin>
-            <div class="px-6"></div>
+            <div class="px-6" />
           </template>
         </DefaultTabs>
       </div>

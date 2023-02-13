@@ -13,7 +13,7 @@ export default defineComponent({
     LockClosedIcon,
     DefaultModal: components.DefaultModal
   },
-  setup() {
+  setup () {
     const router = useRouter()
     const store = useStore()
 
