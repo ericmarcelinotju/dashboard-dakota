@@ -22,7 +22,15 @@
         @delete="handleDelete"
         @edit="handleEdit"
         @search="handleSearch"
-      />
+      >
+        <template #picture="{ item }">
+          <img
+            v-if="item.picture"
+            class="w-32"
+            :src="item.picture"
+          >
+        </template>
+      </DefaultTable>
     </template>
     <template #dialog>
       <DefaultModal

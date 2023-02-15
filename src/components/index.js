@@ -13,8 +13,6 @@ export default {
     /* webpackChunkName: "c-default-page" */ '@/components/default/page/index.vue')),
   DefaultTabs: defineAsyncComponent(() => import(
     /* webpackChunkName: "c-default-tabs" */ '@/components/default/Tabs.vue')),
-  InputImage: defineAsyncComponent(() => import(
-    /* webpackChunkName: "c-input-image" */ '@/components/form/image/index.vue')),
   InputDropdown: defineAsyncComponent(() => import(
     /* webpackChunkName: "c-input-dropdown" */ '@/components/form/dropdown/index.vue')),
   InputMultiselect: defineAsyncComponent(() => import(
@@ -26,9 +24,13 @@ export default {
   InputSwitch: defineAsyncComponent(() => import(
     /* webpackChunkName: "c-input-switch" */ '@/components/form/Switch.vue')),
   InputAudio: defineAsyncComponent(() => import(
-    /* webpackChunkName: "c-input-audio" */ '@/components/form/Audio.vue')),
+    /* webpackChunkName: "c-input-audio" */ '@/components/form/file/Audio.vue')),
   InputAvatar: defineAsyncComponent(() => import(
-    /* webpackChunkName: "c-input-avatar" */ '@/components/form/Avatar.vue')),
+    /* webpackChunkName: "c-input-avatar" */ '@/components/form/file/Avatar.vue')),
+  InputImage: defineAsyncComponent(() => import(
+    /* webpackChunkName: "c-input-image" */ '@/components/form/file/Image.vue')),
+  InputVideo: defineAsyncComponent(() => import(
+    /* webpackChunkName: "c-input-video" */ '@/components/form/file/Video.vue')),
   // InputDualList: defineAsyncComponent(() => import(
   //   /* webpackChunkName: "c-input-dualList" */ '@/components/form/dualList/index.vue')),
 

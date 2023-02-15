@@ -1,35 +1,47 @@
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
 import {
-  detail as getBranch,
-  insert as insertBranch,
-  update as updateBranch
-} from '@/api/branch'
+  detail as getMovie,
+  insert as insertMovie,
+  update as updateMovie
+} from '@/api/movie'
+import { convertJsonToFormData } from '@/utils/body'
 
 export default defineComponent({
   components: {
     DefaultCreateEdit: components.DefaultCreateEdit,
     Loading: components.Loading,
-    InputDropdown: components.InputDropdown
+    InputDropdown: components.InputDropdown,
+    InputImage: components.InputImage,
+    InputVideo: components.InputVideo,
+    InputMultitext: components.InputMultitext,
+    Datepicker
   },
   setup () {
     const route = useRoute()
     const router = useRouter()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('branch')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('movie')
 
     const initialState = {
-      number: '',
-      name: '',
-      host: '',
-      port: '',
-      type: 'yeastar',
-      api_version: 2,
-      folder: '',
-      username: '',
-      password: ''
+      code: null,
+      title: null,
+      rating: null,
+      runTime: null,
+      genre: null,
+      releaseDate: null,
+      actors: null,
+      actresses: null,
+      producer: null,
+      distributor: null,
+      director: null,
+      writer: null,
+      description: null,
+      picture: null,
+      trailer: null
     }
     const params = reactive({ ...initialState })
     const formLoading = ref(false)
@@ -41,7 +53,7 @@ export default defineComponent({
     const initPage = () => {
       if (!isUpdate.value) return
       formLoading.value = true
-      getBranch(routeParams.value.id)
+      getMovie(routeParams.value.id)
         .then(res => {
           Object.assign(initialState, res.data)
           Object.assign(params, res.data)
@@ -60,14 +72,16 @@ export default defineComponent({
 
     const submit = () => {
       saveLoading.value = true
+
+      const payload = convertJsonToFormData(params)
       if (isUpdate.value) {
-        updateBranch(routeParams.value.id, { ...params, ...{ id: parseInt(routeParams.value.id) } })
+        updateMovie(routeParams.value.id, payload)
           .then(() => {
             saveSuccess('updated')
           })
           .catch(saveFail)
       } else {
-        insertBranch({ ...params })
+        insertMovie(payload)
           .then(() => {
             saveSuccess('inserted')
           })
@@ -77,7 +91,7 @@ export default defineComponent({
 
     const saveSuccess = (message) => {
       reset()
-      router.push({ path: `${pages.branch.url}` })
+      router.push({ path: `${pages.movie.url}` })
       saveLoading.value = false
       showSuccessNotification(message)
     }

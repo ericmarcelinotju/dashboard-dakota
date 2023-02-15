@@ -166,7 +166,7 @@
                   id="dob"
                   v-model="params.dob"
                   auto-apply
-                  class="default-input"
+                  input-class-name="default-input"
                   vertical
                 />
               </div>

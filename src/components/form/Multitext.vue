@@ -4,6 +4,7 @@
       v-model="value"
       :multiple="true"
       :options="[]"
+      :placeholder="placeholder"
       :taggable="true"
       @tag="addTag"
     />
@@ -39,6 +40,10 @@ export default defineComponent({
     duplicateErrMsg: {
       type: String,
       default: t('app.components.customMultitext.duplicateErr')
+    },
+    placeholder: {
+      type: String,
+      default: () => 'Input value'
     }
   },
   emits: ['update:modelValue'],

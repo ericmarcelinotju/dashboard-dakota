@@ -7,6 +7,12 @@
       controls
       :src="avatarSource"
     >
+    <img
+      v-else-if="defaultAvatar"
+      :id="id"
+      class="w-24 h-24 rounded-full"
+      :src="defaultAvatar"
+    >
     <div
       v-else
       id="avatar_image"
@@ -51,7 +57,8 @@ export default {
   emits: ['update:modelValue', 'input'],
   data () {
     return {
-      avatarFile: null
+      avatarFile: null,
+      defaultAvatar: null
     }
   },
   computed: {
@@ -62,7 +69,7 @@ export default {
   watch: {
     modelValue: {
       handler (val) {
-        this.avatarFile = val
+        this.defaultAvatar = val
       },
       immediate: true
     }

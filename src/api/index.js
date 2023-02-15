@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   config => {
-    config.headers['Authorization'] = `Bearer ${store.getters['auth/token']}`
+    config.headers.Authorization = `Bearer ${store.getters['auth/token']}`
     return config
   },
   error => Promise.reject(error)
@@ -21,10 +21,11 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
+    console.log(error.response)
     if (error.response) {
-      if (error.response.code === 401) {
+      if (error.response.status === 401) {
         store.commit('auth/setLogout')
-      } else if (error.response.code === 403) {
+      } else if (error.response.status === 403) {
         router.replace({ name: pages.forbidden.name })
       }
     }

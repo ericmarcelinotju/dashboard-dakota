@@ -2,141 +2,230 @@
   <DefaultCreateEdit>
     <template #form>
       <form
-        class="p-6 overflow-y-auto min-h-[92%] mb-14"
+        class="p-6 overflow-y-auto min-h-[92%]"
         @submit.prevent="submit"
       >
         <div class="default-field mt-4">
+          <InputImage
+            id="picture"
+            v-model="params.picture"
+            label="Unggah Gambar"
+            reset-label="Hapus Gambar"
+          />
+        </div>
+        <div class="default-field mt-4">
+          <InputVideo
+            id="trailer"
+            v-model="params.trailer"
+            label="Unggah Trailer"
+            reset-label="Hapus Trailer"
+          />
+        </div>
+        <div class="default-field mt-4">
           <label
             class="default-label"
-            for="number"
+            for="code"
           >
-            {{ $t("app.fields.number") }}<sup>*</sup>
+            Kode<sup>*</sup>
           </label>
           <input
-            id="number"
-            v-model="params.number"
+            id="code"
+            v-model="params.code"
             class="default-input"
             required
             type="text"
           >
         </div>
 
-        <div class="default-field mt-6">
+        <div class="default-field mt-4">
           <label
             class="default-label"
-            for="name"
+            for="title"
           >
-            {{ $t("app.fields.name") }}<sup>*</sup>
+            Title<sup>*</sup>
           </label>
           <input
-            id="name"
-            v-model="params.name"
+            id="title"
+            v-model="params.title"
             class="default-input"
             required
             type="text"
           >
         </div>
 
-        <template v-if="params.type === 'yeastar'">
-          <div class="default-field mt-6">
+        <div class="default-field mt-4">
+          <label
+            class="default-label"
+            for="description"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            v-model="params.description"
+            class="default-input"
+          />
+        </div>
+
+        <div class="grid grid-cols-12 gap-x-12 gap-y-4 mt-4">
+          <div class="default-field col-span-6">
             <label
               class="default-label"
-              for="host"
+              for="runTime"
             >
-              {{ $t("app.fields.host") }}<sup>*</sup>
+              Durasi<sup>*</sup>
             </label>
             <input
-              id="host"
-              v-model="params.host"
+              id="runTime"
+              v-model="params.runTime"
+              class="default-input"
+              required
+              type="number"
+            >
+          </div>
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="releaseDate"
+            >
+              Tanggal Rilis<sup>*</sup>
+            </label>
+            <Datepicker
+              id="releaseDate"
+              v-model="params.releaseDate"
+              auto-apply
+              input-class-name="default-input"
+              vertical
+            />
+          </div>
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="rating"
+            >
+              Rating Usia<sup>*</sup>
+            </label>
+            <input
+              id="rating"
+              v-model="params.rating"
+              class="default-input"
+              required
+              type="number"
+            >
+          </div>
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="genre"
+            >
+              Genre
+            </label>
+            <input
+              id="genre"
+              v-model="params.genre"
               class="default-input"
               required
               type="text"
             >
           </div>
 
-          <div class="grid grid-cols-12 gap-x-24 mt-6">
-            <div class="default-field col-span-6">
-              <label
-                class="default-label"
-                for="port"
-              >
-                {{ $t("app.fields.port") }}<sup>*</sup>
-              </label>
-              <input
-                id="port"
-                v-model="params.port"
-                class="default-input"
-                required
-                type="text"
-              >
-            </div>
-          </div>
-          <div class="grid grid-cols-12 gap-x-24 mt-6">
-            <div class="default-field col-span-6">
-              <label
-                class="default-label"
-                for="username"
-              >
-                {{ $t("app.fields.username") }}<sup>*</sup>
-              </label>
-              <input
-                id="username"
-                v-model="params.username"
-                class="default-input"
-                required
-                type="text"
-              >
-            </div>
-            <div class="default-field col-span-6">
-              <label
-                class="default-label"
-                for="password"
-              >
-                {{ $t("app.fields.password") }}<sup>*</sup>
-              </label>
-              <input
-                id="password"
-                v-model="params.password"
-                class="default-input"
-                :required="isUpdate"
-                type="password"
-              >
-            </div>
-          </div>
-        </template>
-        <template v-else>
-          <div class="default-field mt-6">
+          <div class="default-field col-span-6">
             <label
               class="default-label"
-              for="folder"
+              for="actors"
             >
-              {{ $t("app.fields.folder") }}<sup>*</sup>
+              Aktor
+            </label>
+            <InputMultitext
+              id="actors"
+              v-model="params.actors"
+              placeholder="Nama-nama aktor"
+            />
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="actresses"
+            >
+              Aktris
+            </label>
+            <InputMultitext
+              id="actresses"
+              v-model="params.actresses"
+              placeholder="Nama-nama aktris"
+            />
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="producer"
+            >
+              Produser
             </label>
             <input
-              id="folder"
-              v-model="params.folder"
+              id="producer"
+              v-model="params.producer"
               class="default-input"
-              required
               type="text"
             >
           </div>
-        </template>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="distributor"
+            >
+              Distributor
+            </label>
+            <input
+              id="distributor"
+              v-model="params.distributor"
+              class="default-input"
+              type="text"
+            >
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="director"
+            >
+              Director
+            </label>
+            <input
+              id="director"
+              v-model="params.director"
+              class="default-input"
+              type="text"
+            >
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="writer"
+            >
+              Writer
+            </label>
+            <input
+              id="writer"
+              v-model="params.writer"
+              class="default-input"
+              type="text"
+            >
+          </div>
+        </div>
 
         <div class="create-edit-submit-container">
           <button
-            class="warning-button mr-4"
-            type="cancel"
-            @click.prevent="reset"
-          >
-            {{ $t("app.createEdit.cancel") }}
-          </button>
-          <button
-            class="info-button"
+            class="danger-button"
             :disabled="saveLoading"
             type="submit"
           >
             <Loading v-if="saveLoading" />
-            {{ $t("app.createEdit.save") }}
+            Simpan
           </button>
         </div>
       </form>
