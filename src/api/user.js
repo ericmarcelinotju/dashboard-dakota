@@ -22,10 +22,15 @@ const del = (id) => {
   return axios.delete(api.user + '/' + id)
 }
 
+const updateWork = (id, data) => {
+  return axios.put(`${api.user}/${id}/work`, data)
+}
+
 export {
   get,
   detail,
   insert,
   update,
-  del
+  del,
+  updateWork
 }

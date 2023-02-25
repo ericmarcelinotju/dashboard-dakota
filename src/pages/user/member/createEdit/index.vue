@@ -166,8 +166,8 @@
                   id="dob"
                   v-model="params.dob"
                   auto-apply
+                  :enable-time-picker="false"
                   input-class-name="default-input"
-                  vertical
                 />
               </div>
 

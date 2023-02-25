@@ -28,3 +28,23 @@ export const fields = [
     sortable: true
   }
 ]
+
+export const workInFields = [
+  {
+    name: 'ID',
+    value: 'id',
+    hidden: true
+  },
+  {
+    name: 'Teater',
+    value: 'theater'
+  },
+  {
+    name: 'Posisi',
+    value: 'position'
+  },
+  {
+    name: 'Periode Kerja',
+    value: 'work_period'
+  }
+]
