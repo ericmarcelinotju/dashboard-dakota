@@ -5,7 +5,8 @@ import {
   TicketIcon,
   ChartPieIcon,
   CurrencyDollarIcon,
-  ShieldExclamationIcon
+  ShieldExclamationIcon,
+  CogIcon
 } from '@heroicons/vue/solid'
 
 export const navigations = [
@@ -91,5 +92,11 @@ export const navigations = [
     module: 'ORDER',
     href: '/report',
     icon: ChartPieIcon
+  },
+  {
+    name: 'Pengaturan Umum',
+    module: 'SETTING',
+    href: '/setting',
+    icon: CogIcon
   }
 ]

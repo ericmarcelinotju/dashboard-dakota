@@ -1,81 +1,206 @@
 <template>
-  <DefaultPage title="Ringkasan Pengguna">
-    <template #action>
-      <button
-        v-if="hasPermission('POST')"
-        class="danger-button mr-4"
-        type="button"
-        @click="handleCreate"
-      >
-        <PlusIcon class="w-4 h-4 mr-1" />
-        TAMBAH BARU
-      </button>
-    </template>
-    <template #search>
-      <div class="flex">
-        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-amber-500">
-          <p class="text-2xl">5678</p>
-          <p class="text-sm">Total Pengguna</p>
+  <DefaultCreateEdit>
+    <template #form>
+      <div class="p-6 overflow-y-auto min-h-[92%]">
+        <div class="default-field">
+          <label
+            class="default-label"
+            for="code"
+          >
+            Kode<sup>*</sup>
+          </label>
+          <input
+            id="code"
+            v-model="params.code"
+            class="default-input"
+            required
+            type="text"
+          >
         </div>
-        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-indigo-600">
-          <p class="text-2xl">3026</p>
-          <p class="text-sm">Pengguna Premium</p>
+
+        <div class="default-field mt-4">
+          <label
+            class="default-label"
+            for="title"
+          >
+            Title<sup>*</sup>
+          </label>
+          <input
+            id="title"
+            v-model="params.title"
+            class="default-input"
+            required
+            type="text"
+          >
         </div>
-        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-blue-700">
-          <p class="text-2xl">2652</p>
-          <p class="text-sm">Pengguna Basic</p>
+
+        <div class="default-field mt-4">
+          <label
+            class="default-label"
+            for="description"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            v-model="params.description"
+            class="default-input"
+          />
         </div>
-        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-sky-400">
-          <p class="text-2xl">123</p>
-          <p class="text-sm">Pengguna Baru</p>
-        </div>
-        <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-green-600">
-          <p class="text-2xl">2345</p>
-          <p class="text-sm">Pengguna Melakukan Transaksi</p>
+
+        <div class="grid grid-cols-12 gap-x-12 gap-y-4 mt-4">
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="runTime"
+            >
+              Durasi<sup>*</sup>
+            </label>
+            <input
+              id="runTime"
+              v-model="params.runTime"
+              class="default-input"
+              required
+              type="number"
+            >
+          </div>
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="releaseDate"
+            >
+              Tanggal Rilis<sup>*</sup>
+            </label>
+            <Datepicker
+              id="releaseDate"
+              v-model="params.releaseDate"
+              auto-apply
+              input-class-name="default-input"
+              vertical
+            />
+          </div>
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="rating"
+            >
+              Rating Usia<sup>*</sup>
+            </label>
+            <input
+              id="rating"
+              v-model="params.rating"
+              class="default-input"
+              required
+              type="number"
+            >
+          </div>
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="genre"
+            >
+              Genre
+            </label>
+            <input
+              id="genre"
+              v-model="params.genre"
+              class="default-input"
+              required
+              type="text"
+            >
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="actors"
+            >
+              Aktor
+            </label>
+            <InputMultitext
+              id="actors"
+              v-model="params.actors"
+              placeholder="Nama-nama aktor"
+            />
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="actresses"
+            >
+              Aktris
+            </label>
+            <InputMultitext
+              id="actresses"
+              v-model="params.actresses"
+              placeholder="Nama-nama aktris"
+            />
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="producer"
+            >
+              Produser
+            </label>
+            <input
+              id="producer"
+              v-model="params.producer"
+              class="default-input"
+              type="text"
+            >
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="distributor"
+            >
+              Distributor
+            </label>
+            <input
+              id="distributor"
+              v-model="params.distributor"
+              class="default-input"
+              type="text"
+            >
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="director"
+            >
+              Director
+            </label>
+            <input
+              id="director"
+              v-model="params.director"
+              class="default-input"
+              type="text"
+            >
+          </div>
+
+          <div class="default-field col-span-6">
+            <label
+              class="default-label"
+              for="writer"
+            >
+              Writer
+            </label>
+            <input
+              id="writer"
+              v-model="params.writer"
+              class="default-input"
+              type="text"
+            >
+          </div>
         </div>
       </div>
     </template>
-    <template #table>
-      <DefaultTable
-        :fields="fields"
-        :has-delete="hasPermission('DELETE')"
-        :has-edit="hasPermission('PUT')"
-        :items="items"
-        :loading="loading"
-        :total="itemsTotal"
-        @delete="handleDelete"
-        @edit="handleEdit"
-        @search="handleSearch"
-      >
-        <template #branches="{ item }">
-          <span
-            v-for="branch in item.branches"
-            :key="branch.id"
-            class="default-tag mr-1"
-          >
-            {{ branch.name }}
-          </span>
-        </template>
-        <template #extensions="{ item }">
-          <span>{{ item.extensions?.length }}</span>
-        </template>
-        <template #role="{ item }">
-          <span>{{ item.role.name }}</span>
-        </template>
-        <template #last_login="{ item }">
-          <span>{{ item.last_login }}</span>
-        </template>
-      </DefaultTable>
-    </template>
-    <template #dialog>
-      <DefaultModal
-        v-model="visibleDeleteConfirmationModal"
-        :loading="loadingDelete"
-        type="danger"
-        @confirm="confirmDelete"
-      />
-    </template>
-  </DefaultPage>
+  </DefaultCreateEdit>
 </template>
 
 <script src="./script.js"></script>

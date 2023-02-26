@@ -5,30 +5,25 @@ export const fields = [
     hidden: true
   },
   {
-    name: 'Username',
-    value: 'username',
+    name: 'Tanggal',
+    value: 'date',
     sortable: true,
     searchable: true
   },
   {
-    name: 'Email',
-    value: 'email',
-    sortable: true,
-    searchable: true
+    name: 'Kode',
+    value: 'code'
   },
   {
-    name: 'Role',
-    value: 'role',
-    filterable: true,
-    optionKey: 'role/roles'
+    name: 'Total',
+    value: 'totalAmount'
   },
   {
-    name: 'Branch',
-    value: 'branch'
+    name: 'Pengguna',
+    value: 'user'
   },
   {
-    name: 'Last Login',
-    value: 'last_login',
-    sortable: true
+    name: 'Aksi',
+    value: 'view'
   }
 ]

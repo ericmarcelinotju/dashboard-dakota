@@ -201,6 +201,10 @@ sup {
   @apply appearance-none checked:bg-primary-blue border-gray-300 rounded-sm h-5 w-5 mr-4 shadow-sm;
 }
 
+.seat-checkbox {
+  @apply appearance-none text-primary-green checked:bg-primary-green checked:bg-none hover:bg-gray-100 focus:bg-primary-red focus:outline-primary-green border-gray-300 rounded-md h-7 w-7 mr-2 shadow-sm ;
+}
+
 .create-edit-submit-container {
   @apply py-3;
 }

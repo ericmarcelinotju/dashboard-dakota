@@ -36,7 +36,7 @@ export default defineComponent({
       getTheaters(params)
         .then(res => {
           items.value = res.data.data
-          itemsTotal.value = res.data.total
+          itemsTotal.value = res.data.totalItem
         })
         .finally(() => {
           loading.value = false

@@ -3,7 +3,10 @@
     <template #form>
       <div class="p-6 overflow-y-auto min-h-[92%] mb-14">
         <div class="default-field">
-          <label class="default-label" for="code">
+          <label
+            class="default-label"
+            for="code"
+          >
             Kode Studio<sup>*</sup>
           </label>
           <input
@@ -12,11 +15,14 @@
             class="default-input"
             required
             type="text"
-          />
+          >
         </div>
 
         <div class="default-field mt-6">
-          <label class="default-label" for="name">
+          <label
+            class="default-label"
+            for="name"
+          >
             Nama Studio<sup>*</sup>
           </label>
           <input
@@ -26,20 +32,22 @@
             class="default-input"
             required
             type="text"
-          />
+          >
         </div>
 
-        <div v-if="hasPermission('GET', 'PRICING')" class="default-field mt-6">
-          <label class="default-label" for="pricing_id"> Kelas Harga </label>
+        <div
+          v-if="hasPermission('GET', 'PRICING')"
+          class="default-field mt-6"
+        >
+          <label
+            class="default-label"
+            for="pricing_id"
+          > Kelas Harga </label>
           <InputDropdown
             v-model="params.pricingId"
             class="default-input"
             :options="pricings"
           />
-        </div>
-
-        <div v-if="hasPermission('GET', 'SEAT')" class="default-field mt-6">
-          <label class="default-label" for="seats">Kursi</label>
         </div>
 
         <div class="flex mt-4">

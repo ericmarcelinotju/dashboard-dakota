@@ -79,7 +79,7 @@ export default defineComponent({
     }
   },
   emits: ['search', 'selection', 'detail', 'delete', 'edit', 'rowClick'],
-  setup(props, context) {
+  setup (props, context) {
     const router = useRouter()
     let pagination, sort
 

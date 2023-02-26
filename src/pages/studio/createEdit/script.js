@@ -15,7 +15,7 @@ export default defineComponent({
   components: {
     DefaultCreateEdit: components.DefaultCreateEdit,
     Loading: components.Loading,
-    InputDropdown: components.InputDropdown,
+    InputDropdown: components.InputDropdown
   },
   setup () {
     const route = useRoute()
