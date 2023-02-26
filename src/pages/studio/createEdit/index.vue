@@ -42,7 +42,9 @@
           <label
             class="default-label"
             for="pricing_id"
-          > Kelas Harga </label>
+          >
+            Kelas Harga
+          </label>
           <InputDropdown
             v-model="params.pricingId"
             class="default-input"
