@@ -1,13 +1,15 @@
 import {
   login,
-  logout
+  logout,
+  refresh
 } from '@/api/auth'
 import router from '@/router'
 import { pages } from '@/config'
 
 const state = () => ({
   user: {},
-  token: null
+  token: null,
+  refreshToken: null
 })
 
 const getters = {
@@ -45,10 +47,12 @@ const mutations = {
   setLogin (state, value) {
     state.user = value.user
     state.token = value.accessToken
+    state.refreshToken = value.refreshToken
   },
   setLogout (state) {
     state.user = {}
     state.token = null
+    state.refreshToken = null
     router.replace({ path: pages.auth.login.url })
   }
 }
@@ -64,6 +68,16 @@ const actions = {
   logout ({ commit }) {
     return logout()
       .finally(() => {
+        commit('setLogout')
+      })
+  },
+  refresh ({ state, commit }) {
+    return refresh({ refreshToken: state.refreshToken })
+      .then((res) => {
+        commit('setLogin', res.data)
+        return res
+      })
+      .catch(() => {
         commit('setLogout')
       })
   }

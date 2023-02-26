@@ -21,10 +21,10 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
-    console.log(error.response)
     if (error.response) {
       if (error.response.status === 401) {
-        store.commit('auth/setLogout')
+        return store.dispatch('auth/refresh')
+          .then(() => axiosInstance.request(error.config))
       } else if (error.response.status === 403) {
         router.replace({ name: pages.forbidden.name })
       }

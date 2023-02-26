@@ -13,6 +13,10 @@ const register = (data) => {
   return axios.post(api.auth.register, data)
 }
 
+const refresh = (data) => {
+  return axios.post(api.auth.refresh, data)
+}
+
 const forgotPassword = (data) => {
   return axios.post(api.auth.forgotPassword, data, { timeout: 30000 })
 }
@@ -25,6 +29,7 @@ export {
   login,
   logout,
   register,
+  refresh,
   forgotPassword,
   resetPassword
 }
