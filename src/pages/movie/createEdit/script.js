@@ -1,6 +1,5 @@
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
@@ -10,16 +9,15 @@ import {
   update as updateMovie
 } from '@/api/movie'
 import { convertJsonToFormData } from '@/utils/body'
+import MovieForm from './movie/index.vue'
+import TheaterForm from './theater/index.vue'
 
 export default defineComponent({
   components: {
     DefaultCreateEdit: components.DefaultCreateEdit,
-    Loading: components.Loading,
-    InputDropdown: components.InputDropdown,
-    InputImage: components.InputImage,
-    InputVideo: components.InputVideo,
-    InputMultitext: components.InputMultitext,
-    Datepicker
+    DefaultTabs: components.DefaultTabs,
+    MovieForm,
+    TheaterForm
   },
   setup () {
     const route = useRoute()
@@ -55,8 +53,13 @@ export default defineComponent({
       formLoading.value = true
       getMovie(routeParams.value.id)
         .then(res => {
-          Object.assign(initialState, res.data)
-          Object.assign(params, res.data)
+          const movie = {
+            ...res.data,
+            runTime: res.data.runTimeNumber,
+            releaseDate: new Date(res.data.releaseDateISO)
+          }
+          Object.assign(initialState, movie)
+          Object.assign(params, movie)
         })
         .catch(() => {
           showDangerNotification('loaded')
@@ -105,6 +108,16 @@ export default defineComponent({
       initPage()
     })
 
+    const tabOptions = computed(() => isUpdate.value
+      ? [
+          { label: 'Detail Film', value: 'movie' },
+          { label: 'Teater', value: 'theater' }
+        ]
+      : [
+          { label: 'Detail Film', value: 'movie' }
+        ]
+    )
+
     return {
       routeParams,
       isUpdate,
@@ -112,7 +125,8 @@ export default defineComponent({
       formLoading,
       saveLoading,
       submit,
-      reset
+      reset,
+      tabOptions
     }
   }
 })

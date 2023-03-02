@@ -10,7 +10,7 @@ const convertJsonToFormData = (json) => {
   const formData = new FormData()
 
   for (const key in json) {
-    if (json[key] === null || json[key] === undefined) {
+    if (json[key] === null || json[key] === undefined || json[key] === '') {
       continue
     }
     formData.append(key, json[key])

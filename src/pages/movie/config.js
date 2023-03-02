@@ -9,6 +9,12 @@ export const fields = [
     value: 'picture'
   },
   {
+    name: 'Code',
+    value: 'code',
+    sortable: true,
+    searchable: true
+  },
+  {
     name: 'Nama',
     value: 'title',
     sortable: true,
@@ -28,5 +34,25 @@ export const fields = [
     name: 'Usia',
     value: 'rating',
     sortable: true
+  }
+]
+
+export const theaterFields = [
+  {
+    name: 'ID',
+    value: 'id',
+    hidden: true
+  },
+  {
+    name: 'Code',
+    value: 'code',
+    sortable: true,
+    searchable: true
+  },
+  {
+    name: 'Name',
+    value: 'name',
+    sortable: true,
+    searchable: true
   }
 ]

@@ -1,14 +1,14 @@
-import { computed, defineComponent, onMounted, ref, reactive } from 'vue'
+import { computed, defineComponent, ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
 import {
-  insert as insertUser,
-  update as updateUser
-} from '@/api/user'
-import { get as getRoles } from '@/api/role'
+  insert as insertMovie,
+  update as updateMovie
+} from '@/api/movie'
 import { convertJsonToFormData } from '@/utils/body'
 
 export default defineComponent({
@@ -16,15 +16,18 @@ export default defineComponent({
     DefaultCreateEdit: components.DefaultCreateEdit,
     DefaultTabs: components.DefaultTabs,
     Loading: components.Loading,
-    InputAvatar: components.InputAvatar,
-    InputDropdown: components.InputDropdown
+    InputDropdown: components.InputDropdown,
+    InputImage: components.InputImage,
+    InputVideo: components.InputVideo,
+    InputMultitext: components.InputMultitext,
+    Datepicker
   },
   props: {
     loading: {
       type: Boolean,
       default: false
     },
-    user: {
+    movie: {
       type: Object,
       default: () => {}
     }
@@ -33,23 +36,23 @@ export default defineComponent({
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('movie')
 
-    const params = reactive(props.user)
+    const params = reactive(props.movie)
     const saveLoading = ref(false)
 
     const routeParams = computed(() => route.params || {})
     const hasId = computed(() => !!routeParams.value.id)
 
-    const roles = ref([])
-
     const submit = () => {
       saveLoading.value = true
+
+      params.releaseDate = params.releaseDate.toISOString()
       const payload = convertJsonToFormData(params)
       if (hasId.value) {
-        updateUser(routeParams.value.id, payload)
+        updateMovie(routeParams.value.id, payload)
           .then(() => {
-            router.push({ path: `${pages.staff.url}` })
+            router.push({ path: `${pages.movie.url}` })
             showSuccessNotification('updated')
           })
           .catch(() => {
@@ -59,9 +62,9 @@ export default defineComponent({
             saveLoading.value = false
           })
       } else {
-        insertUser(payload)
+        insertMovie(payload)
           .then(() => {
-            router.push({ path: `${pages.staff.url}` })
+            router.push({ path: `${pages.movie.url}` })
             showSuccessNotification('inserted')
           })
           .catch(() => {
@@ -77,31 +80,13 @@ export default defineComponent({
       return store.getters['auth/hasPermission'](module, method)
     }
 
-    const tabOptions = computed(() => {
-      return [
-        { label: 'Profil Pengguna', value: 'profile' },
-        { label: 'Theater Kerja', value: 'workin' }
-      ]
-    })
-
-    onMounted(() => {
-      if (hasPermission('GET', 'ROLE')) {
-        getRoles()
-          .then(res => {
-            roles.value = res.data.data
-          })
-      }
-    })
-
     return {
       routeParams,
       hasId,
       params,
       saveLoading,
       submit,
-      roles,
-      hasPermission,
-      tabOptions
+      hasPermission
     }
   }
 })

@@ -15,6 +15,7 @@ export default {
 
   movie: '/api/movie',
   product: '/api/product',
+  productCategory: '/api/product/category',
   theater: '/api/theater',
   holiday: '/api/holiday',
   tax: '/api/tax',

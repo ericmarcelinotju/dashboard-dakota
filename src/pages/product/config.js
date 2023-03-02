@@ -5,27 +5,51 @@ export const fields = [
     hidden: true
   },
   {
-    name: 'Foto Produk',
+    name: 'Foto',
     value: 'image'
   },
   {
-    name: 'Nama Produk',
-    value: 'nama',
+    name: 'Nama',
+    value: 'name',
     sortable: true,
     searchable: true
   },
   {
-    name: 'Deskripsi Produk',
+    name: 'Deskripsi',
     value: 'description'
+  },
+  {
+    name: 'Kategori',
+    value: 'category'
   },
   {
     name: 'Harga Dicoret',
     value: 'listPrice',
-    sortable: true,
+    sortable: true
   },
   {
     name: 'Harga',
     value: 'purchasePrice',
+    sortable: true
+  }
+]
+
+export const theaterFields = [
+  {
+    name: 'ID',
+    value: 'id',
+    hidden: true
+  },
+  {
+    name: 'Code',
+    value: 'code',
     sortable: true,
+    searchable: true
+  },
+  {
+    name: 'Name',
+    value: 'name',
+    sortable: true,
+    searchable: true
   }
 ]

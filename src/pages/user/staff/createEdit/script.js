@@ -44,13 +44,6 @@ export default defineComponent({
         })
     }
 
-    const tabOptions = computed(() => {
-      return [
-        { label: 'Profil Pengguna', value: 'profile' },
-        { label: 'Theater Kerja', value: 'workin' }
-      ]
-    })
-
     onMounted(() => {
       initPage()
     })
@@ -60,8 +53,7 @@ export default defineComponent({
       hasId,
       params,
       loading,
-      roles,
-      tabOptions
+      roles
     }
   }
 })

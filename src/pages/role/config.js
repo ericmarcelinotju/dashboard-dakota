@@ -11,7 +11,7 @@ export const fields = [
     searchable: true
   },
   {
-    name: 'Description',
+    name: 'Deskripsi',
     value: 'description',
     sortable: true,
     searchable: true

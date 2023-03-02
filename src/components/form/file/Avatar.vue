@@ -35,7 +35,12 @@
       >
         Unggah Foto
       </label>
-      <a class="link text-sm mt-2">Hapus Foto</a>
+      <a
+        class="link text-sm mt-2"
+        @click="onDeleteClick"
+      >
+        Hapus Foto
+      </a>
     </div>
   </div>
 </template>
@@ -80,6 +85,15 @@ export default {
       if (!files.length) return
 
       this.avatarFile = files[0]
+
+      this.$emit('update:modelValue', this.avatarFile)
+      this.$emit('input', this.avatarFile)
+    },
+    onDeleteClick () {
+      this.avatarFile = null
+
+      this.$emit('update:modelValue', this.avatarFile)
+      this.$emit('input', this.avatarFile)
     }
   }
 }

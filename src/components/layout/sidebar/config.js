@@ -59,6 +59,12 @@ export const navigations = [
     icon: DesktopComputerIcon
   },
   {
+    name: 'Pemutaran Film',
+    module: 'SCREENING',
+    href: '/screening',
+    icon: TicketIcon
+  },
+  {
     name: 'Tiket',
     module: 'ORDER',
     href: '/ticket',

@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, computed, reactive, ref } from 'vue'
+import { defineComponent, onMounted, reactive, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
@@ -6,8 +6,8 @@ import components from '@/components'
 import { pages } from '@/config'
 import { PlusIcon } from '@heroicons/vue/solid'
 import { get as getTheaters } from '@/api/theater'
-import { updateWork as updateUserWork } from '@/api/user'
-import { workInFields } from '../../config'
+import { update as updateMovie } from '@/api/movie'
+import { theaterFields } from '../../config'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -24,7 +24,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    user: {
+    movie: {
       type: Object,
       default: () => {}
     }
@@ -32,27 +32,21 @@ export default defineComponent({
   setup (props) {
     const store = useStore()
     const router = useRouter()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('movie')
 
-    const items = ref(props.user.workHistory)
+    const items = ref(props.movie.theaters)
     const itemsTotal = ref(items.value.length)
 
     const saveLoading = ref(false)
     const params = reactive({
-      ...props.user.workIn,
-      theaterId: props.user.workIn ? props.user.workIn.theater.id : null
-    })
-    const workPeriod = computed({
-      get () {
-        return [params.startDate, params.endDate]
-      },
-      set (value) {
-        params.startDate = value[0]
-        params.endDate = value[1]
-      }
+      theaterId: null,
+      theaters: props.movie.theaters
     })
 
     const theaters = ref([])
+    const theaterOptions = computed(() => {
+      return theaters.value.filter(theater => !params.theaters.find((activeTheater) => activeTheater.id === theater.id))
+    })
 
     const hasPermission = (method, module = 'USER') => {
       return store.getters['auth/hasPermission'](module, method)
@@ -69,9 +63,11 @@ export default defineComponent({
 
     const submit = () => {
       saveLoading.value = true
-      updateUserWork(props.user.id, { ...params })
+      updateMovie(props.movie.id, {
+        theaterIds: params.theaters.map(item => item.id)
+      })
         .then(() => {
-          router.push({ path: `${pages.staff.url}` })
+          router.push({ path: `${pages.movie.url}` })
           showSuccessNotification('updated')
         })
         .catch(() => {
@@ -82,15 +78,27 @@ export default defineComponent({
         })
     }
 
+    const addTheater = () => {
+      const choosenTheater = theaters.value.find(item => item.id === params.theaterId)
+      params.theaters.push(choosenTheater)
+    }
+
+    const removeTheater = (theater) => {
+      const choosenIndex = theaters.value.indexOf(item => item.id === params.theaterId)
+      console.log(choosenIndex)
+      params.theaters.splice(choosenIndex, 1)
+    }
+
     return {
-      fields: workInFields,
+      fields: theaterFields,
       items,
       itemsTotal,
 
       params,
-      workPeriod,
       submit,
-      theaters
+      theaterOptions,
+      addTheater,
+      removeTheater
     }
   }
 })

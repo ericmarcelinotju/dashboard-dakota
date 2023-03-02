@@ -1,18 +1,19 @@
 <template>
   <div class="flex">
-    <img
+    <video
       v-if="videoFile"
       :id="id"
       class="w-96 h-64"
       controls
       :src="videoSource"
-    >
-    <img
+    />
+    <video
       v-else-if="defaultVideo"
       :id="id"
       class="w-96 h-64"
+      controls
       :src="defaultVideo"
-    >
+    />
     <div
       v-else
       :id="id"
@@ -35,7 +36,12 @@
       >
         {{ label }}
       </label>
-      <a class="link text-sm mt-2">{{ resetLabel }}</a>
+      <a
+        class="link text-sm mt-2"
+        @click="onDeleteClick"
+      >
+        {{ resetLabel }}
+      </a>
     </div>
   </div>
 </template>
@@ -92,6 +98,12 @@ export default {
       if (!files.length) return
 
       this.videoFile = files[0]
+
+      this.$emit('update:modelValue', this.videoFile)
+      this.$emit('input', this.videoFile)
+    },
+    onDeleteClick () {
+      this.videoFile = null
 
       this.$emit('update:modelValue', this.videoFile)
       this.$emit('input', this.videoFile)

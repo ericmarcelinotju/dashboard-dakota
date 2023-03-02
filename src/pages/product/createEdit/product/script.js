@@ -1,14 +1,15 @@
-import { computed, defineComponent, onMounted, ref, reactive } from 'vue'
+import { computed, defineComponent, ref, reactive, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
 import {
-  insert as insertUser,
-  update as updateUser
-} from '@/api/user'
-import { get as getRoles } from '@/api/role'
+  insert as insertProduct,
+  update as updateProduct
+} from '@/api/product'
+import { get as getProductCategory } from '@/api/productCategory'
 import { convertJsonToFormData } from '@/utils/body'
 
 export default defineComponent({
@@ -16,15 +17,16 @@ export default defineComponent({
     DefaultCreateEdit: components.DefaultCreateEdit,
     DefaultTabs: components.DefaultTabs,
     Loading: components.Loading,
-    InputAvatar: components.InputAvatar,
-    InputDropdown: components.InputDropdown
+    InputDropdown: components.InputDropdown,
+    InputImage: components.InputImage,
+    Datepicker
   },
   props: {
     loading: {
       type: Boolean,
       default: false
     },
-    user: {
+    product: {
       type: Object,
       default: () => {}
     }
@@ -33,23 +35,24 @@ export default defineComponent({
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('product')
 
-    const params = reactive(props.user)
+    const params = reactive(props.product)
     const saveLoading = ref(false)
 
     const routeParams = computed(() => route.params || {})
     const hasId = computed(() => !!routeParams.value.id)
 
-    const roles = ref([])
+    const categories = ref([])
 
     const submit = () => {
       saveLoading.value = true
+
       const payload = convertJsonToFormData(params)
       if (hasId.value) {
-        updateUser(routeParams.value.id, payload)
+        updateProduct(routeParams.value.id, payload)
           .then(() => {
-            router.push({ path: `${pages.staff.url}` })
+            router.push({ path: `${pages.product.url}` })
             showSuccessNotification('updated')
           })
           .catch(() => {
@@ -59,9 +62,9 @@ export default defineComponent({
             saveLoading.value = false
           })
       } else {
-        insertUser(payload)
+        insertProduct(payload)
           .then(() => {
-            router.push({ path: `${pages.staff.url}` })
+            router.push({ path: `${pages.product.url}` })
             showSuccessNotification('inserted')
           })
           .catch(() => {
@@ -77,20 +80,11 @@ export default defineComponent({
       return store.getters['auth/hasPermission'](module, method)
     }
 
-    const tabOptions = computed(() => {
-      return [
-        { label: 'Profil Pengguna', value: 'profile' },
-        { label: 'Theater Kerja', value: 'workin' }
-      ]
-    })
-
     onMounted(() => {
-      if (hasPermission('GET', 'ROLE')) {
-        getRoles()
-          .then(res => {
-            roles.value = res.data.data
-          })
-      }
+      getProductCategory()
+        .then(res => {
+          categories.value = res.data.data
+        })
     })
 
     return {
@@ -99,9 +93,8 @@ export default defineComponent({
       params,
       saveLoading,
       submit,
-      roles,
-      hasPermission,
-      tabOptions
+      categories,
+      hasPermission
     }
   }
 })

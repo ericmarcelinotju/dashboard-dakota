@@ -39,7 +39,7 @@
             class="default-label"
             for="description"
           >
-            Description
+            Deskripsi
           </label>
           <textarea
             id="description"

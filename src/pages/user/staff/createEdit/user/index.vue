@@ -1,6 +1,9 @@
 <template>
   <div class="px-6">
-    <div class="default-field mt-6">
+    <div class="default-field mt-4">
+      <InputAvatar v-model="params.avatar" />
+    </div>
+    <div class="default-field mt-4">
       <label
         class="default-label"
         for="username"
@@ -17,7 +20,7 @@
       >
     </div>
 
-    <div class="grid grid-cols-12 gap-x-12 gap-y-4 mt-6">
+    <div class="grid grid-cols-12 gap-x-12 gap-y-4 mt-4">
       <div class="default-field col-span-6">
         <label
           class="default-label"
@@ -50,7 +53,7 @@
       </div>
     </div>
 
-    <div class="default-field mt-6">
+    <div class="default-field mt-4">
       <label
         class="default-label"
         for="email"
@@ -67,7 +70,7 @@
       >
     </div>
 
-    <div class="default-field mt-6">
+    <div class="default-field mt-4">
       <label
         class="default-label"
         for="password"
@@ -83,7 +86,7 @@
       >
     </div>
 
-    <div class="default-field mt-6">
+    <div class="default-field mt-4">
       <label
         class="default-label"
         for="confirm-password"
@@ -101,7 +104,7 @@
 
     <div
       v-if="hasPermission('GET', 'ROLE')"
-      class="default-field mt-6"
+      class="default-field mt-4"
     >
       <label
         class="default-label"
@@ -116,7 +119,7 @@
       />
     </div>
     <button
-      class="danger-button mt-6"
+      class="danger-button mt-4"
       :disabled="saveLoading"
       type="submit"
       @click.prevent="submit"

@@ -24,7 +24,14 @@
         @search="handleSearch"
       >
         <template #image="{ item }">
-          <img :src="item.image" alt="" />
+          <img
+            v-if="item.image"
+            class="w-32"
+            :src="item.image"
+          >
+        </template>
+        <template #category="{ item }">
+          <span>{{ item.category.name }}</span>
         </template>
       </DefaultTable>
     </template>

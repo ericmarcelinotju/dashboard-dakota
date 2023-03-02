@@ -1,77 +1,57 @@
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
-import InputDualList from '@/components/form/dualList/index.vue'
 import {
-  detail as getUser,
-  insert as insertUser,
-  update as updateUser
-} from '@/api/user'
-import { get as getBranches } from '@/api/branch'
-import { get as getExtensions } from '@/api/extension'
-import { get as getRoles } from '@/api/role'
+  detail as getProduct,
+  insert as insertProduct,
+  update as updateProduct
+} from '@/api/product'
+import { convertJsonToFormData } from '@/utils/body'
+import ProductForm from './product/index.vue'
+import TheaterForm from './theater/index.vue'
 
 export default defineComponent({
   components: {
     DefaultCreateEdit: components.DefaultCreateEdit,
     DefaultTabs: components.DefaultTabs,
-    Loading: components.Loading,
-    InputDropdown: components.InputDropdown,
-    InputDualList
+    ProductForm,
+    TheaterForm
   },
   setup () {
     const route = useRoute()
     const router = useRouter()
-    const store = useStore()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('product')
 
-    const initialParams = {
-      username: null,
-      first_name: null,
-      last_name: null,
-      department: null,
-      title: null,
-      email: null,
-      password: null,
-      confirm_password: null,
-      role_id: null,
-      branches: [],
-      extensions: []
+    const initialState = {
+      code: null,
+      name: null,
+      description: null,
+      purchasePrice: null,
+      priceList: null,
+      uom: null
     }
-    const params = reactive({ ...initialParams })
+    const params = reactive({ ...initialState })
     const formLoading = ref(false)
     const saveLoading = ref(false)
 
     const routeParams = computed(() => route.params || {})
-    const hasId = computed(() => !!routeParams.value.id)
-
-    const roles = ref([])
-    const branches = ref([])
-    const extensions = ref([])
-
-    const initialFilter = {
-      branch_id: ''
-    }
-    const filter = reactive({ ...initialFilter })
-
-    const extensionOptions = computed(() =>
-      extensions.value
-        .filter(ext =>
-          params.branches.findIndex(branch => branch.id === ext.branch_id) !== -1
-        )
-        .filter(ext => filter.branch_id ? filter.branch_id === ext.branch_id : true)
-    )
+    const isUpdate = computed(() => !!routeParams.value.id)
 
     const initPage = () => {
-      if (!hasId.value) return
+      if (!isUpdate.value) return
       formLoading.value = true
-      getUser(routeParams.value.id)
+      getProduct(routeParams.value.id)
         .then(res => {
-          Object.assign(initialParams, res.data)
-          Object.assign(params, res.data)
+          const product = {
+            ...res.data,
+            listPrice: res.data.listPriceNumber,
+            purchasePrice: res.data.purchasePriceNumber,
+            categoryId: res.data.category.id
+          }
+          Object.assign(initialState, product)
+          Object.assign(params, product)
         })
         .catch(() => {
           showDangerNotification('loaded')
@@ -82,80 +62,63 @@ export default defineComponent({
     }
 
     const reset = () => {
-      Object.assign(params, initialParams)
-      Object.assign(filter, initialFilter)
+      Object.assign(params, initialState)
     }
 
     const submit = () => {
       saveLoading.value = true
-      if (hasId.value) {
-        updateUser(routeParams.value.id, { ...params, ...{ user_id: routeParams.value.id }, ...{ role_id: params.role_id } })
+
+      const payload = convertJsonToFormData(params)
+      if (isUpdate.value) {
+        updateProduct(routeParams.value.id, payload)
           .then(() => {
-            reset()
-            router.push({ path: `${pages.user.url}` })
-            showSuccessNotification('updated')
+            saveSuccess('updated')
           })
-          .catch(() => {
-            showDangerNotification('saved')
-          })
-          .finally(() => {
-            saveLoading.value = false
-          })
+          .catch(saveFail)
       } else {
-        insertUser({ ...params })
+        insertProduct(payload)
           .then(() => {
-            reset()
-            router.push({ path: `${pages.user.url}` })
-            showSuccessNotification('inserted')
+            saveSuccess('inserted')
           })
-          .catch(() => {
-            showDangerNotification('saved')
-          })
-          .finally(() => {
-            saveLoading.value = false
-          })
+          .catch(saveFail)
       }
     }
 
-    const hasPermission = (method, module = 'USER') => {
-      return store.getters['auth/hasPermission'](module, method)
+    const saveSuccess = (message) => {
+      reset()
+      router.push({ path: `${pages.product.url}` })
+      saveLoading.value = false
+      showSuccessNotification(message)
+    }
+
+    const saveFail = () => {
+      showDangerNotification('saved')
+      saveLoading.value = false
     }
 
     onMounted(() => {
       initPage()
-      if (hasPermission('GET', 'BRANCH')) {
-        getBranches()
-          .then(res => {
-            branches.value = res.data.branches
-          })
-      }
-      if (hasPermission('GET', 'EXTENSION')) {
-        getExtensions()
-          .then(res => {
-            extensions.value = res.data.extensions
-          })
-      }
-      if (hasPermission('GET', 'ROLE')) {
-        getRoles()
-          .then(res => {
-            roles.value = res.data.roles.filter(role => role.name !== 'Super Admin')
-          })
-      }
     })
+
+    const tabOptions = computed(() => isUpdate.value
+      ? [
+          { label: 'Detail Produk', value: 'product' },
+          { label: 'Teater', value: 'theater' }
+        ]
+      : [
+          { label: 'Detail Produk', value: 'product' }
+        ]
+    )
 
     return {
       routeParams,
-      hasId,
+      isUpdate,
       params,
-      filter,
       formLoading,
       saveLoading,
       submit,
       reset,
-      roles,
-      branches,
-      extensionOptions,
-      hasPermission
+      tabOptions
     }
   }
 })

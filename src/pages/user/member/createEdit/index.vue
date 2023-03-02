@@ -1,7 +1,7 @@
 <template>
   <DefaultCreateEdit>
     <template #form>
-      <div class="overflow-y-auto pb-6">
+      <div class="h-full">
         <DefaultTabs :options="tabOptions">
           <template #profile>
             <div class="px-6">

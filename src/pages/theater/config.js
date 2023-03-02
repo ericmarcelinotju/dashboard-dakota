@@ -5,6 +5,12 @@ export const fields = [
     hidden: true
   },
   {
+    name: 'Code',
+    value: 'code',
+    sortable: true,
+    searchable: true
+  },
+  {
     name: 'Name',
     value: 'name',
     sortable: true,

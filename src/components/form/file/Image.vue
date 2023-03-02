@@ -34,7 +34,12 @@
       >
         {{ label }}
       </label>
-      <a class="link text-sm mt-2">{{ resetLabel }}</a>
+      <a
+        class="link text-sm mt-2"
+        @click="onDeleteClick"
+      >
+        {{ resetLabel }}
+      </a>
     </div>
   </div>
 </template>
@@ -91,6 +96,12 @@ export default {
       if (!files.length) return
 
       this.imageFile = files[0]
+
+      this.$emit('update:modelValue', this.imageFile)
+      this.$emit('input', this.imageFile)
+    },
+    onDeleteClick () {
+      this.imageFile = null
 
       this.$emit('update:modelValue', this.imageFile)
       this.$emit('input', this.imageFile)

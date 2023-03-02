@@ -1,8 +1,13 @@
 <template>
   <DefaultCreateEdit>
     <template #form>
-      <div class="overflow-y-auto pb-6">
-        <DefaultTabs :options="tabOptions">
+      <div class="h-full">
+        <DefaultTabs
+          :options="[
+            { label: 'Profil Pengguna', value: 'profile' },
+            { label: 'Theater Kerja', value: 'workin' }
+          ]"
+        >
           <template #profile>
             <user-form
               :loading="loading"
