@@ -4,42 +4,30 @@ import { useStore } from 'vuex'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
-import InputDualList from '@/components/form/dualList/index.vue'
 import {
-  detail as getUser,
-  insert as insertUser,
-  update as updateUser
-} from '@/api/user'
-import { get as getBranches } from '@/api/branch'
-import { get as getExtensions } from '@/api/extension'
-import { get as getRoles } from '@/api/role'
+  detail as getPricing,
+  insert as insertPricing,
+  update as updatePricing
+} from '@/api/pricing'
 
 export default defineComponent({
   components: {
     DefaultCreateEdit: components.DefaultCreateEdit,
-    DefaultTabs: components.DefaultTabs,
     Loading: components.Loading,
-    InputDropdown: components.InputDropdown,
-    InputDualList
+    InputDropdown: components.InputDropdown
   },
   setup () {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('pricing')
 
     const initialParams = {
-      username: null,
-      first_name: null,
-      last_name: null,
-      department: null,
-      title: null,
-      email: null,
-      password: null,
-      confirm_password: null,
-      role_id: null,
-      branches: [],
-      extensions: []
+      code: null,
+      name: null,
+      weekdayPrice: null,
+      weekendPrice: null,
+      holidayPrice: null
     }
     const params = reactive({ ...initialParams })
     const formLoading = ref(false)
@@ -48,30 +36,19 @@ export default defineComponent({
     const routeParams = computed(() => route.params || {})
     const hasId = computed(() => !!routeParams.value.id)
 
-    const roles = ref([])
-    const branches = ref([])
-    const extensions = ref([])
-
-    const initialFilter = {
-      branch_id: ''
-    }
-    const filter = reactive({ ...initialFilter })
-
-    const extensionOptions = computed(() =>
-      extensions.value
-        .filter(ext =>
-          params.branches.findIndex(branch => branch.id === ext.branch_id) !== -1
-        )
-        .filter(ext => filter.branch_id ? filter.branch_id === ext.branch_id : true)
-    )
-
     const initPage = () => {
       if (!hasId.value) return
       formLoading.value = true
-      getUser(routeParams.value.id)
+      getPricing(routeParams.value.id)
         .then(res => {
-          Object.assign(initialParams, res.data)
-          Object.assign(params, res.data)
+          const data = {
+            ...res.data,
+            weekdayPrice: res.data.weekdayPriceNumber,
+            weekendPrice: res.data.weekendPriceNumber,
+            holidayPrice: res.data.holidayPriceNumber
+          }
+          Object.assign(initialParams, data)
+          Object.assign(params, data)
         })
         .catch(() => {
           showDangerNotification('loaded')
@@ -83,16 +60,15 @@ export default defineComponent({
 
     const reset = () => {
       Object.assign(params, initialParams)
-      Object.assign(filter, initialFilter)
     }
 
     const submit = () => {
       saveLoading.value = true
       if (hasId.value) {
-        updateUser(routeParams.value.id, { ...params, ...{ user_id: routeParams.value.id }, ...{ role_id: params.role_id } })
+        updatePricing(routeParams.value.id, params)
           .then(() => {
             reset()
-            router.push({ path: `${pages.user.url}` })
+            router.push({ path: `${pages.pricing.url}` })
             showSuccessNotification('updated')
           })
           .catch(() => {
@@ -102,10 +78,10 @@ export default defineComponent({
             saveLoading.value = false
           })
       } else {
-        insertUser({ ...params })
+        insertPricing(params)
           .then(() => {
             reset()
-            router.push({ path: `${pages.user.url}` })
+            router.push({ path: `${pages.pricing.url}` })
             showSuccessNotification('inserted')
           })
           .catch(() => {
@@ -117,44 +93,22 @@ export default defineComponent({
       }
     }
 
-    const hasPermission = (method, module = 'USER') => {
+    const hasPermission = (method, module = 'PRICING') => {
       return store.getters['auth/hasPermission'](module, method)
     }
 
     onMounted(() => {
       initPage()
-      if (hasPermission('GET', 'BRANCH')) {
-        getBranches()
-          .then(res => {
-            branches.value = res.data.branches
-          })
-      }
-      if (hasPermission('GET', 'EXTENSION')) {
-        getExtensions()
-          .then(res => {
-            extensions.value = res.data.extensions
-          })
-      }
-      if (hasPermission('GET', 'ROLE')) {
-        getRoles()
-          .then(res => {
-            roles.value = res.data.roles.filter(role => role.name !== 'Super Admin')
-          })
-      }
     })
 
     return {
       routeParams,
       hasId,
       params,
-      filter,
       formLoading,
       saveLoading,
       submit,
       reset,
-      roles,
-      branches,
-      extensionOptions,
       hasPermission
     }
   }

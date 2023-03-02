@@ -1,61 +1,25 @@
-export const statusOptions = [
+export const fields = [
   {
-    label: 'All',
-    value: ''
+    name: 'ID',
+    value: 'id',
+    hidden: true
   },
   {
-    label: 'Answered',
-    value: 'answered'
+    name: 'Waktu',
+    value: 'date',
+    sortable: true,
+    searchable: true
   },
   {
-    label: 'No Answer',
-    value: 'noanswer'
+    name: 'Film',
+    value: 'movie'
   },
   {
-    label: 'Busy',
-    value: 'busy'
+    name: 'Studio',
+    value: 'studio'
   },
   {
-    label: 'Failed',
-    value: 'failed'
-  },
-  {
-    label: 'Voice Mail',
-    value: 'voicemail'
-  }
-]
-
-export const typeOptions = [
-  {
-    label: 'All',
-    value: ''
-  },
-  {
-    label: 'Inbound',
-    value: 'inbound'
-  },
-  {
-    label: 'Outbound',
-    value: 'outbound'
-  },
-  {
-    label: 'Internal',
-    value: 'internal'
-  },
-  {
-    label: 'Multisite Interconnect',
-    value: 'multisite_interconnect'
-  },
-  {
-    label: 'Callback',
-    value: 'callback'
-  },
-  {
-    label: 'Transfer',
-    value: 'transfer'
-  },
-  {
-    label: 'Warning',
-    value: 'warning'
+    name: 'Harga',
+    value: 'currentPricing'
   }
 ]

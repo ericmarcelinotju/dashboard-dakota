@@ -1,47 +1,42 @@
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, computed, reactive, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { pages } from '@/config'
+import { fields } from '../config'
 import components from '@/components'
 import { useDefaultForm } from '@/composables/default-form'
-import { CogIcon, DownloadIcon, PlayIcon, PlusIcon } from '@heroicons/vue/solid'
-import RecordingSearch from './search/index.vue'
-import { download as downloadFile } from '@/utils/file'
-import { get as getRecordings, del as deleteRecording } from '@/api/recording'
+import { PlusIcon } from '@heroicons/vue/solid'
+import {
+  get as getScreenings,
+  del as deleteScreening
+} from '@/api/screening'
 
 export default defineComponent({
   components: {
-    CogIcon,
-    DownloadIcon,
-    PlayIcon,
     PlusIcon,
-    RecordingSearch,
-    DefaultModal: components.DefaultModal,
-    DefaultPage: components.DefaultPage,
-    DefaultSearch: components.DefaultSearch,
     DefaultTable: components.DefaultTable,
-    PopoverInfo: components.PopoverInfo
+    DefaultSearch: components.DefaultSearch,
+    DefaultModal: components.DefaultModal,
+    DefaultPage: components.DefaultPage
   },
   setup () {
     const router = useRouter()
     const store = useStore()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('recording')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('screening')
+
+    const theater = computed(() => store.getters['auth/theater'])
 
     const loading = ref(false)
     let stateParams = reactive({})
 
     const items = ref([])
     const itemsTotal = ref(0)
-
     const handleSearch = (params) => {
-      if (!params.branch_id) {
-        return
-      }
       stateParams = { ...params }
       loading.value = true
-      getRecordings(params)
+      getScreenings(params)
         .then(res => {
-          items.value = res.data.recordings
+          items.value = res.data.data
           itemsTotal.value = res.data.totalItem
         })
         .finally(() => {
@@ -49,15 +44,23 @@ export default defineComponent({
         })
     }
 
+    onMounted(() => {
+      handleSearch(stateParams)
+    })
+
     const handleCreate = () => {
-      router.push({ name: pages.recording.create.name })
+      router.push({ name: pages.screening.create.name })
     }
 
     const handleEdit = ({ id }) => {
-      router.push({ name: pages.recording.edit.name, params: { id } })
+      router.push({ name: pages.screening.edit.name, params: { id } })
     }
 
-    // Delete recording
+    const handleEditSeat = ({ id }) => {
+      router.push({ name: pages.screening.edit.name + 'seat', params: { id } })
+    }
+
+    // Delete screening
     const loadingDelete = ref(false)
     const visibleDeleteConfirmationModal = ref(false)
     const deleteItem = ref({})
@@ -68,7 +71,7 @@ export default defineComponent({
     const confirmDelete = () => {
       const { id } = deleteItem.value
       loadingDelete.value = true
-      deleteRecording(id, deleteItem.value)
+      deleteScreening(id)
         .then(() => {
           handleSearch(stateParams)
           showSuccessNotification('deleted')
@@ -82,51 +85,14 @@ export default defineComponent({
         })
     }
 
-    const visiblePlayRecordingModal = ref(false)
-    const playRecordingItem = ref({})
-    const handlePlay = async (data) => {
-      if (loadingDownload.value) {
-        return
-      }
-      loadingDownload.value = true
-      playRecordingItem.value = { ...data }
-      store.dispatch('recording/downloadRecording', data.id)
-        .then((blob) => {
-          playRecordingItem.value.recording_file = URL.createObjectURL(blob)
-          visiblePlayRecordingModal.value = true
-        }).catch(() => {
-          showDangerNotification('download')
-        }).finally(() => {
-          loadingDownload.value = false
-        })
-    }
-
-    // Download recording
-    const loadingDownload = ref(false)
-    const handleDownload = async (data) => {
-      if (loadingDownload.value) {
-        return
-      }
-      loadingDownload.value = true
-      store.dispatch('recording/downloadRecording', data.id)
-        .then((blob) => {
-          downloadFile(blob, data.recording)
-          showSuccessNotification('download')
-        })
-        .catch(() => {
-          showDangerNotification('download')
-        }).finally(() => {
-          loadingDownload.value = false
-        })
-    }
-
-    const hasPermission = (method, module = 'RECORDING') => {
+    const hasPermission = (method, module = 'USER') => {
       return store.getters['auth/hasPermission'](module, method)
     }
 
     return {
-      fields,
+      theater,
 
+      fields,
       items,
       itemsTotal,
       loading,
@@ -134,18 +100,12 @@ export default defineComponent({
 
       handleCreate,
       handleEdit,
+      handleEditSeat,
 
       loadingDelete,
       visibleDeleteConfirmationModal,
       handleDelete,
       confirmDelete,
-
-      visiblePlayRecordingModal,
-      playRecordingItem,
-      handlePlay,
-
-      loadingDownload,
-      handleDownload,
 
       hasPermission
     }
