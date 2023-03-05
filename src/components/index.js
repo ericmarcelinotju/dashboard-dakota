@@ -31,6 +31,8 @@ export default {
     /* webpackChunkName: "c-input-image" */ '@/components/form/file/Image.vue')),
   InputVideo: defineAsyncComponent(() => import(
     /* webpackChunkName: "c-input-video" */ '@/components/form/file/Video.vue')),
+  InputCalendarDay: defineAsyncComponent(() => import(
+    /* webpackChunkName: "c-input-calendar-day" */ '@/components/form/calendar/day/index.vue')),
   // InputDualList: defineAsyncComponent(() => import(
   //   /* webpackChunkName: "c-input-dualList" */ '@/components/form/dualList/index.vue')),
 

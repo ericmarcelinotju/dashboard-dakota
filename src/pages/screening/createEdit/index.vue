@@ -5,50 +5,41 @@
         <div class="default-field">
           <label
             class="default-label"
-            for="code"
+            for="studio_id"
           >
-            Kode Studio<sup>*</sup>
+            Studio<sup>*</sup>
           </label>
-          <input
-            id="code"
-            v-model="params.code"
+          <InputDropdown
+            v-model="params.studioId"
             class="default-input"
-            required
-            type="text"
-          >
+            :options="studios"
+          />
         </div>
 
-        <div class="default-field mt-6">
+        <div class="default-field mt-4">
           <label
             class="default-label"
-            for="name"
+            for="date"
           >
-            Nama Studio<sup>*</sup>
+            Tanggal<sup>*</sup>
           </label>
-          <input
-            id="name"
-            v-model="params.name"
-            autocomplete="user-name"
-            class="default-input"
-            required
-            type="text"
-          >
+          <Datepicker
+            id="date"
+            v-model="params.date"
+            auto-apply
+            :enable-time-picker="false"
+            input-class-name="default-input"
+          />
         </div>
 
         <div
-          v-if="hasPermission('GET', 'PRICING')"
-          class="default-field mt-6"
+          v-if="params.studioId && params.date"
+          class="default-field mt-4"
         >
-          <label
-            class="default-label"
-            for="pricing_id"
-          >
-            Kelas Harga
-          </label>
-          <InputDropdown
-            v-model="params.pricingId"
-            class="default-input"
-            :options="pricings"
+          <InputCalendarDay
+            v-model="events"
+            @calendar-click="onCalendarClick"
+            @event-delete="onEventDelete"
           />
         </div>
 
@@ -73,6 +64,26 @@
       </div>
     </template>
   </DefaultCreateEdit>
+  <DefaultModal
+    v-model="visibleAddScreeningModal"
+    type="danger"
+  >
+    <div class="default-field">
+      <label
+        class="default-label"
+        for="movie"
+      >
+        Pilih Film
+      </label>
+      <InputDropdown
+        v-model="activeMovie"
+        class="default-input"
+        label-key="title"
+        :options="movies"
+        @input="onMovieChange"
+      />
+    </div>
+  </DefaultModal>
 </template>
 
 <script src="./script.js"></script>
