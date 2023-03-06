@@ -55,6 +55,7 @@
             class="
               inline-block
               align-bottom
+              overflow-visible
               bg-white
               rounded-lg
               px-4
