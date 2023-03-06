@@ -6,9 +6,8 @@ import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
 import {
-  // get as getScreenings,
-  insert as insertScreening,
-  update as updateScreening
+  get as getScreenings,
+  save as saveScreenings
 } from '@/api/screening'
 import { get as getStudios } from '@/api/studio'
 import { get as getMovies } from '@/api/movie'
@@ -71,28 +70,21 @@ export default defineComponent({
       detail: `Duration : ${screening.movie.runTimeNumber / 60} minutes`
     })))
 
-    // const initPage = () => {
-    //   if (!hasId.value) return
-    //   formLoading.value = true
-    //   getScreening(routeParams.value.id)
-    //     .then(res => {
-    //       const data = {
-    //         ...res.data,
-    //         movieId: res.data.movie.id,
-    //         studioId: res.data.studio.id
-    //       }
-    //       Object.assign(initialParams, data)
-    //       Object.assign(params, data)
-    //     })
-    //     .catch(() => {
-    //       showDangerNotification('loaded')
-    //     })
-    //     .finally(() => {
-    //       formLoading.value = false
-    //     })
-    // }
     watch(() => params.studioId && params.date, () => {
-      // getScreenings()
+      if (!params.studioId || !params.date) return
+      getScreenings({
+        studioId: params.studioId,
+        date: params.date.toString()
+      })
+        .then(res => {
+          console.log(res)
+          params.screenings = res.data.data.map(screening => ({
+            ...screening,
+            movieId: screening.movie.id,
+            hour: +screening.time.split(':')[0],
+            minute: +screening.time.split(':')[1]
+          }))
+        })
       console.log('update screenings')
     })
 
@@ -102,33 +94,18 @@ export default defineComponent({
 
     const submit = () => {
       saveLoading.value = true
-      if (hasId.value) {
-        updateScreening(routeParams.value.id, params)
-          .then(() => {
-            reset()
-            router.push({ path: `${pages.screening.url}` })
-            showSuccessNotification('updated')
-          })
-          .catch(() => {
-            showDangerNotification('saved')
-          })
-          .finally(() => {
-            saveLoading.value = false
-          })
-      } else {
-        insertScreening(params)
-          .then(() => {
-            reset()
-            router.push({ path: `${pages.screening.url}` })
-            showSuccessNotification('inserted')
-          })
-          .catch(() => {
-            showDangerNotification('saved')
-          })
-          .finally(() => {
-            saveLoading.value = false
-          })
-      }
+      saveScreenings(params)
+        .then(() => {
+          reset()
+          router.push({ path: `${pages.screening.url}` })
+          showSuccessNotification('inserted')
+        })
+        .catch(() => {
+          showDangerNotification('saved')
+        })
+        .finally(() => {
+          saveLoading.value = false
+        })
     }
 
     const hasPermission = (method, module = 'STUDIO') => {

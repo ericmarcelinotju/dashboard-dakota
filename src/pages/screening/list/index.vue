@@ -7,15 +7,15 @@
         type="button"
         @click="handleCreate"
       >
-        <PlusIcon class="w-4 h-4 mr-1" />
-        TAMBAH BARU
+        <CogIcon class="w-4 h-4 mr-1" />
+        ATUR PEMUTARAN FILM
       </button>
     </template>
     <template #table>
       <DefaultTable
         :fields="fields"
-        :has-delete="hasPermission('DELETE')"
-        :has-edit="hasPermission('PUT')"
+        :has-delete="false"
+        :has-edit="false"
         :items="items"
         :loading="loading"
         :total="itemsTotal"
@@ -31,9 +31,6 @@
         </template>
         <template #studio="{ item }">
           <span>{{ item.studio ? item.studio.name : "" }}</span>
-        </template>
-        <template #action="{ item }">
-          <a @click="handleEditSeat(item)">Ubah Ketersediaan Kursi</a>
         </template>
       </DefaultTable>
     </template>

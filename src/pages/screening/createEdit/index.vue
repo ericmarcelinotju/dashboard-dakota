@@ -66,11 +66,11 @@
   </DefaultCreateEdit>
   <DefaultModal
     v-model="visibleAddScreeningModal"
-    type="info"
-    title="Pilih Film"
     :description="`Pilih film yang akan diputar jam ${activeScreening.hour?.toString().padStart(2, '0')}:${activeScreening.minute?.toString().padStart(2, '0')}`"
     :has-cancel="false"
     :has-confirm="false"
+    title="Pilih Film"
+    type="info"
   >
     <div class="default-field mt-4">
       <InputDropdown

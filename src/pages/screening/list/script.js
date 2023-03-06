@@ -5,7 +5,7 @@ import { pages } from '@/config'
 import { fields } from '../config'
 import components from '@/components'
 import { useDefaultForm } from '@/composables/default-form'
-import { PlusIcon } from '@heroicons/vue/solid'
+import { CogIcon } from '@heroicons/vue/solid'
 import {
   get as getScreenings,
   del as deleteScreening
@@ -13,7 +13,7 @@ import {
 
 export default defineComponent({
   components: {
-    PlusIcon,
+    CogIcon,
     DefaultTable: components.DefaultTable,
     DefaultSearch: components.DefaultSearch,
     DefaultModal: components.DefaultModal,

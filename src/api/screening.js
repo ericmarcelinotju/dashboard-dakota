@@ -22,10 +22,15 @@ const del = (id) => {
   return axios.delete(api.screening + '/' + id)
 }
 
+const save = (data) => {
+  return axios.post(`${api.screening}/save`, data)
+}
+
 export {
   get,
   detail,
   insert,
   update,
-  del
+  del,
+  save
 }
