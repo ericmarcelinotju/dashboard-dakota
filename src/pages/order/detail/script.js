@@ -1,5 +1,6 @@
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { pages } from '@/config'
 import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
 import components from '@/components'
@@ -12,29 +13,18 @@ export default defineComponent({
   },
   setup () {
     const route = useRoute()
-    const { showDangerNotification } = useDefaultForm('movie')
+    const router = useRouter()
+    const { showDangerNotification } = useDefaultForm('order')
 
-    const initialState = {
-      code: null,
-      date: null,
-      subTotalAmount: null,
-      taxAmount: null,
-      totalAmount: null,
-      user: null,
-      payment: null
-    }
-    const params = reactive({ ...initialState })
+    const params = reactive({})
     const formLoading = ref(false)
 
     const routeParams = computed(() => route.params || {})
-    const isUpdate = computed(() => !!routeParams.value.id)
 
     const initPage = () => {
-      if (!isUpdate.value) return
       formLoading.value = true
       getOrder(routeParams.value.id)
         .then(res => {
-          Object.assign(initialState, res.data)
           Object.assign(params, res.data)
         })
         .catch(() => {
@@ -45,20 +35,34 @@ export default defineComponent({
         })
     }
 
-    const reset = () => {
-      Object.assign(params, initialState)
-    }
-
     onMounted(() => {
       initPage()
     })
 
+    const onUserClick = (id) => {
+      router.push({ name: pages.member.edit.name, params: { id } })
+    }
+
+    const onProductClick = (id) => {
+      router.push({ name: pages.product.edit.name, params: { id } })
+    }
+
+    const onStudioClick = (id) => {
+      router.push({ name: pages.studio.edit.name, params: { id } })
+    }
+
+    const onMovieClick = (id) => {
+      router.push({ name: pages.movie.edit.name, params: { id } })
+    }
+
     return {
       routeParams,
-      isUpdate,
       params,
       formLoading,
-      reset
+      onUserClick,
+      onProductClick,
+      onStudioClick,
+      onMovieClick
     }
   }
 })

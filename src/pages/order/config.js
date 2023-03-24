@@ -11,8 +11,16 @@ export const fields = [
     searchable: true
   },
   {
+    name: 'Jam',
+    value: 'time'
+  },
+  {
     name: 'Kode',
     value: 'code'
+  },
+  {
+    name: 'Kategori',
+    value: 'category'
   },
   {
     name: 'Total',
@@ -21,6 +29,10 @@ export const fields = [
   {
     name: 'Pengguna',
     value: 'user'
+  },
+  {
+    name: 'Status',
+    value: 'status'
   },
   {
     name: 'Aksi',

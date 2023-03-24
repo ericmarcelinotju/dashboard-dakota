@@ -2,11 +2,11 @@ import api from './config'
 import axios from './index'
 
 const login = (data) => {
-  return axios.post(api.auth.login, data)
+  return axios.post(api.auth.login, data, { refresh: false })
 }
 
 const logout = () => {
-  return axios.post(api.auth.logout)
+  return axios.post(api.auth.logout, { refresh: false })
 }
 
 const register = (data) => {
@@ -14,7 +14,7 @@ const register = (data) => {
 }
 
 const refresh = (data) => {
-  return axios.post(api.auth.refresh, data)
+  return axios.post(api.auth.refresh, data, { refresh: false })
 }
 
 const forgotPassword = (data) => {

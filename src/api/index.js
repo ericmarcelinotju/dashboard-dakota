@@ -1,7 +1,5 @@
 import axios from 'axios'
-import router from '@/router'
 import store from '@/store'
-import { pages } from '@/config'
 
 const axiosInstance = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
@@ -21,15 +19,12 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
-    if (error.response) {
+    if (error.response && error.config.refresh !== false) {
       if (error.response.status === 401) {
         return store.dispatch('auth/refresh')
-          .then(() => axiosInstance.request(error.config))
-      } else if (error.response.status === 403) {
-        router.replace({ name: pages.forbidden.name })
+          .then(() => axios.request(error.config))
       }
     }
-
     return Promise.reject(error)
   }
 )
