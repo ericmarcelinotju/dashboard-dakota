@@ -174,14 +174,11 @@
                 flex
                 items-center
                 text-sm
-                focus:outline-none
-                focus:ring-1
-                focus:ring-offset-2
-                focus:ring-soft-gray
                 lg:p-2 lg:rounded-md lg:hover:bg-red-500
               "
             >
-              <UserCircleIcon class="text-white h-8 w-8 rounded-full" />
+              <img v-if="user.avatar" :src="user.avatar" class="h-10 w-10 rounded-full" alt="avatar">
+              <UserCircleIcon v-else class="text-white h-10 w-10 rounded-full" />
               <ChevronDownIcon
                 aria-hidden="true"
                 class="
@@ -213,19 +210,16 @@
                 w-48
                 rounded-md
                 shadow-lg
-                py-1
+                overflow-hidden
                 z-10
-                bg-soft-gray
+                bg-white
                 ring-1 ring-soft-gray
                 focus:outline-none
               "
             >
               <MenuItem v-slot="{ active }">
                 <a
-                  :class="[
-                    active ? 'bg-white' : '',
-                    'block px-4 py-2 text-primary-gray',
-                  ]"
+                  class="block px-4 py-2 text-primary-gray"
                 >
                   <div class="mb-2">
                     <b>{{ user.role.name }}</b>
@@ -237,7 +231,7 @@
               <MenuItem v-slot="{ active }">
                 <a
                   :class="[
-                    active ? 'bg-white' : '',
+                    active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-primary-gray cursor-pointer flex items-center',
                   ]"
                   @click="handleLogout"

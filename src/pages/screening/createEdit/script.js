@@ -21,7 +21,7 @@ export default defineComponent({
     InputCalendarDay: components.InputCalendarDay,
     Datepicker
   },
-  setup () {
+  setup() {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
@@ -70,14 +70,14 @@ export default defineComponent({
       detail: `Duration : ${screening.movie.runTimeNumber / 60} minutes`
     })))
 
-    watch(() => params.studioId && params.date, () => {
+    const initScreenings = () => {
       if (!params.studioId || !params.date) return
+      formLoading.value = true
       getScreenings({
         studioId: params.studioId,
         date: params.date.toString()
       })
         .then(res => {
-          console.log(res)
           params.screenings = res.data.data.map(screening => ({
             ...screening,
             movieId: screening.movie.id,
@@ -85,8 +85,13 @@ export default defineComponent({
             minute: +screening.time.split(':')[1]
           }))
         })
-      console.log('update screenings')
-    })
+        .finally(() => {
+          formLoading.value = false
+        })
+    }
+
+    watch(() => params.studioId, initScreenings)
+    watch(() => params.date, initScreenings)
 
     const reset = () => {
       Object.assign(params, initialParams)
