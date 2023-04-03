@@ -3,13 +3,19 @@
     <img
       alt="login background"
       class="absolute h-full w-full"
-      src="@/assets/img/login-background.png"
-    />
+      src="@/assets/img/login-background.jpg"
+    >
     <div class="mx-auto w-full max-w-sm lg:w-96 z-10">
-      <h2 class="mt-6 text-3xl text-center">Reset Password</h2>
+      <h2 class="mt-6 text-3xl text-center">
+        Reset Password
+      </h2>
 
       <div class="mt-8">
-        <form action="#" method="POST" @submit.prevent="handleResetPassword">
+        <form
+          action="#"
+          method="POST"
+          @submit.prevent="handleResetPassword"
+        >
           <div
             v-if="errorMessage"
             class="font-bold text-sm text-[#ff0000] mb-4"
@@ -25,7 +31,7 @@
               placeholder="New Password"
               required
               type="password"
-            />
+            >
           </div>
 
           <div class="mt-4 relative">
@@ -37,20 +43,28 @@
               placeholder="Confirm Password"
               required
               type="password"
-            />
+            >
           </div>
 
           <div class="mt-6 flex items-center justify-between">
             <div />
             <div class="text-sm">
-              <a class="font-medium cursor-pointer" @click="handleLogin">
+              <a
+                class="font-medium cursor-pointer"
+                @click="handleLogin"
+              >
                 &lt; back to login
               </a>
             </div>
           </div>
 
           <div class="mt-6 text-center">
-            <button class="info-button submit" type="submit">Submit</button>
+            <button
+              class="info-button submit"
+              type="submit"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>

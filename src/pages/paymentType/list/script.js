@@ -1,4 +1,4 @@
-import { defineComponent, reactive, ref, onMounted } from 'vue'
+import { defineComponent, computed, reactive, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { pages } from '@/config'
@@ -7,9 +7,9 @@ import components from '@/components'
 import { useDefaultForm } from '@/composables/default-form'
 import { CogIcon, PlusIcon } from '@heroicons/vue/solid'
 import {
-  get as getUsers,
-  del as deleteUser
-} from '@/api/user'
+  get as getPaymentTypes,
+  del as deletePaymentType
+} from '@/api/paymentType'
 
 export default defineComponent({
   components: {
@@ -23,7 +23,9 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     const store = useStore()
-    const { showSuccessNotification, showDangerNotification } = useDefaultForm('user')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('paymentType')
+
+    const theater = computed(() => store.getters['auth/theater'])
 
     const loading = ref(false)
     let stateParams = reactive({})
@@ -33,7 +35,7 @@ export default defineComponent({
     const handleSearch = (params) => {
       stateParams = { ...params }
       loading.value = true
-      getUsers(params)
+      getPaymentTypes(params)
         .then(res => {
           items.value = res.data.data
           itemsTotal.value = res.data.totalItem
@@ -48,14 +50,14 @@ export default defineComponent({
     })
 
     const handleCreate = () => {
-      router.push({ name: pages.user.create.name })
+      router.push({ name: pages.paymentType.create.name })
     }
 
     const handleEdit = ({ id }) => {
-      router.push({ name: pages.user.edit.name, params: { id } })
+      router.push({ name: pages.paymentType.edit.name, params: { id } })
     }
 
-    // Delete user
+    // Delete paymentType
     const loadingDelete = ref(false)
     const visibleDeleteConfirmationModal = ref(false)
     const deleteItem = ref({})
@@ -66,7 +68,7 @@ export default defineComponent({
     const confirmDelete = () => {
       const { id } = deleteItem.value
       loadingDelete.value = true
-      deleteUser(id)
+      deletePaymentType(id)
         .then(() => {
           handleSearch(stateParams)
           showSuccessNotification('deleted')
@@ -85,6 +87,8 @@ export default defineComponent({
     }
 
     return {
+      theater,
+
       items,
       itemsTotal,
       loading,

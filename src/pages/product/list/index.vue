@@ -31,7 +31,7 @@
           >
         </template>
         <template #category="{ item }">
-          <span>{{ item.category.name }}</span>
+          <span class="default-tag">{{ item.category.name }}</span>
         </template>
       </DefaultTable>
     </template>

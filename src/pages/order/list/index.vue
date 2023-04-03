@@ -35,6 +35,9 @@
         <template #user="{ item }">
           <span>{{ item.user?.username }}</span>
         </template>
+        <template #status="{ item }">
+          <span class="default-tag">{{ item.status }}</span>
+        </template>
         <template #view="{ item }">
           <div class="action">
             <a @click="handleDetail(item)"> Lihat </a>

@@ -5,30 +5,41 @@ export const fields = [
     hidden: true
   },
   {
-    name: 'Username',
-    value: 'username',
+    name: 'Code',
+    value: 'code'
+  },
+  {
+    name: 'Nama',
+    value: 'name',
     sortable: true,
     searchable: true
   },
   {
-    name: 'Email',
-    value: 'email',
+    name: 'Deskripsi',
+    value: 'description'
+  },
+  {
+    name: 'Provider',
+    value: 'provider'
+  }
+]
+
+export const theaterFields = [
+  {
+    name: 'ID',
+    value: 'id',
+    hidden: true
+  },
+  {
+    name: 'Code',
+    value: 'code',
     sortable: true,
     searchable: true
   },
   {
-    name: 'Role',
-    value: 'role',
-    filterable: true,
-    optionKey: 'role/roles'
-  },
-  {
-    name: 'Branch',
-    value: 'branch'
-  },
-  {
-    name: 'Last Login',
-    value: 'last_login',
-    sortable: true
+    name: 'Name',
+    value: 'name',
+    sortable: true,
+    searchable: true
   }
 ]

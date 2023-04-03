@@ -30,6 +30,9 @@
             :src="item.picture"
           >
         </template>
+        <template #genre="{ item }">
+          <span class="default-tag">{{ item.genre }}</span>
+        </template>
       </DefaultTable>
     </template>
     <template #dialog>

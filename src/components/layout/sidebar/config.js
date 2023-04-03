@@ -6,7 +6,8 @@ import {
   ChartPieIcon,
   CurrencyDollarIcon,
   ShieldExclamationIcon,
-  CogIcon
+  CogIcon,
+  CashIcon
 } from '@heroicons/vue/solid'
 
 export const navigations = [
@@ -57,6 +58,12 @@ export const navigations = [
     module: 'MOVIE',
     href: '/movie',
     icon: DesktopComputerIcon
+  },
+  {
+    name: 'Tipe Pembayaran',
+    module: 'PAYMENT-TYPE',
+    href: '/payment-type',
+    icon: CashIcon
   },
   {
     name: 'Pemutaran Film',

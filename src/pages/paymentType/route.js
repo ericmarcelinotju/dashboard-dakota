@@ -1,7 +1,7 @@
 import { pages } from '@/config'
 
-const PaymentTypeList = () => import(/* webpackChunkName: 'p-paymentType' */ './list/index.vue')
-const PaymentTypeCreateEdit = () => import(/* webpackChunkName: 'p-paymentType-create-edit' */ './createEdit/index.vue')
+const PaymentTypeList = () => import(/* webpackChunkName: 'p-payment-type' */ './list/index.vue')
+const PaymentTypeCreateEdit = () => import(/* webpackChunkName: 'p-payment-type-create-edit' */ './createEdit/index.vue')
 
 export default [
   {
