@@ -20,6 +20,7 @@ import paymentTypeRoute from '@/pages/paymentType/route.js'
 
 import studioRoute from '@/pages/studio/route.js'
 import screeningRoute from '@/pages/screening/route.js'
+import ticketRoute from '@/pages/ticket/route.js'
 import orderRoute from '@/pages/order/route.js'
 import pricingRoute from '@/pages/pricing/route.js'
 
@@ -132,6 +133,12 @@ const screeningRoutes = {
   children: screeningRoute
 }
 
+const ticketRoutes = {
+  path: pages.ticket.url,
+  component: RouterView,
+  children: ticketRoute
+}
+
 const orderRoutes = {
   path: pages.order.url,
   component: RouterView,
@@ -171,6 +178,7 @@ export const routes = [
 
       studioRoutes,
       screeningRoutes,
+      ticketRoutes,
       orderRoutes,
       pricingRoutes
     ],

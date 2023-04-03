@@ -206,6 +206,13 @@ const pages = {
       name: 'order' + constant.DETAIL.name
     }
   },
+  ticket: {
+    name: 'ticket',
+    url: '/ticket',
+    detail: {
+      name: 'ticket' + constant.DETAIL.name
+    }
+  },
   pricing: {
     name: 'pricing',
     url: '/pricing',
