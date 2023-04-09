@@ -10,9 +10,6 @@ import {
   insert as insertUser,
   update as updateUser
 } from '@/api/user'
-import { get as getBranches } from '@/api/branch'
-import { get as getExtensions } from '@/api/extension'
-import { get as getRoles } from '@/api/role'
 
 export default defineComponent({
   components: {
@@ -123,24 +120,6 @@ export default defineComponent({
 
     onMounted(() => {
       initPage()
-      if (hasPermission('GET', 'BRANCH')) {
-        getBranches()
-          .then(res => {
-            branches.value = res.data.branches
-          })
-      }
-      if (hasPermission('GET', 'EXTENSION')) {
-        getExtensions()
-          .then(res => {
-            extensions.value = res.data.extensions
-          })
-      }
-      if (hasPermission('GET', 'ROLE')) {
-        getRoles()
-          .then(res => {
-            roles.value = res.data.roles.filter(role => role.name !== 'Super Admin')
-          })
-      }
     })
 
     return {

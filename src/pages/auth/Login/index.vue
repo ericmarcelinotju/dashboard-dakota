@@ -2,6 +2,7 @@
   <div class="absolute h-full w-full flex">
     <div
       class="
+        relative
         flex-1 flex flex-col
         justify-center
         py-12
@@ -17,20 +18,10 @@
             alt="Application Icon"
             class="w-36"
             src="@/assets/img/icon/dakota-red.png"
-          />
+          >
           <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
-          <!-- <p class="mt-2 text-sm text-gray-600">
-            Or
-            {{ " " }}
-            <a
-              class="font-medium text-red-600 hover:text-red-500"
-              href="#"
-            >
-              contact us for account creation
-            </a>
-          </p> -->
         </div>
 
         <div class="mt-8">
@@ -42,7 +33,10 @@
               @submit.prevent="handleLogin"
             >
               <div>
-                <label class="default-label" for="username"> Username </label>
+                <label
+                  class="default-label"
+                  for="username"
+                > Username </label>
                 <div class="mt-1">
                   <input
                     id="username"
@@ -64,12 +58,15 @@
                     name="username"
                     required
                     type="text"
-                  />
+                  >
                 </div>
               </div>
 
               <div class="space-y-1">
-                <label class="default-label" for="password"> Password </label>
+                <label
+                  class="default-label"
+                  for="password"
+                > Password </label>
                 <div class="mt-1">
                   <input
                     id="password"
@@ -91,7 +88,7 @@
                     name="password"
                     required
                     type="password"
-                  />
+                  >
                 </div>
               </div>
 
@@ -103,7 +100,7 @@
                     class="default-checkbox"
                     name="remember-me"
                     type="checkbox"
-                  />
+                  >
                   <label
                     class="ml-2 block text-sm text-gray-900"
                     for="remember-me"
@@ -146,20 +143,26 @@
               >
                 Sign in
               </button>
-              <p v-if="error" class="text-sm text-red-700">
+              <p
+                v-if="error"
+                class="text-sm text-red-700"
+              >
                 {{ error }}
               </p>
             </form>
           </div>
         </div>
       </div>
+      <span class="absolute bottom-8 left-8">
+        Version: {{ appVersion }}
+      </span>
     </div>
     <div class="hidden lg:block relative w-0 flex-1">
       <img
         alt=""
         class="absolute inset-0 h-full w-full object-cover"
         src="@/assets/img/login-background.jpg"
-      />
+      >
     </div>
   </div>
 </template>

@@ -92,6 +92,8 @@ export default defineComponent({
       Object.assign(forgotPasswordParams, defaultForgotPasswordParams)
     }
 
+    const appVersion = process.env.VITE_APP_VERSION
+
     return {
       handleLogin,
       params,
@@ -103,7 +105,9 @@ export default defineComponent({
       visibleForgotPasswordModal,
       handleForgotPassword,
       onConfirmForgotPassword,
-      onCloseForgotPassword
+      onCloseForgotPassword,
+
+      appVersion
     }
   }
 })
