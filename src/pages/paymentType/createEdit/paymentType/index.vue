@@ -161,6 +161,24 @@
       </div>
     </div>
 
+    <div class="default-field mt-4">
+      <label
+        class="default-label"
+        for="environment"
+      >
+        Environment<sup>*</sup>
+      </label>
+      <select
+        id="environment"
+        v-model="params.environment"
+        class="default-input"
+        required
+      >
+        <option value="sandbox">Sandbox</option>
+        <option value="production">Production</option>
+      </select>
+    </div>
+
     <div class="flex mt-4">
       <button
         class="warning-button mr-4"
