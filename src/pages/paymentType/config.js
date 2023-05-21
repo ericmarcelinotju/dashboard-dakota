@@ -5,18 +5,20 @@ export const fields = [
     hidden: true
   },
   {
-    name: 'Code',
-    value: 'code'
+    name: 'Kode',
+    value: 'code',
+    sortable: true,
+    searchable: true
   },
   {
-    name: 'Nama',
+    name: 'Name',
     value: 'name',
     sortable: true,
     searchable: true
   },
   {
-    name: 'Deskripsi',
-    value: 'description'
+    name: 'Metode',
+    value: 'method'
   },
   {
     name: 'Provider',

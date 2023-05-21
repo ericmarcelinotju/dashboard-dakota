@@ -1,6 +1,6 @@
 <template>
   <form
-    class="p-6"
+    class="p-6 overflow-y-auto min-h-[92%]"
     @submit.prevent="submit"
   >
     <div class="default-field">
@@ -8,7 +8,7 @@
         class="default-label"
         for="code"
       >
-        Kode<sup>*</sup>
+        Kode Tipe Pembayaran<sup>*</sup>
       </label>
       <input
         id="code"
@@ -22,38 +22,17 @@
     <div class="default-field mt-4">
       <label
         class="default-label"
-        for="nama"
+        for="name"
       >
-        Nama Tipe Pembayaran<sup>*</sup>
+        Nama<sup>*</sup>
       </label>
       <input
-        id="nama"
+        id="name"
         v-model="params.name"
         class="default-input"
         required
         type="text"
       >
-    </div>
-
-    <div class="default-field mt-4">
-      <label
-        class="default-label"
-        for="provider"
-      >
-        Provider
-      </label>
-      <select
-        id="provider"
-        v-model="params.provider"
-        class="default-input"
-      >
-        <option value="bri">
-          BRI
-        </option>
-        <option value="midtrans">
-          Midtrans
-        </option>
-      </select>
     </div>
 
     <div class="default-field mt-4">
@@ -67,7 +46,44 @@
         id="description"
         v-model="params.description"
         class="default-input"
+        required
       />
+    </div>
+
+    <div class="grid grid-cols-12 gap-x-12 gap-y-4 mt-4">
+      <div class="default-field col-span-6">
+        <label
+          class="default-label"
+          for="provider"
+        >
+          Provider<sup>*</sup>
+        </label>
+        <select
+          id="provider"
+          v-model="params.provider"
+          class="default-input"
+          required
+        >
+          <option value="bri">BRI</option>
+          <option value="midtrans">Midtrans</option>
+        </select>
+      </div>
+      <div class="default-field col-span-6">
+        <label
+          class="default-label"
+          for="method"
+        >
+          Metode<sup>*</sup>
+        </label>
+        <select
+          id="method"
+          v-model="params.method"
+          class="default-input"
+          required
+        >
+          <option value="qrcode">QRCode</option>
+        </select>
+      </div>
     </div>
 
     <div class="default-field mt-4">
@@ -82,7 +98,7 @@
         v-model="params.clientId"
         class="default-input"
         type="text"
-      >
+      />
     </div>
 
     <div class="default-field mt-4">
@@ -92,10 +108,11 @@
       >
         Client Key
       </label>
-      <textarea
+      <input
         id="clientKey"
         v-model="params.clientKey"
         class="default-input"
+        type="text"
       />
     </div>
 
@@ -144,7 +161,32 @@
       </div>
     </div>
 
-    <div class="create-edit-submit-container">
+    <div class="default-field mt-4">
+      <label
+        class="default-label"
+        for="environment"
+      >
+        Environment<sup>*</sup>
+      </label>
+      <select
+        id="environment"
+        v-model="params.environment"
+        class="default-input"
+        required
+      >
+        <option value="sandbox">Sandbox</option>
+        <option value="production">Production</option>
+      </select>
+    </div>
+
+    <div class="flex mt-4">
+      <button
+        class="warning-button mr-4"
+        type="cancel"
+        @click.prevent="reset"
+      >
+        Reset
+      </button>
       <button
         class="danger-button"
         :disabled="saveLoading"

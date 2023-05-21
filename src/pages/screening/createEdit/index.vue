@@ -34,8 +34,13 @@
 
         <div
           v-if="params.studioId && params.date"
-          class="default-field mt-4"
+          class="default-field mt-4 relative"
         >
+          <div
+            v-if="formLoading"
+            class="absolute w-full h-full flex justify-center align-center z-10 bg-gray-400/50 rounded-md">
+            <Loading class="w-24 h-24 margin-auto self-center text-gray-600 my-6"/>
+          </div>
           <InputCalendarDay
             v-model="events"
             @calendar-click="onCalendarClick"

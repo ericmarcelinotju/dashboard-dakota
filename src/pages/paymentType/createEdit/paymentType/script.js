@@ -26,10 +26,10 @@ export default defineComponent({
     },
     paymentType: {
       type: Object,
-      default: () => {}
+      default: () => { }
     }
   },
-  setup (props) {
+  setup(props) {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
@@ -40,8 +40,6 @@ export default defineComponent({
 
     const routeParams = computed(() => route.params || {})
     const hasId = computed(() => !!routeParams.value.id)
-
-    const categories = ref([])
 
     const submit = () => {
       saveLoading.value = true
@@ -74,7 +72,7 @@ export default defineComponent({
       }
     }
 
-    const hasPermission = (method, module = 'USER') => {
+    const hasPermission = (method, module = 'PAYMENT-TYPE') => {
       return store.getters['auth/hasPermission'](module, method)
     }
 
@@ -84,7 +82,6 @@ export default defineComponent({
       params,
       saveLoading,
       submit,
-      categories,
       hasPermission
     }
   }

@@ -20,7 +20,7 @@ export default defineComponent({
     DefaultModal: components.DefaultModal,
     DefaultPage: components.DefaultPage
   },
-  setup () {
+  setup() {
     const router = useRouter()
     const store = useStore()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('paymentType')
@@ -82,7 +82,7 @@ export default defineComponent({
         })
     }
 
-    const hasPermission = (method, module = 'USER') => {
+    const hasPermission = (method, module = 'PAYMENT-TYPE') => {
       return store.getters['auth/hasPermission'](module, method)
     }
 

@@ -6,7 +6,7 @@ import components from '@/components'
 import { pages } from '@/config'
 import { PlusIcon } from '@heroicons/vue/solid'
 import { get as getTheaters } from '@/api/theater'
-import { update as updateProduct } from '@/api/paymentType'
+import { update as updatePaymentType } from '@/api/paymentType'
 import { theaterFields } from '../../config'
 import { useRouter } from 'vue-router'
 
@@ -26,10 +26,10 @@ export default defineComponent({
     },
     paymentType: {
       type: Object,
-      default: () => {}
+      default: () => { }
     }
   },
-  setup (props) {
+  setup(props) {
     const store = useStore()
     const router = useRouter()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('paymentType')
@@ -63,7 +63,7 @@ export default defineComponent({
 
     const submit = () => {
       saveLoading.value = true
-      updateProduct(props.paymentType.id, {
+      updatePaymentType(props.paymentType.id, {
         theaterIds: params.theaters.map(item => item.id)
       })
         .then(() => {

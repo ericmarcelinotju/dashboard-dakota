@@ -19,7 +19,7 @@ export default defineComponent({
     PaymentTypeForm,
     TheaterForm
   },
-  setup () {
+  setup() {
     const route = useRoute()
     const router = useRouter()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('paymentType')
@@ -100,12 +100,12 @@ export default defineComponent({
 
     const tabOptions = computed(() => isUpdate.value
       ? [
-          { label: 'Detail Tipe Pembayaran', value: 'payment-type' },
-          { label: 'Teater', value: 'theater' }
-        ]
+        { label: 'Detail Tipe Pembayaran', value: 'payment-type' },
+        { label: 'Teater', value: 'theater' }
+      ]
       : [
-          { label: 'Detail Tipe Pembayaran', value: 'payment-type' }
-        ]
+        { label: 'Detail Tipe Pembayaran', value: 'payment-type' }
+      ]
     )
 
     return {

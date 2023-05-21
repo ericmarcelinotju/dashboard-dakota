@@ -30,6 +30,12 @@ export const navigations = [
     icon: ChartBarIcon
   },
   {
+    name: 'Tipe Pembayaran',
+    module: 'PAYMENT-TYPE',
+    href: '/payment-type',
+    icon: CurrencyDollarIcon
+  },
+  {
     name: 'Teater',
     module: 'THEATER',
     href: '/theater',
