@@ -126,17 +126,17 @@ export default ({ mode }) => {
     },
     server: {
       port: 9099,
-      proxy: {
-        '^/api': {
-          target: process.env.VITE_APP_API_ADDRESS,
-          headers: {
-            Host: process.env.VITE_APP_API_HOST,
-            'X-Host': process.env.VITE_APP_API_ADDRESS
-          },
-          changeOrigin: true,
-          followRedirects: true
-        }
-      }
+      // proxy: {
+      //   '/api': {
+      //     target: process.env.VITE_APP_API_ADDRESS,
+      //     headers: {
+      //       Host: process.env.VITE_APP_API_HOST,
+      //       'X-Host': process.env.VITE_APP_API_ADDRESS
+      //     },
+      //     changeOrigin: true,
+      //     followRedirects: true
+      //   }
+      // }
     }
   })
 }
