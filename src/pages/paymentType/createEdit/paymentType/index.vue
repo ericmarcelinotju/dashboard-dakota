@@ -50,40 +50,22 @@
       />
     </div>
 
-    <div class="grid grid-cols-12 gap-x-12 gap-y-4 mt-4">
-      <div class="default-field col-span-6">
-        <label
-          class="default-label"
-          for="provider"
-        >
-          Provider<sup>*</sup>
-        </label>
-        <select
-          id="provider"
-          v-model="params.provider"
-          class="default-input"
-          required
-        >
-          <option value="bri">BRI</option>
-          <option value="midtrans">Midtrans</option>
-        </select>
-      </div>
-      <div class="default-field col-span-6">
-        <label
-          class="default-label"
-          for="method"
-        >
-          Metode<sup>*</sup>
-        </label>
-        <select
-          id="method"
-          v-model="params.method"
-          class="default-input"
-          required
-        >
-          <option value="qrcode">QRCode</option>
-        </select>
-      </div>
+    <div class="default-field mt-4">
+      <label
+        class="default-label"
+        for="provider"
+      >
+        Provider<sup>*</sup>
+      </label>
+      <select
+        id="provider"
+        v-model="params.provider"
+        class="default-input"
+        required
+      >
+        <option value="bri">BRI</option>
+        <option value="midtrans">Midtrans</option>
+      </select>
     </div>
 
     <div class="default-field mt-4">

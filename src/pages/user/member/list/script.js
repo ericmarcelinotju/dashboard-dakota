@@ -10,6 +10,7 @@ import {
   get as getUsers,
   del as deleteUser
 } from '@/api/user'
+import { user as getUserStatistic } from '@/api/statistic'
 
 export default defineComponent({
   components: {
@@ -45,8 +46,23 @@ export default defineComponent({
         })
     }
 
+    const userStatistics = ref({
+      activeTotal: 0,
+      inActiveTotal: 0,
+      newTotal: 0,
+      total: 0,
+      transactingTotal: 0
+    })
+    const initStatistics = () => {
+      getUserStatistic()
+        .then(res => {
+          userStatistics.value = res.data
+        })
+    }
+
     onMounted(() => {
       handleSearch(stateParams)
+      initStatistics()
     })
 
     const handleCreate = () => {
@@ -91,6 +107,8 @@ export default defineComponent({
       itemsTotal,
       loading,
       handleSearch,
+
+      userStatistics,
 
       fields,
 

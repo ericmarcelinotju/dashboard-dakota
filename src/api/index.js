@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '@/store'
 
 const axiosInstance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: process.env.VITE_APP_API_ADDRESS,
   timeout: 10000,
   transformResponse: [data => JSON.parse(data).result],
   withCredentials: true

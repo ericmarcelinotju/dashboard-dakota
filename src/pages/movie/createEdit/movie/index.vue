@@ -12,12 +12,18 @@
       />
     </div>
     <div class="default-field mt-4">
-      <InputVideo
+      <label
+        class="default-label"
+        for="trailer"
+      >
+        Trailer
+      </label>
+      <input
         id="trailer"
         v-model="params.trailer"
-        label="Unggah Trailer"
-        reset-label="Hapus Trailer"
-      />
+        class="default-input"
+        type="text"
+      >
     </div>
     <div class="default-field mt-4">
       <label
@@ -109,7 +115,6 @@
           v-model="params.rating"
           class="default-input"
           required
-          type="number"
         >
       </div>
       <div class="default-field col-span-6">
@@ -128,31 +133,17 @@
         >
       </div>
 
-      <div class="default-field col-span-6">
+      <div class="default-field col-span-12">
         <label
           class="default-label"
-          for="actors"
+          for="casts"
         >
-          Aktor
+          Pemeran
         </label>
         <InputMultitext
-          id="actors"
-          v-model="params.actors"
-          placeholder="Nama-nama aktor"
-        />
-      </div>
-
-      <div class="default-field col-span-6">
-        <label
-          class="default-label"
-          for="actresses"
-        >
-          Aktris
-        </label>
-        <InputMultitext
-          id="actresses"
-          v-model="params.actresses"
-          placeholder="Nama-nama aktris"
+          id="casts"
+          v-model="params.casts"
+          placeholder="Nama-nama pemeran"
         />
       </div>
 

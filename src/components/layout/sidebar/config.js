@@ -66,12 +66,6 @@ export const navigations = [
     icon: DesktopComputerIcon
   },
   {
-    name: 'Tipe Pembayaran',
-    module: 'PAYMENT-TYPE',
-    href: '/payment-type',
-    icon: CashIcon
-  },
-  {
     name: 'Pemutaran Film',
     module: 'SCREENING',
     href: '/screening',

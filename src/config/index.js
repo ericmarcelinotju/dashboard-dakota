@@ -21,7 +21,7 @@ const constant = {
 }
 
 const pages = {
-  getAppTitle: (pageName) => `${pageName.toUpperCase()} | Dakota - CMS`,
+  getAppTitle: (pageName) => `CMS Dakota Cinema | ${pageName.toUpperCase()}`,
   constant: {
     INDEX: {
       path: ''
