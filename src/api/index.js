@@ -11,6 +11,10 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   config => {
     config.headers.Authorization = `Bearer ${store.getters['auth/token']}`
+    const theater = store.getters['auth/theater']
+    if (theater) {
+      config.headers['dakota-branch-id'] = theater.id
+    }
     return config
   },
   error => Promise.reject(error)

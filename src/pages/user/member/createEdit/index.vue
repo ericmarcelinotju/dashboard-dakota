@@ -1,7 +1,10 @@
 <template>
   <DefaultCreateEdit>
     <template #form>
-      <div class="h-[92%]">
+      <div
+        class="h-[92%]"
+        :options="tabOptions"
+      >
         <DefaultTabs :options="tabOptions">
           <template #profile>
             <div class="px-6">
@@ -230,10 +233,13 @@
             </div>
           </template>
           <template #active_transaction>
-            <p>Active Transaction</p>
+            <Transaction :user-id="params.id" />
           </template>
           <template #history_transaction>
-            <p>History Transaction</p>
+            <Transaction
+              is-history
+              :user-id="params.id"
+            />
           </template>
           <template #point>
             <p>DC Point</p>

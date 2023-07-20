@@ -1,5 +1,5 @@
 <template>
-  <DefaultPage :title="`Payment Type ${theater.name}`">
+  <DefaultPage title="Payment Type">
     <template #action>
       <button
         v-if="hasPermission('POST')"

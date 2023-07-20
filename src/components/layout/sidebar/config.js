@@ -6,17 +6,10 @@ import {
   ChartPieIcon,
   CurrencyDollarIcon,
   ShieldExclamationIcon,
-  CogIcon,
-  CashIcon
+  CogIcon
 } from '@heroicons/vue/solid'
 
 export const navigations = [
-  {
-    name: 'Halaman Utama',
-    module: 'DASHBOARD',
-    href: '/dashboard',
-    icon: DesktopComputerIcon
-  },
   {
     name: 'Pengguna',
     module: 'USER',

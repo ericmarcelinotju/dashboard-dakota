@@ -1,7 +1,14 @@
 <template>
   <div class="shadow-lg">
-    <TransitionRoot as="template" :show="sidebarOpen">
-      <Dialog as="div" class="fixed inset-0 flex z-40 lg:hidden" @close="close">
+    <TransitionRoot
+      as="template"
+      :show="sidebarOpen"
+    >
+      <Dialog
+        as="div"
+        class="fixed inset-0 flex z-40 lg:hidden"
+        @close="close"
+      >
         <TransitionChild
           as="template"
           enter="transition-opacity ease-linear duration-300"
@@ -61,7 +68,10 @@
                   @click="close"
                 >
                   <span class="sr-only">Close sidebar</span>
-                  <XIcon aria-hidden="true" class="h-6 w-6 text-white" />
+                  <XIcon
+                    aria-hidden="true"
+                    class="h-6 w-6 text-white"
+                  />
                 </button>
               </div>
             </TransitionChild>
@@ -81,7 +91,10 @@
             </nav>
           </div>
         </TransitionChild>
-        <div aria-hidden="true" class="flex-shrink-0 w-14">
+        <div
+          aria-hidden="true"
+          class="flex-shrink-0 w-14"
+        >
           <!-- Dummy element to force sidebar to shrink to fit close icon -->
         </div>
       </Dialog>

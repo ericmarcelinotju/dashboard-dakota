@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 const useDefaultForm = (objectName = '') => {
   const { t } = useI18n()
 
-  const showNotification = (actionName = 'action', type = 'success', message, timeout = 2000) => {
+  const showNotification = (actionName = 'action', type = 'success', message, timeout = 200000) => {
     notify({
       group: 'bottom',
       type: type,
@@ -18,6 +18,10 @@ const useDefaultForm = (objectName = '') => {
   }
 
   const showDangerNotification = (actionName = 'action', message) => {
+    if (Array.isArray(message)) {
+      message = message.join('\n')
+    }
+    console.log(message)
     showNotification(actionName, 'danger', message)
   }
 

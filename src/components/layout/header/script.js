@@ -1,5 +1,5 @@
-import { computed, defineComponent, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
 import { capitalizeWords } from '@/utils/string'
 import {
   Menu,
@@ -11,10 +11,8 @@ import {
   PopoverPanel
 } from '@headlessui/vue'
 import { ChevronDownIcon, SearchIcon } from '@heroicons/vue/solid'
-import { BellIcon, MenuAlt1Icon, UserCircleIcon, LogoutIcon } from '@heroicons/vue/outline'
+import { BellIcon, MenuAlt1Icon, UserCircleIcon, LogoutIcon, RefreshIcon } from '@heroicons/vue/outline'
 import { useStore } from 'vuex'
-import { get as getLogs } from '@/api/log'
-import { pages } from '@/config'
 
 export default defineComponent({
   name: 'HeaderLayout',
@@ -31,15 +29,16 @@ export default defineComponent({
     MenuAlt1Icon,
     SearchIcon,
     LogoutIcon,
-    UserCircleIcon
+    UserCircleIcon,
+    RefreshIcon
   },
-  emits: ['logout', 'notification', 'about', 'openSidebar'],
-  setup(_, context) {
+  emits: ['logout', 'notification', 'about', 'openSidebar', 'changeTheater'],
+  setup (_, context) {
     const route = useRoute()
-    const router = useRouter()
     const store = useStore()
 
     const user = computed(() => store.getters['auth/user'])
+    const activeTheater = computed(() => store.getters['auth/theater'])
 
     const routeName = computed(() => capitalizeWords(route.name))
 
@@ -55,27 +54,9 @@ export default defineComponent({
       context.emit('openSidebar')
     }
 
-    // const notifications = ref([])
-    // const getNotifications = () => {
-    //   if (hasPermission('GET')) {
-    //     getLogs({
-    //       level: 'danger'
-    //     })
-    //       .then(res => {
-    //         notifications.value = res.data.logs
-    //       })
-    //   }
-    // }
-    // onMounted(() => {
-    //   getNotifications()
-    // })
-
-    // const handleEventLog = () => {
-    //   router.push({ name: pages.log.event.name })
-    // }
-    // const handleSystemLog = () => {
-    //   router.push({ name: pages.log.system.name })
-    // }
+    const handleChangeTheater = () => {
+      context.emit('changeTheater')
+    }
 
     const hasPermission = (method, module = 'LOG') => {
       return store.getters['auth/hasPermission'](module, method)
@@ -86,11 +67,9 @@ export default defineComponent({
       handleLogout,
       handleAbout,
       handleOpenSidebar,
+      handleChangeTheater,
       user,
-      // notifications,
-      // getNotifications,
-      // handleEventLog,
-      // handleSystemLog,
+      activeTheater,
       hasPermission
     }
   }

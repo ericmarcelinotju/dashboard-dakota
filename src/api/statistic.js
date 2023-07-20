@@ -8,7 +8,12 @@ const user = () => {
   return axios.get('/api/statistic/user')
 }
 
+const order = () => {
+  return axios.get('/api/statistic/order')
+}
+
 export {
   dashboard,
-  user
+  user,
+  order
 }

@@ -9,7 +9,8 @@ import { pages } from '@/config'
 const state = () => ({
   user: {},
   token: null,
-  refreshToken: null
+  refreshToken: null,
+  activeTheater: null
 })
 
 const getters = {
@@ -20,8 +21,7 @@ const getters = {
     return state.token
   },
   theater (state) {
-    // TODO :: Theater selection feature
-    return state.user.workIn ? state.user.workIn.theater : {}
+    return state.activeTheater || (state.user.workIn ? state.user.workIn.theater : null)
   },
   isLoggedIn (state) {
     return state.token !== null
@@ -53,7 +53,11 @@ const mutations = {
     state.user = {}
     state.token = null
     state.refreshToken = null
+    state.activeTheater = null
     router.replace({ path: pages.auth.login.url })
+  },
+  setTheater (state, theater) {
+    state.activeTheater = theater
   }
 }
 

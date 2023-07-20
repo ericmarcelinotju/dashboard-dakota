@@ -21,7 +21,10 @@
       @click="handleOpenSidebar"
     >
       <span class="sr-only">Open sidebar</span>
-      <MenuAlt1Icon aria-hidden="true" class="h-6 w-6" />
+      <MenuAlt1Icon
+        aria-hidden="true"
+        class="h-6 w-6"
+      />
     </button>
     <!-- Search bar -->
     <div class="flex-1 px-4 flex justify-between sm:px-6 lg:mx-auto lg:px-6">
@@ -165,7 +168,10 @@
         </Menu> -->
 
         <!-- Profile dropdown -->
-        <Menu as="div" class="ml-3 relative">
+        <Menu
+          as="div"
+          class="ml-3 relative"
+        >
           <div>
             <MenuButton
               class="
@@ -177,8 +183,16 @@
                 lg:p-2 lg:rounded-md lg:hover:bg-red-500
               "
             >
-              <img v-if="user.avatar" :src="user.avatar" class="h-10 w-10 rounded-full" alt="avatar">
-              <UserCircleIcon v-else class="text-white h-10 w-10 rounded-full" />
+              <img
+                v-if="user.avatar"
+                alt="avatar"
+                class="h-10 w-10 rounded-full"
+                :src="user.avatar"
+              >
+              <UserCircleIcon
+                v-else
+                class="text-white h-10 w-10 rounded-full"
+              />
               <ChevronDownIcon
                 aria-hidden="true"
                 class="
@@ -207,7 +221,7 @@
                 absolute
                 right-0
                 mt-4
-                w-48
+                w-64
                 rounded-md
                 shadow-lg
                 overflow-hidden
@@ -217,7 +231,7 @@
                 focus:outline-none
               "
             >
-              <MenuItem v-slot="{ active }">
+              <MenuItem>
                 <a
                   class="block px-4 py-2 text-primary-gray"
                 >
@@ -227,7 +241,29 @@
                   <div>{{ user.username }}</div>
                 </a>
               </MenuItem>
-              <hr />
+              <MenuItem v-if="activeTheater">
+                <a class="block px-4 py-2 text-primary-gray">
+                  <div class="mb-2">
+                    <b>{{ user.workIn?.position || user.role?.name }}</b> in <b>{{ activeTheater.name }}</b>
+                  </div>
+                </a>
+              </MenuItem>
+              <MenuItem
+                v-if="user.role.name === 'Super Administrator'"
+                v-slot="{ active }"
+              >
+                <a
+                  :class="[
+                    active ? 'bg-gray-100' : '',
+                    'block px-4 py-2 text-primary-gray cursor-pointer flex items-center',
+                  ]"
+                  @click="handleChangeTheater"
+                >
+                  <RefreshIcon class="h-6 w-6 mr-4" />
+                  <span>Change Theater</span>
+                </a>
+              </MenuItem>
+              <hr>
               <MenuItem v-slot="{ active }">
                 <a
                   :class="[
@@ -236,7 +272,7 @@
                   ]"
                   @click="handleLogout"
                 >
-                  <LogoutIcon class="h-6 w-6 rounded-full mr-4" />
+                  <LogoutIcon class="h-6 w-6 mr-4" />
                   <span>{{ $t("global.logout") }}</span>
                 </a>
               </MenuItem>

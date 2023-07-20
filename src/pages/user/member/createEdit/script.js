@@ -5,6 +5,7 @@ import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
 import { pages } from '@/config'
 import components from '@/components'
+import Transaction from './Transaction.vue'
 import {
   detail as getUser,
   insert as insertUser,
@@ -20,6 +21,7 @@ export default defineComponent({
     Loading: components.Loading,
     InputDropdown: components.InputDropdown,
     InputAvatar: components.InputAvatar,
+    Transaction,
     Datepicker
   },
   setup () {
@@ -72,32 +74,35 @@ export default defineComponent({
 
     const submit = () => {
       saveLoading.value = true
-      params.dob = params.dob.toISOString()
+      const formData = convertJsonToFormData({
+        ...params,
+        dob: params.dob.toISOString()
+      })
       if (hasId.value) {
         updateUser(
           routeParams.value.id,
-          convertJsonToFormData(params)
+          formData
         )
           .then(() => {
             reset()
             router.push({ path: `${pages.member.url}` })
             showSuccessNotification('updated')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err.response.data)
           })
           .finally(() => {
             saveLoading.value = false
           })
       } else {
-        insertUser(convertJsonToFormData(params))
+        insertUser(formData)
           .then(() => {
             reset()
             router.push({ path: `${pages.member.url}` })
             showSuccessNotification('inserted')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err.response.data)
           })
           .finally(() => {
             saveLoading.value = false
@@ -110,13 +115,16 @@ export default defineComponent({
     }
 
     const tabOptions = computed(() => {
-      return [
-        { label: 'Profil Pengguna', value: 'profile' },
-        { label: 'Transaksi Aktif', value: 'active_transaction' },
-        { label: 'Riwayat Transaksi', value: 'history_transaction' },
-        { label: 'DC Point', value: 'point' },
-        { label: 'Sisa Deposit', value: 'deposit' }
-      ]
+      if (hasId.value) {
+        return [
+          { label: 'Profil Pengguna', value: 'profile' },
+          { label: 'Transaksi Aktif', value: 'active_transaction' },
+          { label: 'Riwayat Transaksi', value: 'history_transaction' },
+          { label: 'DC Point', value: 'point' },
+          { label: 'Sisa Deposit', value: 'deposit' }
+        ]
+      }
+      return [{ label: 'Profil Pengguna', value: 'profile' }]
     })
 
     onMounted(() => {

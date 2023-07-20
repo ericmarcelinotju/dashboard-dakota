@@ -5,9 +5,8 @@ import { pages } from '@/config'
 import { fields } from '../config'
 import components from '@/components'
 import { CogIcon, PlusIcon } from '@heroicons/vue/solid'
-import {
-  get as getOrders
-} from '@/api/order'
+import { get as getOrders } from '@/api/order'
+import { order as getOrderStatistic } from '@/api/statistic'
 
 export default defineComponent({
   components: {
@@ -40,8 +39,22 @@ export default defineComponent({
         })
     }
 
+    const orderStatistics = ref({
+      pendingTotal: 0,
+      settleTotal: 0,
+      failedTotal: 0,
+      total: 0
+    })
+    const initStatistics = () => {
+      getOrderStatistic()
+        .then(res => {
+          orderStatistics.value = res.data
+        })
+    }
+
     onMounted(() => {
       handleSearch(stateParams)
+      initStatistics()
     })
 
     const handleDetail = ({ id }) => {
@@ -57,6 +70,8 @@ export default defineComponent({
       itemsTotal,
       loading,
       handleSearch,
+
+      orderStatistics,
 
       fields,
 

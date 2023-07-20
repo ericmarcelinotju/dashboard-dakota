@@ -75,7 +75,7 @@ export default defineComponent({
           }, 5000)
         })
         .catch(err => {
-          if (err.response.code === 404) {
+          if (err.response.status === 404) {
             forgotPasswordMessage.value = 'Incorrect username or email. Contact your administrator.'
           } else {
             forgotPasswordMessage.value = 'Unexpected error, please contact your administrator.'

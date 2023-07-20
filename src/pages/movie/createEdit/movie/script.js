@@ -47,28 +47,30 @@ export default defineComponent({
     const submit = () => {
       saveLoading.value = true
 
-      params.releaseDate = params.releaseDate.toISOString()
-      const payload = convertJsonToFormData(params)
+      const formData = convertJsonToFormData({
+        ...params,
+        releaseDate: params.releaseDate.toISOString()
+      })
       if (hasId.value) {
-        updateMovie(routeParams.value.id, payload)
+        updateMovie(routeParams.value.id, formData)
           .then(() => {
             router.push({ path: `${pages.movie.url}` })
             showSuccessNotification('updated')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err.response.data)
           })
           .finally(() => {
             saveLoading.value = false
           })
       } else {
-        insertMovie(payload)
+        insertMovie(formData)
           .then(() => {
             router.push({ path: `${pages.movie.url}` })
             showSuccessNotification('inserted')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err.response.data)
           })
           .finally(() => {
             saveLoading.value = false

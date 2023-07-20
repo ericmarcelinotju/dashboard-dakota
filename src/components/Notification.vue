@@ -54,9 +54,7 @@
                   <p class="text-sm font-medium text-gray-900">
                     {{ notification.title }}
                   </p>
-                  <p class="mt-1 text-sm text-gray-500">
-                    {{ notification.text }}
-                  </p>
+                  <pre class="mt-1 text-sm text-gray-500">{{ notification.text }}</pre>
                 </div>
                 <div
                   v-if="false"

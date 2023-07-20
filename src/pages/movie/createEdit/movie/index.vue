@@ -115,6 +115,7 @@
           v-model="params.rating"
           class="default-input"
           required
+          type="text"
         >
       </div>
       <div class="default-field col-span-6">

@@ -1,4 +1,4 @@
-import { ref, defineComponent } from 'vue'
+import { onMounted, computed, ref, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import components from '@/components'
 import DefaultHeader from './../header/index.vue'
@@ -6,6 +6,7 @@ import DefaultFooter from './../footer/index.vue'
 import DefaultSidebar from './../sidebar/index.vue'
 import store from '@/store'
 import { pages } from '@/config'
+import { get as getTheaters } from '@/api/theater'
 
 export default defineComponent({
   name: 'ContainerLayout',
@@ -35,13 +36,47 @@ export default defineComponent({
       window.open(pages.about, '_blank').focus()
     }
 
+    const initTheaters = () => {
+      getTheaters()
+        .then(resp => {
+          theaters.value = resp.data.data
+        })
+    }
+
+    const visibleChangeTheaterModal = ref(false)
+    const theaters = ref([])
+    const activeTheater = computed({
+      get () {
+        return store.getters['auth/theater']
+      },
+      set (newValue) {
+        store.commit('auth/setTheater', newValue)
+      }
+    })
+
+    const handleChangeTheater = () => {
+      visibleChangeTheaterModal.value = true
+    }
+
+    onMounted(() => {
+      initTheaters()
+
+      if (!activeTheater.value) {
+        handleChangeTheater()
+      }
+    })
+
     return {
       route,
       handleLogout,
       handleNotification,
       handleAbout,
+      handleChangeTheater,
       visibleNotificationModal,
-      currNotification
+      currNotification,
+      visibleChangeTheaterModal,
+      theaters,
+      activeTheater
     }
   }
 })

@@ -31,7 +31,6 @@ const ForgotPassword = () => import(/* webpackChunkName: 'p-forgot-password' */ 
 const Dashboard = () => import(/* webpackChunkName: 'p-dashboard */ '@/pages/dashboard/index.vue')
 
 const Setting = () => import(/* webpackChunkName: 'p-setting' */ '@/pages/setting/index.vue')
-const Statistic = () => import(/* webpackChunkName: 'p-setting' */ '@/pages/statistic/Statistic.vue')
 
 const Forbidden = () => import(/* webpackChunkName: 'c-forbidden */ '@/components/Forbidden.vue')
 const NotFound = () => import(/* webpackChunkName: 'c-not-found */ '@/components/NotFound.vue')
@@ -78,16 +77,6 @@ const settingRoutes = {
   meta: {
     auth: true,
     title: pages.getAppTitle(pages.setting.name)
-  }
-}
-
-const statisticRoutes = {
-  path: pages.statistic.url,
-  name: pages.statistic.name,
-  component: Statistic,
-  meta: {
-    auth: true,
-    title: pages.getAppTitle(pages.statistic.name)
   }
 }
 
@@ -168,7 +157,6 @@ export const routes = [
 
       logRoutes,
       settingRoutes,
-      statisticRoutes,
 
       movieRoutes,
       productRoutes,
