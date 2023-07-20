@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 const useDefaultForm = (objectName = '') => {
   const { t } = useI18n()
 
-  const showNotification = (actionName = 'action', type = 'success', message, timeout = 200000) => {
+  const showNotification = (actionName = 'action', type = 'success', message, timeout = 3000) => {
     notify({
       group: 'bottom',
       type: type,
