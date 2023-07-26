@@ -21,7 +21,7 @@ export default defineComponent({
     InputCalendarDay: components.InputCalendarDay,
     Datepicker
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
@@ -113,8 +113,8 @@ export default defineComponent({
         })
     }
 
-    const hasPermission = (method, module = 'STUDIO') => {
-      return store.getters['auth/hasPermission'](module, method)
+    const hasPermission = (action, feature = 'screening') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     onMounted(() => {

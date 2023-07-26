@@ -93,8 +93,8 @@ export default defineComponent({
       }
     }
 
-    const hasPermission = (method, module = 'PRICING') => {
-      return store.getters['auth/hasPermission'](module, method)
+    const hasPermission = (action, feature = 'pricing') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     onMounted(() => {

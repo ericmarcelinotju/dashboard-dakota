@@ -23,13 +23,13 @@ export default defineComponent({
       return children.some((item) => item.href === route.path)
     }
 
-    const hasPermission = (module) => {
-      return store.getters['auth/hasPermission'](module, 'GET')
+    const hasPermission = (feature) => {
+      return store.getters['auth/hasPermission'](feature, 'read')
     }
 
     const hasAnyPermission = (children) => {
       for (const item of children) {
-        if (store.getters['auth/hasPermission'](item.module, 'GET')) {
+        if (store.getters['auth/hasPermission'](item.module, 'read')) {
           return true
         }
       }

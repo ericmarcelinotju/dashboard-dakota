@@ -29,7 +29,7 @@ export default defineComponent({
       default: () => { }
     }
   },
-  setup(props) {
+  setup (props) {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
@@ -72,8 +72,8 @@ export default defineComponent({
       }
     }
 
-    const hasPermission = (method, module = 'PAYMENT-TYPE') => {
-      return store.getters['auth/hasPermission'](module, method)
+    const hasPermission = (action, feature = 'payment-type') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     return {

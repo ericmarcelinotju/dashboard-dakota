@@ -58,10 +58,6 @@ export default defineComponent({
       context.emit('changeTheater')
     }
 
-    const hasPermission = (method, module = 'LOG') => {
-      return store.getters['auth/hasPermission'](module, method)
-    }
-
     return {
       routeName,
       handleLogout,
@@ -69,8 +65,7 @@ export default defineComponent({
       handleOpenSidebar,
       handleChangeTheater,
       user,
-      activeTheater,
-      hasPermission
+      activeTheater
     }
   }
 })

@@ -48,8 +48,8 @@ export default defineComponent({
       return theaters.value.filter(theater => !params.theaters.find((activeTheater) => activeTheater.id === theater.id))
     })
 
-    const hasPermission = (method, module = 'USER') => {
-      return store.getters['auth/hasPermission'](module, method)
+    const hasPermission = (action, feature = 'theater') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     onMounted(() => {

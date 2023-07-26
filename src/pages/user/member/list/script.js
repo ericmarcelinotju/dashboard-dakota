@@ -98,8 +98,8 @@ export default defineComponent({
         })
     }
 
-    const hasPermission = (method, module = 'USER') => {
-      return store.getters['auth/hasPermission'](module, method)
+    const hasPermission = (action, feature = 'user') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     return {

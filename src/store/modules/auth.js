@@ -27,18 +27,18 @@ const getters = {
     return state.token !== null
   },
   hasPermission (state) {
-    return (module, method) => {
-      // if (!state.user || !state.user.role) {
-      //   return false
-      // }
-      // const found = state.user.role.permissions.find(item => {
-      //   if (Array.isArray(method)) {
-      //     return item.module === module && method.includes(item.method)
-      //   }
-      //   return item.module === module && item.method === method
-      // })
-      // return !!found
-      return true
+    return (feature, action) => {
+      if (!state.user || !state.user.role || !state.user.role.permissions) {
+        return false
+      }
+      console.log(feature, action, state.user.role.permissions)
+      const found = state.user.role.permissions.find(item => {
+        if (Array.isArray(action)) {
+          return item.feature === feature && action.includes(item.action)
+        }
+        return item.feature === feature && item.action === action
+      })
+      return !!found
     }
   }
 }

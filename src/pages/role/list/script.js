@@ -76,8 +76,8 @@ export default defineComponent({
         })
     }
 
-    const hasPermission = (method) => {
-      return store.getters['auth/hasPermission']('ROLE', method)
+    const hasPermission = (action, feature = 'role') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     return {

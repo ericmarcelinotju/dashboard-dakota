@@ -92,8 +92,8 @@ export default defineComponent({
         })
     }
 
-    const hasPermission = (method, module = 'STUDIO') => {
-      return store.getters['auth/hasPermission'](module, method)
+    const hasPermission = (action, feature = 'studio') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     onMounted(() => {

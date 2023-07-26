@@ -2,7 +2,7 @@
   <DefaultPage :title="`Pemutaran Film ${theater.name}`">
     <template #action>
       <button
-        v-if="hasPermission('POST')"
+        v-if="hasPermission('create')"
         class="danger-button mr-4"
         type="button"
         @click="handleCreate"

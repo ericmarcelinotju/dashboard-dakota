@@ -29,7 +29,7 @@ export default defineComponent({
       default: () => { }
     }
   },
-  setup(props) {
+  setup (props) {
     const store = useStore()
     const router = useRouter()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('paymentType')
@@ -48,8 +48,8 @@ export default defineComponent({
       return theaters.value.filter(theater => !params.theaters.find((activeTheater) => activeTheater.id === theater.id))
     })
 
-    const hasPermission = (method, module = 'USER') => {
-      return store.getters['auth/hasPermission'](module, method)
+    const hasPermission = (action, feature = 'payment-type') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     onMounted(() => {

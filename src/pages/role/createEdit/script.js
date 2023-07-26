@@ -80,7 +80,11 @@ export default defineComponent({
       if (hasId.value) {
         updateRole(
           routeParams.value.id,
-          { ...params, ...{ id: parseInt(routeParams.value.id) } }
+          {
+            ...params,
+            id: parseInt(routeParams.value.id),
+            permissionIds: params.permissions.map(item => item.id)
+          }
         )
           .then(() => {
             saveSuccess('updated')
@@ -92,7 +96,10 @@ export default defineComponent({
             saveLoading.value = false
           })
       } else {
-        insertRole({ ...params })
+        insertRole({
+          ...params,
+          permissionIds: params.permissions.map(item => item.id)
+        })
           .then(() => {
             saveSuccess('inserted')
           })

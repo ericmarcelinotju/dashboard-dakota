@@ -1,107 +1,125 @@
 import {
-  DesktopComputerIcon,
   UserGroupIcon,
-  ChartBarIcon,
+  CalendarIcon,
+  CashIcon,
+  CreditCardIcon,
+  FilmIcon,
   TicketIcon,
-  ChartPieIcon,
-  CurrencyDollarIcon,
   ShieldExclamationIcon,
-  CogIcon
-} from '@heroicons/vue/solid'
+  CogIcon,
+  VideoCameraIcon,
+  ShoppingBagIcon,
+  ShoppingCartIcon,
+  OfficeBuildingIcon
+  // TemplateIcon,
+  // ChartPieIcon,
+  // ReceiptTaxIcon,
+  // CurrencyDollarIcon
+} from '@heroicons/vue/outline'
 
 export const navigations = [
+  // {
+  //   name: 'Dashboard',
+  //   href: '/',
+  //   icon: TemplateIcon
+  // },
   {
     name: 'Pengguna',
-    module: 'USER',
+    module: 'user',
     href: '/member',
     icon: UserGroupIcon
   },
   {
     name: 'Penjualan',
-    module: 'ORDER',
+    module: 'order',
     href: '/order',
-    icon: ChartBarIcon
+    icon: ShoppingBagIcon
   },
   {
     name: 'Tipe Pembayaran',
-    module: 'PAYMENT-TYPE',
+    module: 'payment-type',
     href: '/payment-type',
-    icon: CurrencyDollarIcon
+    icon: CreditCardIcon
   },
   {
     name: 'Teater',
-    module: 'THEATER',
+    module: 'theater',
     href: '/theater',
-    icon: DesktopComputerIcon
+    icon: OfficeBuildingIcon
   },
   {
     name: 'Pricing',
-    module: 'PRICING',
+    module: 'pricing',
     href: '/pricing',
-    icon: CurrencyDollarIcon
+    icon: CashIcon
   },
   {
     name: 'Studio',
-    module: 'STUDIO',
+    module: 'studio',
     href: '/studio',
-    icon: DesktopComputerIcon
+    icon: VideoCameraIcon
   },
   {
     name: 'Kafetaria',
-    module: 'PRODUCT',
+    module: 'product',
     href: '/product',
-    icon: DesktopComputerIcon
+    icon: ShoppingCartIcon
   },
   {
     name: 'Film',
-    module: 'MOVIE',
+    module: 'movie',
     href: '/movie',
-    icon: DesktopComputerIcon
+    icon: FilmIcon
   },
   {
     name: 'Pemutaran Film',
-    module: 'SCREENING',
+    module: 'screening',
     href: '/screening',
-    icon: TicketIcon
+    icon: CalendarIcon
   },
   {
     name: 'Tiket',
-    module: 'ORDER',
+    module: 'order',
     href: '/ticket',
     icon: TicketIcon
   },
-  {
-    name: 'Promo',
-    module: 'PROMO',
-    href: '/promo',
-    icon: DesktopComputerIcon
-  },
-
+  // {
+  //   name: 'Promo',
+  //   module: 'promo',
+  //   href: '/promo',
+  //   icon: ReceiptTaxIcon
+  // },
+  // {
+  //   name: 'Tax',
+  //   module: 'tax',
+  //   href: '/tax',
+  //   icon: CurrencyDollarIcon
+  // },
   {
     name: 'Pengaturan Akses',
     icon: ShieldExclamationIcon,
     children: [
       {
         name: 'Atur Pengurus',
-        module: 'USER',
+        module: 'user',
         href: '/staff'
       },
       {
         name: 'Atur Peran',
-        module: 'ROLE',
+        module: 'role',
         href: '/role'
       }
     ]
   },
-  {
-    name: 'Laporan',
-    module: 'ORDER',
-    href: '/report',
-    icon: ChartPieIcon
-  },
+  // {
+  //   name: 'Laporan',
+  //   module: 'report',
+  //   href: '/report',
+  //   icon: ChartPieIcon
+  // },
   {
     name: 'Pengaturan Umum',
-    module: 'SETTING',
+    module: 'setting',
     href: '/setting',
     icon: CogIcon
   }

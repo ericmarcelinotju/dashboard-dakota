@@ -91,8 +91,8 @@ export default defineComponent({
       detailItem.value = data
     }
 
-    const hasPermission = (method) => {
-      return store.getters['auth/hasPermission']('ROLE', method)
+    const hasPermission = (action, feature = 'role') => {
+      return store.getters['auth/hasPermission'](feature, action)
     }
 
     const title = computed(() => `${route.meta.type.charAt(0).toUpperCase() + route.meta.type.slice(1)} Log`)

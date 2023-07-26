@@ -2,7 +2,7 @@
   <DefaultPage title="Payment Type">
     <template #action>
       <button
-        v-if="hasPermission('POST')"
+        v-if="hasPermission('create')"
         class="danger-button mr-4"
         type="button"
         @click="handleCreate"
@@ -14,8 +14,8 @@
     <template #table>
       <DefaultTable
         :fields="fields"
-        :has-delete="hasPermission('DELETE')"
-        :has-edit="hasPermission('PUT')"
+        :has-delete="hasPermission('delete')"
+        :has-edit="hasPermission('update')"
         :items="items"
         :loading="loading"
         :total="itemsTotal"
