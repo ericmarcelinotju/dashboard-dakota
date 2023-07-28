@@ -4,8 +4,7 @@ import store from '@/store'
 const axiosInstance = axios.create({
   baseURL: process.env.VITE_APP_API_ADDRESS,
   timeout: 10000,
-  transformResponse: [data => JSON.parse(data).result],
-  withCredentials: true
+  transformResponse: [data => JSON.parse(data).result]
 })
 
 axiosInstance.interceptors.request.use(
