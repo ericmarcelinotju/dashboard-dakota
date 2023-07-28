@@ -31,7 +31,6 @@ const getters = {
       if (!state.user || !state.user.role || !state.user.role.permissions) {
         return false
       }
-      console.log(feature, action, state.user.role.permissions)
       const found = state.user.role.permissions.find(item => {
         if (Array.isArray(action)) {
           return item.feature === feature && action.includes(item.action)

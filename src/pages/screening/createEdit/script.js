@@ -46,7 +46,6 @@ export default defineComponent({
     const visibleAddScreeningModal = ref(false)
     const onMovieChange = (movieId) => {
       const movie = movies.value.find(movie => movie.id === movieId)
-      console.log(movie)
       activeScreening.movie = movie
       activeScreening.movieId = movieId
       params.screenings.push({ ...activeScreening })

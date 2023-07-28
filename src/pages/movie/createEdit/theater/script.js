@@ -85,7 +85,6 @@ export default defineComponent({
 
     const removeTheater = (theater) => {
       const choosenIndex = theaters.value.indexOf(item => item.id === params.theaterId)
-      console.log(choosenIndex)
       params.theaters.splice(choosenIndex, 1)
     }
 
