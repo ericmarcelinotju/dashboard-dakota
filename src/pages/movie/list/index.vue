@@ -1,5 +1,5 @@
 <template>
-  <DefaultPage>
+  <DefaultPage :title="`Film ${theater ? theater.name : ''}`">
     <template #action>
       <button
         v-if="hasPermission('create')"

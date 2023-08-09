@@ -1,5 +1,5 @@
 <template>
-  <DefaultPage :title="`Kafetaria ${theater.name}`">
+  <DefaultPage :title="`Kafetaria ${theater ? theater.name : ''}`">
     <template #action>
       <button
         v-if="hasPermission('create')"
