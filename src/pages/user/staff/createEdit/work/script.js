@@ -59,7 +59,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      if (hasPermission('GET', 'THEATER')) {
+      if (hasPermission('read', 'theater')) {
         getTheaters()
           .then(res => {
             theaters.value = res.data.data

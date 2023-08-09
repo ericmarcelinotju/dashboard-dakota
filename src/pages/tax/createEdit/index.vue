@@ -11,7 +11,10 @@
         >
           <template #information>
             <div class="default-field mt-6">
-              <label class="default-label" for="username">
+              <label
+                class="default-label"
+                for="username"
+              >
                 {{ $t("app.fields.username") }}<sup>*</sup>
               </label>
               <input
@@ -21,12 +24,15 @@
                 class="default-input"
                 required
                 type="text"
-              />
+              >
             </div>
 
             <div class="grid grid-cols-12 gap-x-24 gap-y-4 mt-6">
               <div class="default-field col-span-6">
-                <label class="default-label" for="first_name">
+                <label
+                  class="default-label"
+                  for="first_name"
+                >
                   {{ $t("app.fields.first_name") }}
                 </label>
                 <input
@@ -34,10 +40,13 @@
                   v-model="params.first_name"
                   class="default-input"
                   type="text"
-                />
+                >
               </div>
               <div class="default-field col-span-6">
-                <label class="default-label" for="last_name">
+                <label
+                  class="default-label"
+                  for="last_name"
+                >
                   {{ $t("app.fields.last_name") }}
                 </label>
                 <input
@@ -45,11 +54,14 @@
                   v-model="params.last_name"
                   class="default-input"
                   type="text"
-                />
+                >
               </div>
 
               <div class="default-field col-span-6">
-                <label class="default-label" for="department">
+                <label
+                  class="default-label"
+                  for="department"
+                >
                   {{ $t("app.fields.department") }}
                 </label>
                 <input
@@ -57,11 +69,14 @@
                   v-model="params.department"
                   class="default-input"
                   type="text"
-                />
+                >
               </div>
 
               <div class="default-field col-span-6">
-                <label class="default-label" for="title">
+                <label
+                  class="default-label"
+                  for="title"
+                >
                   {{ $t("app.fields.title") }}
                 </label>
                 <input
@@ -69,12 +84,15 @@
                   v-model="params.title"
                   class="default-input"
                   type="text"
-                />
+                >
               </div>
             </div>
 
             <div class="default-field mt-6">
-              <label class="default-label" for="email">
+              <label
+                class="default-label"
+                for="email"
+              >
                 {{ $t("app.fields.email") }}<sup>*</sup>
               </label>
               <input
@@ -84,11 +102,14 @@
                 class="default-input"
                 required
                 type="email"
-              />
+              >
             </div>
 
             <div class="default-field mt-6">
-              <label class="default-label" for="password">
+              <label
+                class="default-label"
+                for="password"
+              >
                 {{ $t("app.fields.password") }}
               </label>
               <input
@@ -96,11 +117,14 @@
                 v-model="params.password"
                 class="default-input"
                 type="password"
-              />
+              >
             </div>
 
             <div class="default-field mt-6">
-              <label class="default-label" for="confirm-password">
+              <label
+                class="default-label"
+                for="confirm-password"
+              >
                 {{ $t("app.fields.confirmPassword") }}
               </label>
               <input
@@ -108,11 +132,17 @@
                 v-model="params.confirm_password"
                 class="default-input"
                 type="password"
-              />
+              >
             </div>
 
-            <div v-if="hasPermission('GET', 'ROLE')" class="default-field mt-6">
-              <label class="default-label" for="role_id">
+            <div
+              v-if="hasPermission('read', 'theater')"
+              class="default-field mt-6"
+            >
+              <label
+                class="default-label"
+                for="role_id"
+              >
                 {{ $t("app.fields.role") }}
               </label>
               <InputDropdown
@@ -123,7 +153,10 @@
             </div>
           </template>
           <template #branches>
-            <InputDualList v-model="params.branches" :options="branches">
+            <InputDualList
+              v-model="params.branches"
+              :options="branches"
+            >
               <template #label="{ item }">
                 {{ item.name }}
               </template>
@@ -132,10 +165,13 @@
           <template #extensions>
             <!-- Start Extension filter -->
             <div
-              v-if="hasPermission('GET', 'BRANCH')"
+              v-if="hasPermission('read', 'theater')"
               class="default-field mt-4 w-1/2"
             >
-              <label class="default-label" for="branch_id">
+              <label
+                class="default-label"
+                for="branch_id"
+              >
                 {{ $t("app.fields.branch") }}
               </label>
               <InputDropdown

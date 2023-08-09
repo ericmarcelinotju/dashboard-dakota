@@ -36,7 +36,7 @@
         </div>
 
         <div
-          v-if="hasPermission('GET', 'PRICING')"
+          v-if="hasPermission('read', 'pricing')"
           class="default-field mt-6"
         >
           <label

@@ -129,7 +129,7 @@ export default defineComponent({
 
     onMounted(() => {
       initPage()
-      if (hasPermission('GET', 'ROLE')) {
+      if (hasPermission('read', 'role')) {
         getRoles({
           filter: 'isCustomer:true'
         })

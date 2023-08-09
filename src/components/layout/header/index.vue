@@ -236,7 +236,7 @@
                   class="block px-4 py-2 text-primary-gray"
                 >
                   <div class="mb-2">
-                    <b>{{ user.role.name }}</b>
+                    <b>{{ user.role?.name }}</b>
                   </div>
                   <div>{{ user.username }}</div>
                 </a>
@@ -249,7 +249,7 @@
                 </a>
               </MenuItem>
               <MenuItem
-                v-if="user.role.name === 'Super Administrator'"
+                v-if="user.role?.name === 'Super Administrator'"
                 v-slot="{ active }"
               >
                 <a

@@ -205,7 +205,7 @@
               </div>
 
               <div
-                v-if="hasPermission('GET', 'ROLE')"
+                v-if="hasPermission('read', 'role')"
                 class="default-field mt-4"
               >
                 <label

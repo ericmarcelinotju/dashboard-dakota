@@ -99,7 +99,7 @@ export default defineComponent({
 
     onMounted(() => {
       initPage()
-      if (hasPermission('GET', 'PRICING')) {
+      if (hasPermission('read', 'pricing')) {
         getPricings()
           .then(res => {
             pricings.value = res.data.data

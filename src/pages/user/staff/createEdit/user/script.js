@@ -85,7 +85,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      if (hasPermission('GET', 'ROLE')) {
+      if (hasPermission('read', 'role')) {
         getRoles()
           .then(res => {
             roles.value = res.data.data
