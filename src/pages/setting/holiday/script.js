@@ -19,8 +19,8 @@ export default defineComponent({
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('holiday')
 
     const initialState = reactive({
-      year: null,
-      month: null,
+      year: (new Date()).getFullYear(),
+      month: (new Date()).getMonth(),
       holidays: []
     })
     const params = reactive({ ...initialState })
@@ -54,7 +54,7 @@ export default defineComponent({
         .then(res => {
           params.holidays = res.data.map(holiday => dayjs(holiday.date).toDate())
         })
-    })
+    }, { immediate: true })
 
     const submit = async () => {
       saveLoading.value = true

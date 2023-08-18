@@ -73,6 +73,22 @@
     <div class="default-field mt-4">
       <label
         class="default-label"
+        for="phone_number"
+      >
+        Nomor HP<sup>*</sup>
+      </label>
+      <input
+        id="phone_number"
+        v-model="params.phone"
+        class="default-input"
+        required
+        type="text"
+      >
+    </div>
+
+    <div class="default-field mt-4">
+      <label
+        class="default-label"
         for="password"
       >
         Kata Sandi

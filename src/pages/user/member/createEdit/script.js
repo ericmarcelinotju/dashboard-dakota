@@ -55,6 +55,7 @@ export default defineComponent({
         .then(res => {
           const data = {
             ...res.data,
+            dob: new Date(res.data.dob),
             roleId: res.data.role.id
           }
           Object.assign(initialParams, data)
