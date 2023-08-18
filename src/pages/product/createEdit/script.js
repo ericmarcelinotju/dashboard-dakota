@@ -53,8 +53,8 @@ export default defineComponent({
           Object.assign(initialState, product)
           Object.assign(params, product)
         })
-        .catch(() => {
-          showDangerNotification('loaded')
+        .catch(err => {
+          showDangerNotification('loaded', err?.response?.data)
         })
         .finally(() => {
           formLoading.value = false
@@ -92,7 +92,7 @@ export default defineComponent({
     }
 
     const saveFail = () => {
-      showDangerNotification('saved')
+      showDangerNotification('saved', err?.response?.data)
       saveLoading.value = false
     }
 

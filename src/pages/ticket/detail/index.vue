@@ -120,7 +120,7 @@
                 >
                   {{ item.product.code }}
                 </span>
-                <span> - {{ params.product.name }}</span>
+                <span> - {{ item.product.name }}</span>
               </div>
               <div class="col-span-3">
                 <p>{{ item.qty }}</p>

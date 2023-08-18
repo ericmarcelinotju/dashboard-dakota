@@ -27,8 +27,8 @@ export default defineComponent({
         .then(res => {
           Object.assign(params, res.data)
         })
-        .catch(() => {
-          showDangerNotification('loaded')
+        .catch(err => {
+          showDangerNotification('loaded', err?.response?.data)
         })
         .finally(() => {
           formLoading.value = false

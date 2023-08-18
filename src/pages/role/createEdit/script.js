@@ -63,8 +63,8 @@ export default defineComponent({
           Object.assign(initialState, res.data)
           Object.assign(params, res.data)
         })
-        .catch(() => {
-          showDangerNotification('loaded')
+        .catch(err => {
+          showDangerNotification('loaded', err?.response?.data)
         })
         .finally(() => {
           formLoading.value = false
@@ -89,8 +89,8 @@ export default defineComponent({
           .then(() => {
             saveSuccess('updated')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err?.response?.data)
           })
           .finally(() => {
             saveLoading.value = false
@@ -103,8 +103,8 @@ export default defineComponent({
           .then(() => {
             saveSuccess('inserted')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err?.response?.data)
           })
           .finally(() => {
             saveLoading.value = false

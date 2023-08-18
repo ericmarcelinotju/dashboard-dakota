@@ -75,7 +75,7 @@ export default defineComponent({
           showSuccessNotification('updated')
         })
         .catch(() => {
-          showDangerNotification('saved')
+          showDangerNotification('saved', err?.response?.data)
         })
         .finally(() => {
           saveLoading.value = false

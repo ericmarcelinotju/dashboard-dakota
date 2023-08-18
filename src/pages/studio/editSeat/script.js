@@ -64,8 +64,7 @@ export default defineComponent({
           maxSeat.column = res.data.seatChart[0].length
         })
         .catch(err => {
-          console.log(err)
-          showDangerNotification('loaded')
+          showDangerNotification('loaded', err?.response?.data)
         })
         .finally(() => {
           formLoading.value = false
@@ -84,8 +83,8 @@ export default defineComponent({
           router.push({ path: `${pages.studio.url}` })
           showSuccessNotification('updated')
         })
-        .catch(() => {
-          showDangerNotification('saved')
+        .catch(err => {
+          showDangerNotification('saved', err?.response?.data)
         })
         .finally(() => {
           saveLoading.value = false

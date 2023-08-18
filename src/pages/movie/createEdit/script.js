@@ -60,8 +60,8 @@ export default defineComponent({
           Object.assign(initialState, movie)
           Object.assign(params, movie)
         })
-        .catch(() => {
-          showDangerNotification('loaded')
+        .catch(err => {
+          showDangerNotification('loaded', err?.response?.data)
         })
         .finally(() => {
           formLoading.value = false
@@ -99,7 +99,7 @@ export default defineComponent({
     }
 
     const saveFail = () => {
-      showDangerNotification('saved')
+      showDangerNotification('saved', err?.response?.data)
       saveLoading.value = false
     }
 

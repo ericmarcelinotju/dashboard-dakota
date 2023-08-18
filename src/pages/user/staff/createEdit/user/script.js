@@ -52,8 +52,8 @@ export default defineComponent({
             router.push({ path: `${pages.staff.url}` })
             showSuccessNotification('updated')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err?.response?.data)
           })
           .finally(() => {
             saveLoading.value = false
@@ -64,8 +64,8 @@ export default defineComponent({
             router.push({ path: `${pages.staff.url}` })
             showSuccessNotification('inserted')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err?.response?.data)
           })
           .finally(() => {
             saveLoading.value = false

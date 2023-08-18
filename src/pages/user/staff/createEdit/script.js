@@ -36,8 +36,8 @@ export default defineComponent({
           }
           Object.assign(params, data)
         })
-        .catch(() => {
-          showDangerNotification('loaded')
+        .catch(err => {
+          showDangerNotification('loaded', err?.response?.data)
         })
         .finally(() => {
           loading.value = false

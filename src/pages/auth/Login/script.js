@@ -32,7 +32,7 @@ export default defineComponent({
           router.push({ path: pages.dashboard.url })
         })
         .catch(err => {
-          error.value = err.response && err.response.data
+          error.value = err.response && err?.response?.data
         })
     }
 

@@ -77,8 +77,8 @@ export default defineComponent({
           handleSearch(stateParams)
           showSuccessNotification('deleted')
         })
-        .catch(() => {
-          showDangerNotification('deleted')
+        .catch(err => {
+          showDangerNotification('deleted', err?.response?.data)
         })
         .finally(() => {
           loadingDelete.value = false

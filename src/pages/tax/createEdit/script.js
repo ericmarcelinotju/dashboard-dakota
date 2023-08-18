@@ -70,8 +70,8 @@ export default defineComponent({
           Object.assign(initialParams, res.data)
           Object.assign(params, res.data)
         })
-        .catch(() => {
-          showDangerNotification('loaded')
+        .catch(err => {
+          showDangerNotification('loaded', err?.response?.data)
         })
         .finally(() => {
           formLoading.value = false
@@ -92,8 +92,8 @@ export default defineComponent({
             router.push({ path: `${pages.user.url}` })
             showSuccessNotification('updated')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err?.response?.data)
           })
           .finally(() => {
             saveLoading.value = false
@@ -105,8 +105,8 @@ export default defineComponent({
             router.push({ path: `${pages.user.url}` })
             showSuccessNotification('inserted')
           })
-          .catch(() => {
-            showDangerNotification('saved')
+          .catch(err => {
+            showDangerNotification('saved', err?.response?.data)
           })
           .finally(() => {
             saveLoading.value = false
