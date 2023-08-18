@@ -88,7 +88,7 @@
                   </a>
                 </td>
                 <td
-                  v-for="field in filterFields"
+                  v-for="(field, index) in filterFields"
                   :key="field"
                   :class="field.class"
                 >
@@ -111,7 +111,7 @@
                     <br>
                   </template>
                   <template v-if="hasDelete">
-                    <a @click="onDelete(item)"> Hapus </a>
+                    <a @click="onDelete(item, index)"> Hapus </a>
                     <br>
                   </template>
                   <slot

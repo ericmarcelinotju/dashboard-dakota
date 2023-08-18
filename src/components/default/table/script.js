@@ -135,8 +135,8 @@ export default defineComponent({
       context.emit('edit', item)
     }
 
-    const onDelete = (item) => {
-      context.emit('delete', item)
+    const onDelete = (item, index) => {
+      context.emit('delete', item, index)
     }
 
     const hasDetail = computed(() => !!context.slots.detail)
