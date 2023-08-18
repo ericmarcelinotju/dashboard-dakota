@@ -92,7 +92,7 @@ export default defineComponent({
     const loading = ref(false)
     let stateParams = reactive({
       userId: props.userId,
-      types: props.isHistory ? ['pending'] : ['cancelled', 'failed', 'expired']
+      statuses: props.isHistory ? ['cancelled', 'failed', 'expired', 'settled', 'refunded'] : ['pending']
     })
 
     const items = ref([])
