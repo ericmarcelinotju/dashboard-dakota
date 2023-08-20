@@ -88,118 +88,119 @@
             Isi Pesanan :
           </div>
 
-          <template v-if="params.category === 'product'">
-            <div class="default-field col-span-3">
-              <label class="default-label">
-                Kode
-              </label>
+          <!-- START === Product Items -->
+          <div class="default-field col-span-3">
+            <label class="default-label">
+              Kode
+            </label>
+          </div>
+          <div class="default-field col-span-3">
+            <label class="default-label">
+              Kuantitas
+            </label>
+          </div>
+          <div class="default-field col-span-3">
+            <label class="default-label">
+              Harga
+            </label>
+          </div>
+          <div class="default-field col-span-3">
+            <label class="default-label">
+              Total
+            </label>
+          </div>
+          <template
+            v-for="item in productItems"
+            :key="item"
+          >
+            <div class="col-span-3">
+              <span
+                class="link"
+                @click="onProductClick(item.product.id)"
+              >
+                {{ item.product.code }}
+              </span>
+              <span> - {{ item.product.name }}</span>
             </div>
-            <div class="default-field col-span-3">
-              <label class="default-label">
-                Kuantitas
-              </label>
+            <div class="col-span-3">
+              <p>{{ item.qty }}</p>
             </div>
-            <div class="default-field col-span-3">
-              <label class="default-label">
-                Harga
-              </label>
+            <div class="col-span-3">
+              <p>{{ item.price }}</p>
             </div>
-            <div class="default-field col-span-3">
-              <label class="default-label">
-                Total
-              </label>
+            <div class="col-span-3">
+              <p>{{ item.total }}</p>
             </div>
-            <template
-              v-for="item in params.items"
-              :key="item"
-            >
-              <div class="col-span-3">
-                <span
-                  class="link"
-                  @click="onProductClick(item.product.id)"
-                >
-                  {{ item.product.code }}
-                </span>
-                <span> - {{ item.product.name }}</span>
-              </div>
-              <div class="col-span-3">
-                <p>{{ item.qty }}</p>
-              </div>
-              <div class="col-span-3">
-                <p>{{ item.price }}</p>
-              </div>
-              <div class="col-span-3">
-                <p>{{ item.total }}</p>
-              </div>
-            </template>
           </template>
-          <template v-else-if="params.category === 'ticket'">
-            <div class="default-field col-span-2">
-              <label class="default-label">
-                Studio
-              </label>
+          <!-- END === Product Items -->
+
+          <!-- START === Ticket Items -->
+          <div class="default-field col-span-2">
+            <label class="default-label">
+              Studio
+            </label>
+          </div>
+          <div class="default-field col-span-2">
+            <label class="default-label">
+              Film
+            </label>
+          </div>
+          <div class="default-field col-span-2">
+            <label class="default-label">
+              Tanggal Tayang
+            </label>
+          </div>
+          <div class="default-field col-span-2">
+            <label class="default-label">
+              Jam Tayang
+            </label>
+          </div>
+          <div class="default-field col-span-1">
+            <label class="default-label">
+              Kursi
+            </label>
+          </div>
+          <div class="default-field col-span-3">
+            <label class="default-label">
+              Total
+            </label>
+          </div>
+          <template
+            v-for="item in ticketItems"
+            :key="item"
+          >
+            <div class="col-span-2">
+              <span
+                class="link"
+                @click="onStudioClick(item.screening.studio?.id)"
+              >
+                {{ item.screening.studio?.code }}
+              </span>
+              <span> - {{ item.screening.studio?.name }}</span>
             </div>
-            <div class="default-field col-span-2">
-              <label class="default-label">
-                Film
-              </label>
+            <div class="col-span-2">
+              <span
+                class="link"
+                @click="onMovieClick(item.screening.movie.id)"
+              >
+                {{ item.screening.movie.code }}
+              </span>
+              <span> - {{ item.screening.movie.title }}</span>
             </div>
-            <div class="default-field col-span-2">
-              <label class="default-label">
-                Tanggal Tayang
-              </label>
+            <div class="col-span-2">
+              <p>{{ item.screening.date }}</p>
             </div>
-            <div class="default-field col-span-2">
-              <label class="default-label">
-                Jam Tayang
-              </label>
+            <div class="col-span-2">
+              <p>{{ item.screening.time }}</p>
             </div>
-            <div class="default-field col-span-1">
-              <label class="default-label">
-                Kursi
-              </label>
+            <div class="col-span-1">
+              <p>{{ item.seat.name }}</p>
             </div>
-            <div class="default-field col-span-3">
-              <label class="default-label">
-                Total
-              </label>
+            <div class="col-span-3">
+              <p>{{ item.total }}</p>
             </div>
-            <template
-              v-for="item in params.items"
-              :key="item"
-            >
-              <div class="col-span-2">
-                <span
-                  class="link"
-                  @click="onStudioClick(item.screening.studio?.id)"
-                >
-                  {{ item.screening.studio?.code }}
-                </span>
-                <span> - {{ item.screening.studio?.name }}</span>
-              </div>
-              <div class="col-span-2">
-                <span
-                  class="link"
-                  @click="onMovieClick(item.screening.movie.id)"
-                >
-                  {{ item.screening.movie.code }}
-                </span>
-                <span> - {{ item.screening.movie.title }}</span>
-              </div>
-              <div class="col-span-2">
-                <p>{{ item.screening.date }}</p>
-              </div>
-              <div class="col-span-2">
-                <p>{{ item.screening.time }}</p>
-              </div>
-              <div class="col-span-1">
-                <p>{{ item.seat.name }}</p>
-              </div>
-              <div class="col-span-3">
-                <p>{{ item.total }}</p>
-              </div>
-            </template>
           </template>
+          <!-- END === Ticket Items -->
 
           <hr class="col-span-12">
 

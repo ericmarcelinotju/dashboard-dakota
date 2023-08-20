@@ -57,6 +57,20 @@
       type="success"
     >
       <div class="mt-4 grid grid-cols-3 gap-6">
+        <div>
+          <label
+            class="mr-2"
+            for="no-theater"
+          >
+            No Theater
+          </label>
+          <input
+            id="no-theater"
+            v-model="activeTheater"
+            type="radio"
+            :value="theater"
+          >
+        </div>
         <div
           v-for="theater in theaters"
           :key="theater.id"

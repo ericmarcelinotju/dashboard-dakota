@@ -141,11 +141,13 @@
         >
           Pemeran
         </label>
-        <InputMultitext
+        <input
           id="casts"
           v-model="params.casts"
+          class="default-input"
           placeholder="Nama-nama pemeran"
-        />
+          type="text"
+        >
       </div>
 
       <div class="default-field col-span-6">

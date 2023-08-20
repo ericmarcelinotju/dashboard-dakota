@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { computed, defineComponent, onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { pages } from '@/config'
@@ -28,6 +28,8 @@ export default defineComponent({
       showSuccessNotification,
       showDangerNotification
     } = useDefaultForm('movie')
+
+    const theater = computed(() => store.getters['auth/theater'])
 
     const loading = ref(false)
     let stateParams = reactive({})
@@ -88,6 +90,7 @@ export default defineComponent({
     })
 
     return {
+      theater,
       fields,
 
       loading,

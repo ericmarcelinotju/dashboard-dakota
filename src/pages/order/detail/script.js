@@ -39,6 +39,9 @@ export default defineComponent({
       initPage()
     })
 
+    const productItems = computed(() => params?.items?.filter(item => item.type === 'product'))
+    const ticketItems = computed(() => params?.items?.filter(item => item.type === 'ticket'))
+
     const onUserClick = (id) => {
       router.push({ name: pages.member.edit.name, params: { id } })
     }
@@ -59,6 +62,8 @@ export default defineComponent({
       routeParams,
       params,
       formLoading,
+      productItems,
+      ticketItems,
       onUserClick,
       onProductClick,
       onStudioClick,

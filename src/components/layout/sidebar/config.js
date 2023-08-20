@@ -33,7 +33,8 @@ export const navigations = [
     name: 'Penjualan',
     module: 'order',
     href: '/order',
-    icon: ShoppingBagIcon
+    icon: ShoppingBagIcon,
+    isBranchRequired: true
   },
   {
     name: 'Tipe Pembayaran',
@@ -51,13 +52,15 @@ export const navigations = [
     name: 'Pricing',
     module: 'pricing',
     href: '/pricing',
-    icon: CashIcon
+    icon: CashIcon,
+    isBranchRequired: true
   },
   {
     name: 'Studio',
     module: 'studio',
     href: '/studio',
-    icon: VideoCameraIcon
+    icon: VideoCameraIcon,
+    isBranchRequired: true
   },
   {
     name: 'Kafetaria',
@@ -75,13 +78,15 @@ export const navigations = [
     name: 'Pemutaran Film',
     module: 'screening',
     href: '/screening',
-    icon: CalendarIcon
+    icon: CalendarIcon,
+    isBranchRequired: true
   },
   {
     name: 'Tiket',
     module: 'order',
     href: '/ticket',
-    icon: TicketIcon
+    icon: TicketIcon,
+    isBranchRequired: true
   },
   // {
   //   name: 'Promo',

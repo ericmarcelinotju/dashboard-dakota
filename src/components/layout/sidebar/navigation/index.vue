@@ -17,7 +17,7 @@
           group
           hover:text-white hover:bg-primary-red
         "
-        :class="{ hidden: item.module && !hasPermission(item.module) }"
+        :class="{ hidden: (item.module && !hasPermission(item.module)) || (item.isBranchRequired && !theater) }"
         :to="item.href || ''"
       >
         <component
@@ -60,7 +60,10 @@
             ]"
             viewBox="0 0 20 20"
           >
-            <path d="M6 6L14 10L6 14V6Z" fill="currentColor" />
+            <path
+              d="M6 6L14 10L6 14V6Z"
+              fill="currentColor"
+            />
           </svg>
         </DisclosureButton>
         <DisclosurePanel class="space-y-1">
@@ -80,9 +83,7 @@
               font-medium
               hover:text-white hover:bg-red-600
             "
-            :class="{
-              hidden: subItem.module && !hasPermission(subItem.module),
-            }"
+            :class="{ hidden: (subItem.module && !hasPermission(subItem.module)) || (subItem.isBranchRequired && !theater) }"
             :to="subItem.href"
           >
             <component

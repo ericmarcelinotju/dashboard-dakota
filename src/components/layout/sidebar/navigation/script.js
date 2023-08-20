@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
@@ -19,6 +19,8 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
 
+    const theater = computed(() => store.getters['auth/theater'])
+
     const hasActiveChild = (children) => {
       return children.some((item) => item.href === route.path)
     }
@@ -37,6 +39,7 @@ export default defineComponent({
     }
 
     return {
+      theater,
       hasActiveChild,
       hasPermission,
       hasAnyPermission
