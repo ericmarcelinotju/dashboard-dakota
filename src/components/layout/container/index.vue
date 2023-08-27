@@ -60,15 +60,15 @@
         <div>
           <label
             class="mr-2"
-            for="no-theater"
+            for="all-theater"
           >
-            No Theater
+            All Theater
           </label>
           <input
-            id="no-theater"
+            id="all-theater"
             v-model="activeTheater"
             type="radio"
-            :value="theater"
+            :value="null"
           >
         </div>
         <div

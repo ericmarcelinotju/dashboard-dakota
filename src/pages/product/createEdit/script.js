@@ -91,7 +91,7 @@ export default defineComponent({
       showSuccessNotification(message)
     }
 
-    const saveFail = () => {
+    const saveFail = (err) => {
       showDangerNotification('saved', err?.response?.data)
       saveLoading.value = false
     }

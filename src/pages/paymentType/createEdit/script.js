@@ -19,7 +19,7 @@ export default defineComponent({
     PaymentTypeForm,
     TheaterForm
   },
-  setup() {
+  setup () {
     const route = useRoute()
     const router = useRouter()
     const { showSuccessNotification, showDangerNotification } = useDefaultForm('paymentType')
@@ -89,7 +89,7 @@ export default defineComponent({
       showSuccessNotification(message)
     }
 
-    const saveFail = () => {
+    const saveFail = (err) => {
       showDangerNotification('saved', err?.response?.data)
       saveLoading.value = false
     }
@@ -100,12 +100,12 @@ export default defineComponent({
 
     const tabOptions = computed(() => isUpdate.value
       ? [
-        { label: 'Detail Tipe Pembayaran', value: 'payment-type' },
-        { label: 'Teater', value: 'theater' }
-      ]
+          { label: 'Detail Tipe Pembayaran', value: 'payment-type' },
+          { label: 'Teater', value: 'theater' }
+        ]
       : [
-        { label: 'Detail Tipe Pembayaran', value: 'payment-type' }
-      ]
+          { label: 'Detail Tipe Pembayaran', value: 'payment-type' }
+        ]
     )
 
     return {
