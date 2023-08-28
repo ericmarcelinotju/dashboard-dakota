@@ -1,7 +1,8 @@
 import { pages } from '@/config'
 
 const OrderList = () => import(/* webpackChunkName: 'p-order' */ './list/index.vue')
-const OrderDetail = () => import(/* webpackChunkName: 'p-order-create-edit' */ './detail/index.vue')
+const OrderCreateEdit = () => import(/* webpackChunkName: 'p-order-create-edit' */ './createEdit/index.vue')
+const OrderDetail = () => import(/* webpackChunkName: 'p-order-detail' */ './detail/index.vue')
 
 export default [
   {
@@ -11,6 +12,17 @@ export default [
     meta: {
       auth: true,
       title: pages.getAppTitle(pages.order.name)
+    }
+  },
+  {
+    path: pages.constant.CREATE.path,
+    name: pages.order.name + pages.constant.CREATE.appendName,
+    component: OrderCreateEdit,
+    meta: {
+      auth: true,
+      title: pages.getAppTitle(
+        pages.order.name + pages.constant.CREATE.appendName
+      )
     }
   },
   {

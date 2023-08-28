@@ -27,5 +27,5 @@ export {
   detail,
   insert,
   update,
-  del,
+  del
 }

@@ -32,6 +32,14 @@ export default defineComponent({
       store.commit('notification/readNotification', notification.id)
     }
 
+    const sidebarOpen = ref(false)
+    const handleOpenSidebar = () => {
+      sidebarOpen.value = true
+    }
+    const handleCloseSidebar = () => {
+      sidebarOpen.value = false
+    }
+
     const handleAbout = () => {
       window.open(pages.about, '_blank').focus()
     }
@@ -70,6 +78,9 @@ export default defineComponent({
       route,
       handleLogout,
       handleNotification,
+      sidebarOpen,
+      handleOpenSidebar,
+      handleCloseSidebar,
       handleAbout,
       handleChangeTheater,
       visibleNotificationModal,

@@ -19,10 +19,12 @@ export default {
   theater: '/api/theater',
   holiday: '/api/holiday',
   tax: '/api/tax',
+  payment: '/api/payment',
   paymentType: '/api/payment/type',
 
   studio: '/api/studio',
   screening: '/api/screening',
+  ticket: '/api/ticket',
   order: '/api/order',
   pricing: '/api/pricing',
 

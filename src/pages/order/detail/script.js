@@ -1,20 +1,21 @@
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { pages } from '@/config'
-import Datepicker from '@vuepic/vue-datepicker'
 import { useDefaultForm } from '@/composables/default-form'
 import components from '@/components'
-import { detail as getOrder } from '@/api/order'
+import { detail as getOrder, pay as payOrder } from '@/api/order'
+import { get as getPaymentTypes } from '@/api/paymentType'
 
 export default defineComponent({
   components: {
     DefaultCreateEdit: components.DefaultCreateEdit,
-    Datepicker
+    InputDropdown: components.InputDropdown,
+    Loading: components.Loading
   },
   setup () {
     const route = useRoute()
     const router = useRouter()
-    const { showDangerNotification } = useDefaultForm('order')
+    const { showSuccessNotification, showDangerNotification } = useDefaultForm('order')
 
     const params = reactive({})
     const formLoading = ref(false)
@@ -35,8 +36,14 @@ export default defineComponent({
         })
     }
 
+    const paymentTypes = ref([])
     onMounted(() => {
       initPage()
+
+      getPaymentTypes()
+        .then(res => {
+          paymentTypes.value = res.data.data.filter(item => item.provider === 'cashier')
+        })
     })
 
     const productItems = computed(() => params?.items?.filter(item => item.type === 'product'))
@@ -58,6 +65,25 @@ export default defineComponent({
       router.push({ name: pages.movie.edit.name, params: { id } })
     }
 
+    const payLoading = ref(false)
+    const payForm = reactive({
+      paymentTypeId: null
+    })
+    const submitPayOrder = (id) => {
+      payLoading.value = true
+      payOrder(routeParams.value.id, payForm)
+        .then(() => {
+          router.push({ path: `${pages.order.url}` })
+          showSuccessNotification('inserted')
+        })
+        .catch(err => {
+          showDangerNotification('saved', err?.response?.data)
+        })
+        .finally(() => {
+          payLoading.value = false
+        })
+    }
+
     return {
       routeParams,
       params,
@@ -67,7 +93,11 @@ export default defineComponent({
       onUserClick,
       onProductClick,
       onStudioClick,
-      onMovieClick
+      onMovieClick,
+      paymentTypes,
+      payLoading,
+      payForm,
+      submitPayOrder
     }
   }
 })

@@ -1,5 +1,5 @@
 <template>
-  <DefaultPage title="Penjualan">
+  <DefaultPage :title="`Penjualan ${theater ? theater.name : ''}`">
     <template #search>
       <div class="flex">
         <div class="border-r-2 pr-8 pb-8 w-24 mr-8 text-amber-500">
@@ -36,6 +36,47 @@
         </div>
       </div>
     </template>
+    <template #action>
+      <button
+        v-if="hasPermission('create')"
+        class="danger-button mr-4"
+        type="button"
+        @click="handleCreate"
+      >
+        <PlusIcon class="w-4 h-4 mr-1" />
+        TAMBAH BARU
+      </button>
+    </template>
+    <template #filter>
+      <div class="mt-4">
+        <div class="default-field w-[240px]">
+          <label
+            class="default-label"
+            for="type"
+          >
+            Tipe Transaksi
+          </label>
+          <InputDropdown
+            v-model="params.type"
+            class="default-input"
+            :options="[
+              {
+                id: null,
+                name: 'Semua'
+              },
+              {
+                id: 'ticket',
+                name: 'Tiket'
+              },
+              {
+                id: 'product',
+                name: 'Kafetaria'
+              }
+            ]"
+          />
+        </div>
+      </div>
+    </template>
     <template #table>
       <DefaultTable
         :fields="fields"
@@ -44,8 +85,6 @@
         :items="items"
         :loading="loading"
         :total="itemsTotal"
-        @delete="handleDelete"
-        @edit="handleEdit"
         @search="handleSearch"
       >
         <template #user="{ item }">

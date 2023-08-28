@@ -65,6 +65,7 @@
       >
         <option value="bri">BRI</option>
         <option value="midtrans">Midtrans</option>
+        <option value="cashier">Kasir</option>
       </select>
     </div>
 

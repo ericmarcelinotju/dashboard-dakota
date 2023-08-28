@@ -204,6 +204,12 @@ const pages = {
     url: '/order',
     detail: {
       name: 'order' + constant.DETAIL.name
+    },
+    create: {
+      name: 'order' + constant.CREATE.name
+    },
+    pay: {
+      name: 'orderpay'
     }
   },
   ticket: {

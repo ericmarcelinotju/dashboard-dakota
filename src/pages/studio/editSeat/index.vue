@@ -40,13 +40,20 @@
             Kursi
           </label>
           <div
+            class="py-1 rounded-md bg-gray-400 text-white font-semibold text-center"
+            :style="`width: ${36 * maxSeat.column}px`"
+          >
+            Layar
+          </div>
+          <div
             v-for="row in maxSeat.row"
             :key="row"
-            class="flex mt-2"
+            class="flex mt-2 ml-1"
           >
             <div
               v-for="col in maxSeat.column"
               :key="col"
+              class="relative"
             >
               <input
                 v-model="params.seatChart[row-1][col-1]"
@@ -55,6 +62,7 @@
                 :true-value="1"
                 type="checkbox"
               >
+              <span class="absolute left-[6px] top-[6px] text-xs font-semibold pointer-events-none">{{ getSeatName(row-1,col-1) }}</span>
             </div>
           </div>
         </div>

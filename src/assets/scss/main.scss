@@ -202,7 +202,11 @@ sup {
 }
 
 .seat-checkbox {
-  @apply appearance-none text-primary-green checked:bg-primary-green checked:bg-none hover:bg-gray-100 focus:bg-primary-red focus:outline-primary-green border-gray-300 rounded-md h-7 w-7 mr-2 shadow-sm ;
+  @apply appearance-none text-primary-green checked:bg-primary-green checked:bg-none disabled:bg-gray-300 hover:bg-gray-100 focus:bg-primary-red focus:outline-primary-green border-gray-300 rounded-md h-7 w-7 mr-2 shadow-sm;
+
+  &.unavailable {
+    @apply disabled:bg-red-300;
+  }
 }
 
 .create-edit-submit-container {

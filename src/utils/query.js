@@ -3,9 +3,10 @@ const serializeQueryParams = (paramObj) => {
     return '?' + Object.keys(paramObj).map(k => {
       if (paramObj[k] && typeof paramObj[k] === 'object') {
         return paramObj[k].map(v => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&')
-      } else {
+      } else if (paramObj[k]) {
         return `${encodeURIComponent(k)}=${encodeURIComponent(paramObj[k])}`
       }
+      return ''
     }).join('&')
   }
   return ''

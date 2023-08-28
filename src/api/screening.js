@@ -26,11 +26,16 @@ const save = (data) => {
   return axios.post(`${api.screening}/save`, data)
 }
 
+const ticket = (screeningId) => {
+  return axios.get(`${api.ticket}?screeningId=${screeningId}`)
+}
+
 export {
   get,
   detail,
   insert,
   update,
   del,
-  save
+  save,
+  ticket
 }

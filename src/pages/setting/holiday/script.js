@@ -61,10 +61,10 @@ export default defineComponent({
 
       saveHoliday({ ...params })
         .then(() => {
-          showSuccessNotification('save')
+          showSuccessNotification('saved')
         })
-        .catch(() => {
-          showDangerNotification('save')
+        .catch(err => {
+          showDangerNotification('saved', err?.response?.data)
         })
         .finally(() => {
           saveLoading.value = false

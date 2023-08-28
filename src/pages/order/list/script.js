@@ -1,4 +1,4 @@
-import { defineComponent, reactive, ref, onMounted } from 'vue'
+import { defineComponent, reactive, ref, onMounted, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { pages } from '@/config'
@@ -12,6 +12,7 @@ export default defineComponent({
   components: {
     CogIcon,
     PlusIcon,
+    InputDropdown: components.InputDropdown,
     DefaultTable: components.DefaultTable,
     DefaultSearch: components.DefaultSearch,
     DefaultModal: components.DefaultModal,
@@ -21,7 +22,12 @@ export default defineComponent({
     const router = useRouter()
     const store = useStore()
 
+    const theater = computed(() => store.getters['auth/theater'])
+
     const loading = ref(false)
+    const params = reactive({
+      type: null
+    })
     let stateParams = reactive({})
 
     const items = ref([])
@@ -38,6 +44,10 @@ export default defineComponent({
           loading.value = false
         })
     }
+
+    watch(params, (val) => {
+      handleSearch(val)
+    })
 
     const orderStatistics = ref({
       pendingTotal: 0,
@@ -57,6 +67,10 @@ export default defineComponent({
       initStatistics()
     })
 
+    const handleCreate = () => {
+      router.push({ name: pages.order.create.name })
+    }
+
     const handleDetail = ({ id }) => {
       router.push({ name: pages.order.detail.name, params: { id } })
     }
@@ -66,9 +80,12 @@ export default defineComponent({
     }
 
     return {
+      theater,
       items,
       itemsTotal,
       loading,
+      params,
+      handleCreate,
       handleSearch,
 
       orderStatistics,

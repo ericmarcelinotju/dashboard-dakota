@@ -53,6 +53,10 @@ export default defineComponent({
       return params.seatChart && params.seatChart.length >= maxSeat.row && params.seatChart[0].length >= maxSeat.column
     })
 
+    const getSeatName = (i, j) => {
+      return `${String.fromCharCode(65 + i)}${j + 1}`
+    }
+
     const initPage = () => {
       if (!hasId.value) return
       formLoading.value = true
@@ -104,6 +108,7 @@ export default defineComponent({
       hasId,
       maxSeat,
       isSeatChartValid,
+      getSeatName,
       params,
       formLoading,
       saveLoading,

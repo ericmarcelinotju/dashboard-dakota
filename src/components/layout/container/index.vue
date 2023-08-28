@@ -62,7 +62,7 @@
             class="mr-2"
             for="all-theater"
           >
-            All Theater
+            Semua Teater
           </label>
           <input
             id="all-theater"

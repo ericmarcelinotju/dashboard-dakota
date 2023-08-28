@@ -104,7 +104,7 @@ export default defineComponent({
           router.push({ path: `${pages.screening.url}` })
           showSuccessNotification('inserted')
         })
-        .catch(() => {
+        .catch(err => {
           showDangerNotification('saved', err?.response?.data)
         })
         .finally(() => {

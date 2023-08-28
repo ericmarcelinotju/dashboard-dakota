@@ -26,6 +26,7 @@
           <slot name="action" />
         </div>
       </div>
+      <slot name="filter" />
       <slot name="form" />
       <slot name="table" />
       <slot name="dialog" />

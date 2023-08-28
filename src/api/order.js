@@ -22,10 +22,15 @@ const del = (id) => {
   return axios.delete(api.order + '/' + id)
 }
 
+const pay = (orderId, data) => {
+  return axios.post(`${api.order}/${orderId}/payment`, data)
+}
+
 export {
   get,
   detail,
   insert,
   update,
-  del
+  del,
+  pay
 }

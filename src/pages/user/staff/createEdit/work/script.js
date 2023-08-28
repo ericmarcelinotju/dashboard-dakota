@@ -74,7 +74,7 @@ export default defineComponent({
           router.push({ path: `${pages.staff.url}` })
           showSuccessNotification('updated')
         })
-        .catch(() => {
+        .catch(err => {
           showDangerNotification('saved', err?.response?.data)
         })
         .finally(() => {
