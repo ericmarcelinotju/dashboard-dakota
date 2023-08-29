@@ -10,7 +10,8 @@ import {
   VideoCameraIcon,
   ShoppingBagIcon,
   ShoppingCartIcon,
-  OfficeBuildingIcon
+  OfficeBuildingIcon,
+  ChartPieIcon
   // TemplateIcon,
   // ChartPieIcon,
   // ReceiptTaxIcon,
@@ -116,12 +117,17 @@ export const navigations = [
       }
     ]
   },
-  // {
-  //   name: 'Laporan',
-  //   module: 'report',
-  //   href: '/report',
-  //   icon: ChartPieIcon
-  // },
+  {
+    name: 'Laporan',
+    icon: ChartPieIcon,
+    children: [
+      {
+        name: 'Penjualan',
+        module: 'report',
+        href: '/report/order'
+      }
+    ]
+  },
   {
     name: 'Pengaturan Umum',
     module: 'setting',

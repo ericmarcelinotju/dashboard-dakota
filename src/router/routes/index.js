@@ -23,6 +23,7 @@ import screeningRoute from '@/pages/screening/route.js'
 import ticketRoute from '@/pages/ticket/route.js'
 import orderRoute from '@/pages/order/route.js'
 import pricingRoute from '@/pages/pricing/route.js'
+import reportRoute from '@/pages/report/route.js'
 
 /** dynamic & async import **/
 const Login = () => import(/* webpackChunkName: 'p-auth-login' */ '@/pages/auth/Login/index.vue')
@@ -140,6 +141,12 @@ const pricingRoutes = {
   children: pricingRoute
 }
 
+const reportRoutes = {
+  path: pages.report.url,
+  component: RouterView,
+  children: reportRoute
+}
+
 /** @type {import('vue-router').RouterOptions['routes']} */
 export const routes = [
   // Pages
@@ -168,7 +175,9 @@ export const routes = [
       screeningRoutes,
       ticketRoutes,
       orderRoutes,
-      pricingRoutes
+      pricingRoutes,
+
+      reportRoutes
     ],
     beforeEnter: guardAuth
   },

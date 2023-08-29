@@ -31,6 +31,7 @@ export default {
   log: 'api/log',
   setting: '/api/setting',
   stat: '/api/statistic',
+  report: '/api/report',
 
   getApiPath: function (apiPath) {
     return basePath + apiPath

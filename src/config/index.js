@@ -228,6 +228,14 @@ const pages = {
     edit: {
       name: 'pricing' + constant.EDIT.name
     }
+  },
+  report: {
+    name: 'report',
+    url: '/report',
+    order: {
+      name: 'reportorder',
+      url: '/report/order'
+    }
   }
 }
 
