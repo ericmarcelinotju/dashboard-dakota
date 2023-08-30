@@ -1,7 +1,7 @@
 {
   "name": "dakota-cms",
   "private": true,
-  "version": "1.0.3",
+  "version": "1.1.0",
   "scripts": {
     "dev": "vite --mode development",
     "dev-production": "vite --mode production",
