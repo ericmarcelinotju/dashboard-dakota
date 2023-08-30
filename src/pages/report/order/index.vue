@@ -6,8 +6,11 @@
         type="button"
         @click="handleDownload"
       >
-        <Loading v-if="loading" />
-        <DownloadIcon class="w-4 h-4 mr-1" />
+        <Loading v-if="downloadLoading" />
+        <DownloadIcon
+          v-else
+          class="w-4 h-4 mr-1"
+        />
         Unduh Laporan
       </button>
     </template>
