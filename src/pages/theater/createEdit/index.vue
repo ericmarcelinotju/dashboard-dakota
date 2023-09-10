@@ -156,6 +156,21 @@
         <div class="default-field mt-4">
           <label
             class="default-label"
+            for="map_url"
+          >
+            Map URL
+          </label>
+          <input
+            id="map_url"
+            v-model="params.mapUrl"
+            class="default-input"
+            type="text"
+          >
+        </div>
+
+        <div class="default-field mt-4">
+          <label
+            class="default-label"
             for="database"
           >
             Database

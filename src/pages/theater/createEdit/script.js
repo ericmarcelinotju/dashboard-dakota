@@ -37,6 +37,7 @@ export default defineComponent({
       bankName: null,
       bankAccount: null,
       aCName: null,
+      mapUrl: null,
       databaseName: null
     }
     const params = reactive({ ...initialState })
