@@ -6,6 +6,7 @@
     :items="items"
     :loading="loading"
     :total="itemsTotal"
+    @search="handleSearch"
   >
     <template #user="{ item }">
       <span>{{ item.user?.username }}</span>
@@ -22,7 +23,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive, ref, onMounted } from 'vue'
+import { defineComponent, ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import components from '@/components'
@@ -89,18 +90,19 @@ export default defineComponent({
     const router = useRouter()
     const store = useStore()
 
+    const statuses = computed(() => props.isHistory ? ['cancelled', 'failed', 'expired', 'settled', 'refunded'] : ['pending'])
+
     const loading = ref(false)
-    let stateParams = reactive({
-      userId: props.userId,
-      statuses: props.isHistory ? ['cancelled', 'failed', 'expired', 'settled', 'refunded'] : ['pending']
-    })
 
     const items = ref([])
     const itemsTotal = ref(0)
     const handleSearch = (params) => {
-      stateParams = { ...params }
       loading.value = true
-      getOrders(params)
+      getOrders({
+        ...params,
+        userId: props.userId,
+        statuses: statuses.value
+      })
         .then(res => {
           items.value = res.data.data
           itemsTotal.value = res.data.totalItem
@@ -111,7 +113,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      handleSearch(stateParams)
+      handleSearch({})
     })
 
     const handleDetail = ({ id }) => {
