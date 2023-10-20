@@ -70,12 +70,6 @@
                 Kursi {{ screening?.studio?.name }}
               </label>
               <div
-                class="py-1 rounded-md bg-gray-400 text-white font-semibold text-center"
-                :style="`width: ${36 * tickets[0].length}px`"
-              >
-                Layar
-              </div>
-              <div
                 v-for="ticketRow in tickets"
                 :key="ticketRow"
                 class="flex mt-2 ml-1"
@@ -85,15 +79,22 @@
                   :key="ticket"
                   class="relative"
                 >
+                  {{ ticket?.seat }}
                   <input
                     class="seat-checkbox"
-                    :class="{'unavailable': ticket.status !== 'available'}"
-                    :disabled="!ticket.seat.isActive || ticket.status !== 'available'"
+                    :class="{'unavailable': ticket?.status !== 'available'}"
+                    :disabled="!ticket?.seat?.isActive || ticket?.status !== 'available'"
                     type="checkbox"
-                    @input="onCheckSeat($event, ticket.seat)"
+                    @input="onCheckSeat($event, ticket?.seat)"
                   >
-                  <span class="absolute left-[6px] top-[6px] text-xs font-semibold pointer-events-none">{{ ticket.seat.name }}</span>
+                  <span class="absolute left-[6px] top-[6px] text-xs font-semibold pointer-events-none">{{ ticket?.seat?.name }}</span>
                 </div>
+              </div>
+              <div
+                class="mt-4 py-1 rounded-md bg-gray-400 text-white font-semibold text-center"
+                :style="`width: ${36 * tickets[0].length}px`"
+              >
+                Layar
               </div>
             </div>
           </template>

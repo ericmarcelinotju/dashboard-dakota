@@ -5,16 +5,18 @@ import { pages } from '@/config'
 import { fields } from '../config'
 import components from '@/components'
 import { useDefaultForm } from '@/composables/default-form'
-import { PlusIcon } from '@heroicons/vue/solid'
+import { PlusIcon, DocumentIcon } from '@heroicons/vue/solid'
 import {
   get as getUsers,
-  del as deleteUser
+  del as deleteUser,
+  importDeposit
 } from '@/api/user'
 import { user as getUserStatistic } from '@/api/statistic'
 
 export default defineComponent({
   components: {
     PlusIcon,
+    DocumentIcon,
     DefaultTable: components.DefaultTable,
     DefaultSearch: components.DefaultSearch,
     DefaultModal: components.DefaultModal,
@@ -73,6 +75,32 @@ export default defineComponent({
       router.push({ name: pages.member.edit.name, params: { id } })
     }
 
+    const loadingImport = ref(false)
+    const fileInput = ref(null)
+    const onImportDepositClick = () => {
+      fileInput.value.click()
+    }
+    const onImportDepositUpload = () => {
+      loadingImport.value = true
+
+      const imageFile = event.target.files[0]
+
+      const formData = new FormData()
+      formData.append('file', imageFile)
+
+      importDeposit(formData)
+        .then(() => {
+          showSuccessNotification('imported')
+          handleSearch(stateParams)
+        })
+        .catch(err => {
+          showDangerNotification('imported', err?.response?.data)
+        })
+        .finally(() => {
+          loadingImport.value = false
+        })
+    }
+
     // Delete user
     const loadingDelete = ref(false)
     const visibleDeleteConfirmationModal = ref(false)
@@ -119,6 +147,11 @@ export default defineComponent({
       visibleDeleteConfirmationModal,
       handleDelete,
       confirmDelete,
+
+      loadingImport,
+      fileInput,
+      onImportDepositClick,
+      onImportDepositUpload,
 
       hasPermission
     }

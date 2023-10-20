@@ -10,6 +10,23 @@
         <PlusIcon class="w-4 h-4 mr-1" />
         TAMBAH BARU
       </button>
+
+      <button
+        v-if="hasPermission('update')"
+        class="info-button mr-4"
+        type="button"
+        @click="onImportDepositClick"
+      >
+        <DocumentIcon class="w-4 h-4 mr-1" />
+        IMPORT DEPOSIT
+        <input
+          ref="fileInput"
+          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+          class="hidden"
+          type="file"
+          @change="onImportDepositUpload"
+        >
+      </button>
     </template>
     <template #search>
       <div class="flex">

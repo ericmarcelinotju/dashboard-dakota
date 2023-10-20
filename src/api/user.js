@@ -26,11 +26,16 @@ const updateWork = (id, data) => {
   return axios.put(`${api.user}/${id}/work`, data)
 }
 
+const importDeposit = (payload) => {
+  return axios.post(`${api.user}/import-deposit`, payload)
+}
+
 export {
   get,
   detail,
   insert,
   update,
   del,
-  updateWork
+  updateWork,
+  importDeposit
 }
