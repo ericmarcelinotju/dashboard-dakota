@@ -79,15 +79,14 @@
                   :key="ticket"
                   class="relative"
                 >
-                  {{ ticket?.seat }}
                   <input
                     class="seat-checkbox"
-                    :class="{'unavailable': ticket?.status !== 'available'}"
-                    :disabled="!ticket?.seat?.isActive || ticket?.status !== 'available'"
+                    :class="{'unavailable': ticket.status !== 'available'}"
+                    :disabled="!ticket.seat.isActive || ticket.status !== 'available'"
                     type="checkbox"
-                    @input="onCheckSeat($event, ticket?.seat)"
+                    @input="onCheckSeat($event, ticket.seat)"
                   >
-                  <span class="absolute left-[6px] top-[6px] text-xs font-semibold pointer-events-none">{{ ticket?.seat?.name }}</span>
+                  <span class="absolute left-[6px] top-[6px] text-xs font-semibold pointer-events-none">{{ ticket.seat.name }}</span>
                 </div>
               </div>
               <div
